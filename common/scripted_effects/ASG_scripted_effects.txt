@@ -1,23 +1,23 @@
 ASG_military_update_stats = {
 	every_country = {
 		set_variable = {
-			ASG_industrial_score = THIS.num_of_military_factories
+			ASG_military_score = THIS.num_of_military_factories
 		}
 		set_variable = {
-			ASG_industrial_score_modifier = modifier@industrial_capacity_factory
+			ASG_military_score_modifier = modifier@industrial_capacity_factory
 		}
 		add_to_variable = {
-			ASG_industrial_score_modifier = 1
+			ASG_military_score_modifier = 1
 		}
 		clamp_variable = {
-			var = ASG_industrial_score_modifier
+			var = ASG_military_score_modifier
 			min = 0
 			max = 10000
 		}
 		multiply_variable = {
-			ASG_industrial_score = ASG_industrial_score_modifier
+			ASG_military_score = ASG_military_score_modifier
 		}
-		# log = "Score = [?ASG_industrial_score] THIS = [?THIS.GetName] ROOT = [?ROOT.GetName]"
+		# log = "Score = [?ASG_military_score] THIS = [?THIS.GetName] ROOT = [?ROOT.GetName]"
 	}
 }
 
@@ -3936,7 +3936,7 @@ ASG_casualties_update_stats = {
 		set_variable = {
 			ASG_casualties_score = THIS.casualties_k
 		}
-		# log = "Score = [?ASG_industrial_score] THIS = [?THIS.GetName] ROOT = [?ROOT.GetName]"
+		# log = "Score = [?ASG_military_score] THIS = [?THIS.GetName] ROOT = [?ROOT.GetName]"
 	}
 }
 
@@ -3949,12 +3949,12 @@ ASG_civilian_update_stats = {
 			ASG_civilian_score = THIS.num_of_civilian_factories
 		}
 		set_temp_variable = {
-			ASG_civilian_industrial_score = THIS.num_of_civilian_factories
+			ASG_civilian_score = THIS.num_of_civilian_factories
 		}
 		add_to_temp_variable = {
-			ASG_civilian_industrial_score = THIS.num_of_military_factories
+			ASG_civilian_score = THIS.num_of_military_factories
 		}
-		# log = "Score = [?ASG_civilian_score] civ_score [?ASG_civilian_industrial_score] THIS = [?THIS.GetName]"
+		# log = "Score = [?ASG_civilian_score] civ_score [?ASG_civilian_score] THIS = [?THIS.GetName]"
 		#trade factories calculations
 		#oil
 		set_temp_variable = {
@@ -4617,33 +4617,33 @@ ASG_civilian_update_stats = {
 			}
 		}
 		add_to_temp_variable = {
-			ASG_civilian_industrial_score = ASG_oil_civ_count_import
+			ASG_civilian_score = ASG_oil_civ_count_import
 		}
 		add_to_temp_variable = {
-			ASG_civilian_industrial_score = ASG_aluminium_civ_count_import
+			ASG_civilian_score = ASG_aluminium_civ_count_import
 		}
 		add_to_temp_variable = {
-			ASG_civilian_industrial_score = ASG_rubber_civ_count_import
+			ASG_civilian_score = ASG_rubber_civ_count_import
 		}
 		add_to_temp_variable = {
-			ASG_civilian_industrial_score = ASG_tungsten_civ_count_import
+			ASG_civilian_score = ASG_tungsten_civ_count_import
 		}
 		add_to_temp_variable = {
-			ASG_civilian_industrial_score = ASG_steel_civ_count_import
+			ASG_civilian_score = ASG_steel_civ_count_import
 		}
 		add_to_temp_variable = {
-			ASG_civilian_industrial_score = ASG_chromium_civ_count_import
+			ASG_civilian_score = ASG_chromium_civ_count_import
 		}
-		# log = "Civ Number [?ASG_civilian_score] tot_score [?ASG_civilian_industrial_score] goods [?modifier@consumer_goods_factor] THIS = [?THIS.GetName]"
+		# log = "Civ Number [?ASG_civilian_score] tot_score [?ASG_civilian_score] goods [?modifier@consumer_goods_factor] THIS = [?THIS.GetName]"
 		multiply_temp_variable = {
-			ASG_civilian_industrial_score = modifier@consumer_goods_factor
+			ASG_civilian_score = modifier@consumer_goods_factor
 		}
-		round_temp_variable = ASG_civilian_industrial_score
+		round_temp_variable = ASG_civilian_score
 		multiply_temp_variable = {
-			ASG_civilian_industrial_score = -1
+			ASG_civilian_score = -1
 		}
 		add_to_variable = {
-			ASG_civilian_score = ASG_civilian_industrial_score
+			ASG_civilian_score = ASG_civilian_score
 		}
 		set_variable = {
 			ASG_civilian_score_modifier = modifier@production_speed_buildings_factor
@@ -4654,7 +4654,7 @@ ASG_civilian_update_stats = {
 		multiply_variable = {
 			ASG_civilian_score = ASG_civilian_score_modifier
 		}
-		# log = "Score = [?ASG_civilian_score] civilian_score [?ASG_civilian_score_modifier] ASG_civilian_industrial_score [?ASG_civilian_industrial_score] THIS = [?THIS.GetName]"
+		# log = "Score = [?ASG_civilian_score] civilian_score [?ASG_civilian_score_modifier] ASG_civilian_score [?ASG_civilian_score] THIS = [?THIS.GetName]"
 	}
 }
 
@@ -4735,28 +4735,28 @@ ASG_civilian_add_point_to_line = {
 			set_temp_variable = {
 				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
 			add_to_temp_variable = {
@@ -4794,42 +4794,42 @@ ASG_civilian_add_point_to_line = {
 			clamp_variable = {
 				var = ASG_[categorie]_green_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_blue_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_grey_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_red_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_light_red_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_light_blue_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_light_yellow_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_light_white_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			set_variable = {
 				GLOBAL.ASG_[categorie]_y_position_green = [tag1].ASG_[categorie]_green_pixel_value
@@ -5052,6 +5052,14 @@ ASG_civilian_add_point_to_line = {
 			}
 		}
 		categorie = "civilian"
+		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
+		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
+		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
+		tag4 = "[?GLOBAL.ASG_red_curve_tag.GetTag]"
+		tag5 = "[?GLOBAL.ASG_light_red_curve_tag.GetTag]"
+		tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
+		tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
+		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
 		# debug = yes
 	}
 }
@@ -5119,28 +5127,28 @@ ASG_casualties_add_point_to_line = {
 			set_temp_variable = {
 				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
 			add_to_temp_variable = {
@@ -5178,42 +5186,42 @@ ASG_casualties_add_point_to_line = {
 			clamp_variable = {
 				var = ASG_[categorie]_green_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_blue_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_grey_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_red_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_light_red_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_light_blue_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_light_yellow_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_light_white_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			set_variable = {
 				GLOBAL.ASG_[categorie]_y_position_green = [tag1].ASG_[categorie]_green_pixel_value
@@ -5436,6 +5444,14 @@ ASG_casualties_add_point_to_line = {
 			}
 		}
 		categorie = "casualties"
+		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
+		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
+		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
+		tag4 = "[?GLOBAL.ASG_red_curve_tag.GetTag]"
+		tag5 = "[?GLOBAL.ASG_light_red_curve_tag.GetTag]"
+		tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
+		tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
+		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
 		# debug = yes
 	}
 }
@@ -5503,28 +5519,28 @@ ASG_manpower_add_point_to_line = {
 			set_temp_variable = {
 				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
 			add_to_temp_variable = {
@@ -5562,42 +5578,42 @@ ASG_manpower_add_point_to_line = {
 			clamp_variable = {
 				var = ASG_[categorie]_green_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_blue_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_grey_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_red_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_light_red_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_light_blue_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_light_yellow_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_light_white_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			set_variable = {
 				GLOBAL.ASG_[categorie]_y_position_green = [tag1].ASG_[categorie]_green_pixel_value
@@ -5820,6 +5836,14 @@ ASG_manpower_add_point_to_line = {
 			}
 		}
 		categorie = "manpower"
+		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
+		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
+		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
+		tag4 = "[?GLOBAL.ASG_red_curve_tag.GetTag]"
+		tag5 = "[?GLOBAL.ASG_light_red_curve_tag.GetTag]"
+		tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
+		tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
+		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
 		# debug = yes
 	}
 }
@@ -5829,13 +5853,13 @@ ASG_military_add_point_to_line = {
 	# This count is displayed as an x-axis label, increment it
 	# We keep track of the last y position so we can calculate the slope
 	# log = "ASG : NEW MILITARY GRAPH UPDATE : [GetDateText]"
-	# log = "ASG : ITA.ASG_industrial_score = [?ITA.ASG_industrial_score]    ITA Y Value = [?GLOBAL.ASG_military_y_position_green]       "
-	# log = "ASG : SOV.ASG_industrial_score = [?SOV.ASG_industrial_score]    SOV Y Value = [?GLOBAL.ASG_military_y_position_red]         "
-	# log = "ASG : FRA.ASG_industrial_score = [?FRA.ASG_industrial_score]    FRA Y Value = [?GLOBAL.ASG_military_y_position_light_blue]  "
-	# log = "ASG : USA.ASG_industrial_score = [?USA.ASG_industrial_score]    USA Y Value = [?GLOBAL.ASG_military_y_position_blue]        "
-	# log = "ASG : JAP.ASG_industrial_score = [?JAP.ASG_industrial_score]    JAP Y Value = [?GLOBAL.ASG_military_y_position_light_white] "
-	# log = "ASG : ENG.ASG_industrial_score = [?ENG.ASG_industrial_score]    ENG Y Value = [?GLOBAL.ASG_military_y_position_light_Red]   "
-	# log = "ASG : GER.ASG_industrial_score = [?GER.ASG_industrial_score]    GER Y Value = [?GLOBAL.ASG_military_y_position_grey]        "
+	# log = "ASG : ITA.ASG_military_score = [?ITA.ASG_military_score]    ITA Y Value = [?GLOBAL.ASG_military_y_position_green]       "
+	# log = "ASG : SOV.ASG_military_score = [?SOV.ASG_military_score]    SOV Y Value = [?GLOBAL.ASG_military_y_position_red]         "
+	# log = "ASG : FRA.ASG_military_score = [?FRA.ASG_military_score]    FRA Y Value = [?GLOBAL.ASG_military_y_position_light_blue]  "
+	# log = "ASG : USA.ASG_military_score = [?USA.ASG_military_score]    USA Y Value = [?GLOBAL.ASG_military_y_position_blue]        "
+	# log = "ASG : JAP.ASG_military_score = [?JAP.ASG_military_score]    JAP Y Value = [?GLOBAL.ASG_military_y_position_light_white] "
+	# log = "ASG : ENG.ASG_military_score = [?ENG.ASG_military_score]    ENG Y Value = [?GLOBAL.ASG_military_y_position_light_Red]   "
+	# log = "ASG : GER.ASG_military_score = [?GER.ASG_military_score]    GER Y Value = [?GLOBAL.ASG_military_y_position_grey]        "
 	# log = "ASG : END OF MILITARY GRAPH UPDATE"
 	meta_effect = {
 		text = {
@@ -5887,28 +5911,28 @@ ASG_military_add_point_to_line = {
 			set_temp_variable = {
 				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
-			divide_temp_variable = {
+			multiply_temp_variable = {
 				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 			}
 			add_to_temp_variable = {
@@ -5946,42 +5970,42 @@ ASG_military_add_point_to_line = {
 			clamp_variable = {
 				var = ASG_[categorie]_green_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_blue_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_grey_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_red_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_light_red_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_light_blue_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_light_yellow_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			clamp_variable = {
 				var = ASG_[categorie]_light_white_pixel_value
 				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 			}
 			set_variable = {
 				GLOBAL.ASG_[categorie]_y_position_green = [tag1].ASG_[categorie]_green_pixel_value
@@ -6204,6 +6228,14 @@ ASG_military_add_point_to_line = {
 			}
 		}
 		categorie = "military"
+		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
+		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
+		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
+		tag4 = "[?GLOBAL.ASG_red_curve_tag.GetTag]"
+		tag5 = "[?GLOBAL.ASG_light_red_curve_tag.GetTag]"
+		tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
+		tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
+		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
 		# debug = yes
 	}
 }

@@ -49,7 +49,7 @@ on_actions = {
 					GLOBAL.ASG_graph_pixel_y_offset_value = 4
 				}
 				set_variable = {
-					GLOBAL.ASG_manpower_amount_to_pixel_scale_factor = 25
+					GLOBAL.ASG_manpower_amount_to_pixel_scale_factor = 0.04
 				}
 				set_variable = {
 					GLOBAL.ASG_military_amount_to_pixel_scale_factor = 0.60
@@ -73,10 +73,8 @@ on_actions = {
 				add_to_variable = {
 					GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset = ASG_graph_pixel_y_offset_value
 				}
-
-
+				ASG_stats_update = yes
 			}
-			ASG_stats_update = yes
 			#military
 			meta_effect = {
 				text = {
@@ -105,28 +103,28 @@ on_actions = {
 						ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
 					}
 
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
 
@@ -167,42 +165,42 @@ on_actions = {
 					clamp_variable = {
 						var = ASG_[categorie]_green_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_blue_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_grey_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_red_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_light_red_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_light_blue_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_light_yellow_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_light_white_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					
 					set_variable = {
@@ -241,7 +239,7 @@ on_actions = {
 				tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
 				tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
 				tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
-				debug = yes
+				# debug = yes
 			}
 			#civilian
 			meta_effect = {
@@ -271,28 +269,28 @@ on_actions = {
 						ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
 					}
 
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
 
@@ -333,42 +331,42 @@ on_actions = {
 					clamp_variable = {
 						var = ASG_[categorie]_green_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_blue_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_grey_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_red_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_light_red_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_light_blue_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_light_yellow_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_light_white_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					
 					set_variable = {
@@ -407,7 +405,7 @@ on_actions = {
 				tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
 				tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
 				tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
-				debug = yes
+				# debug = yes
 			}
 			#manpower
 			meta_effect = {
@@ -437,28 +435,28 @@ on_actions = {
 						ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
 					}
 
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
 
@@ -499,42 +497,42 @@ on_actions = {
 					clamp_variable = {
 						var = ASG_[categorie]_green_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_blue_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_grey_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_red_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_light_red_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_light_blue_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_light_yellow_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_light_white_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					
 					set_variable = {
@@ -573,7 +571,7 @@ on_actions = {
 				tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
 				tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
 				tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
-				debug = yes
+				# debug = yes
 			}
 			#casualties
 			meta_effect = {
@@ -603,28 +601,28 @@ on_actions = {
 						ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
 					}
 
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
-					divide_temp_variable = {
+					multiply_temp_variable = {
 						ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
 					}
 
@@ -665,42 +663,42 @@ on_actions = {
 					clamp_variable = {
 						var = ASG_[categorie]_green_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_blue_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_grey_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_red_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_light_red_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_light_blue_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_light_yellow_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					clamp_variable = {
 						var = ASG_[categorie]_light_white_pixel_value
 						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-						max = GLOBAL.ASG_graph_pixel_y_maximum_value
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
 					}
 					
 					set_variable = {
@@ -739,7 +737,7 @@ on_actions = {
 				tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
 				tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
 				tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
-				debug = yes
+				# debug = yes
 			}
 		}
 	}
@@ -747,6 +745,9 @@ on_actions = {
 		effect = {
 			# log = "Graph update THIS = [?THIS.GetName] ROOT = [?ROOT.GetName]"
 			ASG_graph_update = yes
+			add_to_variable = {
+				GLOBAL.ASG_number_of_executed_ticks = 1
+			}
 			# if = {
 			# 	limit = {
 			# 		is_debug = yes

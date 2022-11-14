@@ -77,7 +77,7 @@ scripted_gui = {
 				# Tells the shader how steep to draw the line
 				# Must be equal to (y2 - y1) / 2 + 50
 				frame = GLOBAL.ASG_manpower_graph_slopes_green^ASG_segment_idx
-			}
+			} 
 			segment_light_red = {
 				# Sets they position of the line segment to the graph offset
 				# Equal to -y1
