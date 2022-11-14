@@ -149,17 +149,17 @@ guiTypes = {
 			position = { x = 920 y = 20 }
 		}
 
-		# buttonType = {
-		# 	name = "add_button"
-		# 	spriteType = "GFX_NV_btn_add"
-		# 	position = { x = 20 y = 20 }
-		# }
+		buttonType = {
+			name = "add_button"
+			spriteType = "GFX_NV_btn_add"
+			position = { x = 20 y = 20 }
+		}
 
 		instantTextboxType = {
 			name = "GER_legend"
 			position = { x = 200 y = 510}
 			font = "cg_18b"
-			text = ASG_manpower_graph_legend_GER
+			text = ASG_manpower_graph_legend_grey
 			maxWidth = 60
 			format = center
 		}
@@ -167,7 +167,7 @@ guiTypes = {
 			name = "USA_legend"
 			position = { x = 280 y = 510}
 			font = "cg_18b"
-			text = ASG_manpower_graph_legend_USA
+			text = ASG_manpower_graph_legend_blue
 			maxWidth = 60
 			format = center
 		}
@@ -175,7 +175,7 @@ guiTypes = {
 			name = "SOV_legend"
 			position = { x = 360 y = 510}
 			font = "cg_18b"
-			text = ASG_manpower_graph_legend_SOV
+			text = ASG_manpower_graph_legend_red
 			maxWidth = 60
 			format = center
 		}
@@ -183,7 +183,7 @@ guiTypes = {
 			name = "FRA_legend"
 			position = { x = 440 y = 510}
 			font = "cg_18b"
-			text = ASG_manpower_graph_legend_FRA
+			text = ASG_manpower_graph_legend_light_blue
 			maxWidth = 60
 			format = center
 		}
@@ -191,7 +191,7 @@ guiTypes = {
 			name = "ITA_legend"
 			position = { x = 520 y = 510}
 			font = "cg_18b"
-			text = ASG_manpower_graph_legend_ITA
+			text = ASG_manpower_graph_legend_green
 			maxWidth = 60
 			format = center
 		}
@@ -199,7 +199,7 @@ guiTypes = {
 			name = "JAP_legend"
 			position = { x = 600 y = 510}
 			font = "cg_18b"
-			text = ASG_manpower_graph_legend_JAP
+			text = ASG_manpower_graph_legend_light_white
 			maxWidth = 60
 			format = center
 		}
@@ -207,7 +207,7 @@ guiTypes = {
 			name = "ENG_legend"
 			position = { x = 680 y = 510}
 			font = "cg_18b"
-			text = ASG_manpower_graph_legend_ENG
+			text = ASG_manpower_graph_legend_light_red
 			maxWidth = 60
 			format = center
 		}
