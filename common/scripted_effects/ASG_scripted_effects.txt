@@ -3949,12 +3949,12 @@ ASG_civilian_update_stats = {
 			ASG_civilian_score = THIS.num_of_civilian_factories
 		}
 		set_temp_variable = {
-			ASG_civilian_score = THIS.num_of_civilian_factories
+			ASG_civilian_industrial_score = THIS.num_of_civilian_factories
 		}
 		add_to_temp_variable = {
-			ASG_civilian_score = THIS.num_of_military_factories
+			ASG_civilian_industrial_score = THIS.num_of_military_factories
 		}
-		# log = "Score = [?ASG_civilian_score] civ_score [?ASG_civilian_score] THIS = [?THIS.GetName]"
+		# log = "Score = [?ASG_civilian_score] civ_score [?ASG_civilian_industrial_score] THIS = [?THIS.GetName]"
 		#trade factories calculations
 		#oil
 		set_temp_variable = {
@@ -3965,9 +3965,7 @@ ASG_civilian_update_stats = {
 		}
 		if = {
 			limit = {
-				check_variable = {
-					ASG_oil > 0
-				}
+				check_variable = { ASG_oil > 0 }
 			}
 			set_temp_variable = {
 				ASG_oil_calculations_finished = 0
@@ -3975,16 +3973,12 @@ ASG_civilian_update_stats = {
 			every_country = {
 				limit = {
 					is_subject_of = PREV
-					check_variable = {
-						resource_exported@oil > PREV.resource_imported@oil
-					}
-					check_variable = {
-						ASG_oil_calculations_finished < 1
-					}
+					check_variable = { resource_exported@oil > PREV.resource_imported@oil }
+					check_variable = { ASG_oil_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_oil_price = 80
-				}
+				}	
 				divide_temp_variable = {
 					ASG_oil = ASG_oil_price
 				}
@@ -3998,19 +3992,14 @@ ASG_civilian_update_stats = {
 				add_to_temp_variable = {
 					ASG_oil_calculations_finished = 1
 				}
+				
 			}
 			every_country = {
 				limit = {
 					is_subject_of = PREV
-					check_variable = {
-						resource_exported@oil < PREV.resource_imported@oil
-					}
-					check_variable = {
-						resource_exported@oil > 8
-					}
-					check_variable = {
-						ASG_oil_calculations_finished < 1
-					}
+					check_variable = { resource_exported@oil < PREV.resource_imported@oil }
+					check_variable = { resource_exported@oil > 8 }
+					check_variable = { ASG_oil_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_oil_price = 80
@@ -4036,9 +4025,7 @@ ASG_civilian_update_stats = {
 				}
 				if = {
 					limit = {
-						check_variable = {
-							ASG_oil < 1
-						}
+						check_variable = { ASG_oil < 1 }
 					}
 					add_to_temp_variable = {
 						ASG_oil_calculations_finished = 1
@@ -4047,9 +4034,7 @@ ASG_civilian_update_stats = {
 			}
 			if = {
 				limit = {
-					check_variable = {
-						ASG_oil_calculations_finished < 1
-					}
+					check_variable = { ASG_oil_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_oil_price = 8
@@ -4066,6 +4051,7 @@ ASG_civilian_update_stats = {
 				}
 			}
 		}
+		
 		#aluminium
 		set_temp_variable = {
 			ASG_aluminium = resource_imported@aluminium
@@ -4075,9 +4061,7 @@ ASG_civilian_update_stats = {
 		}
 		if = {
 			limit = {
-				check_variable = {
-					ASG_aluminium > 0
-				}
+				check_variable = { ASG_aluminium > 0 }
 			}
 			set_temp_variable = {
 				ASG_aluminium_calculations_finished = 0
@@ -4085,16 +4069,12 @@ ASG_civilian_update_stats = {
 			every_country = {
 				limit = {
 					is_subject_of = PREV
-					check_variable = {
-						resource_exported@aluminium > PREV.resource_imported@aluminium
-					}
-					check_variable = {
-						ASG_aluminium_calculations_finished < 1
-					}
+					check_variable = { resource_exported@aluminium > PREV.resource_imported@aluminium }
+					check_variable = { ASG_aluminium_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_aluminium_price = 80
-				}
+				}	
 				divide_temp_variable = {
 					ASG_aluminium = ASG_aluminium_price
 				}
@@ -4108,19 +4088,14 @@ ASG_civilian_update_stats = {
 				add_to_temp_variable = {
 					ASG_aluminium_calculations_finished = 1
 				}
+				
 			}
 			every_country = {
 				limit = {
 					is_subject_of = PREV
-					check_variable = {
-						resource_exported@aluminium < PREV.resource_imported@aluminium
-					}
-					check_variable = {
-						resource_exported@aluminium > 8
-					}
-					check_variable = {
-						ASG_aluminium_calculations_finished < 1
-					}
+					check_variable = { resource_exported@aluminium < PREV.resource_imported@aluminium }
+					check_variable = { resource_exported@aluminium > 8 }
+					check_variable = { ASG_aluminium_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_aluminium_price = 80
@@ -4146,9 +4121,7 @@ ASG_civilian_update_stats = {
 				}
 				if = {
 					limit = {
-						check_variable = {
-							ASG_aluminium < 1
-						}
+						check_variable = { ASG_aluminium < 1 }
 					}
 					add_to_temp_variable = {
 						ASG_aluminium_calculations_finished = 1
@@ -4157,9 +4130,7 @@ ASG_civilian_update_stats = {
 			}
 			if = {
 				limit = {
-					check_variable = {
-						ASG_aluminium_calculations_finished < 1
-					}
+					check_variable = { ASG_aluminium_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_aluminium_price = 8
@@ -4176,6 +4147,7 @@ ASG_civilian_update_stats = {
 				}
 			}
 		}
+		
 		#rubber
 		set_temp_variable = {
 			ASG_rubber = resource_imported@rubber
@@ -4185,9 +4157,7 @@ ASG_civilian_update_stats = {
 		}
 		if = {
 			limit = {
-				check_variable = {
-					ASG_rubber > 0
-				}
+				check_variable = { ASG_rubber > 0 }
 			}
 			set_temp_variable = {
 				ASG_rubber_calculations_finished = 0
@@ -4195,16 +4165,12 @@ ASG_civilian_update_stats = {
 			every_country = {
 				limit = {
 					is_subject_of = PREV
-					check_variable = {
-						resource_exported@rubber > PREV.resource_imported@rubber
-					}
-					check_variable = {
-						ASG_rubber_calculations_finished < 1
-					}
+					check_variable = { resource_exported@rubber > PREV.resource_imported@rubber }
+					check_variable = { ASG_rubber_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_rubber_price = 80
-				}
+				}	
 				divide_temp_variable = {
 					ASG_rubber = ASG_rubber_price
 				}
@@ -4218,19 +4184,14 @@ ASG_civilian_update_stats = {
 				add_to_temp_variable = {
 					ASG_rubber_calculations_finished = 1
 				}
+				
 			}
 			every_country = {
 				limit = {
 					is_subject_of = PREV
-					check_variable = {
-						resource_exported@rubber < PREV.resource_imported@rubber
-					}
-					check_variable = {
-						resource_exported@rubber > 8
-					}
-					check_variable = {
-						ASG_rubber_calculations_finished < 1
-					}
+					check_variable = { resource_exported@rubber < PREV.resource_imported@rubber }
+					check_variable = { resource_exported@rubber > 8 }
+					check_variable = { ASG_rubber_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_rubber_price = 80
@@ -4256,9 +4217,7 @@ ASG_civilian_update_stats = {
 				}
 				if = {
 					limit = {
-						check_variable = {
-							ASG_rubber < 1
-						}
+						check_variable = { ASG_rubber < 1 }
 					}
 					add_to_temp_variable = {
 						ASG_rubber_calculations_finished = 1
@@ -4267,9 +4226,7 @@ ASG_civilian_update_stats = {
 			}
 			if = {
 				limit = {
-					check_variable = {
-						ASG_rubber_calculations_finished < 1
-					}
+					check_variable = { ASG_rubber_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_rubber_price = 8
@@ -4286,6 +4243,7 @@ ASG_civilian_update_stats = {
 				}
 			}
 		}
+		
 		#tungsten
 		set_temp_variable = {
 			ASG_tungsten = resource_imported@tungsten
@@ -4295,26 +4253,21 @@ ASG_civilian_update_stats = {
 		}
 		if = {
 			limit = {
-				check_variable = {
-					ASG_tungsten > 0
-				}
+				check_variable = { ASG_tungsten > 0 }
 			}
+
 			set_temp_variable = {
 				ASG_tungsten_calculations_finished = 0
 			}
 			every_country = {
 				limit = {
 					is_subject_of = PREV
-					check_variable = {
-						resource_exported@tungsten > PREV.resource_imported@tungsten
-					}
-					check_variable = {
-						ASG_tungsten_calculations_finished < 1
-					}
+					check_variable = { resource_exported@tungsten > PREV.resource_imported@tungsten }
+					check_variable = { ASG_tungsten_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_tungsten_price = 80
-				}
+				}	
 				divide_temp_variable = {
 					ASG_tungsten = ASG_tungsten_price
 				}
@@ -4328,19 +4281,14 @@ ASG_civilian_update_stats = {
 				add_to_temp_variable = {
 					ASG_tungsten_calculations_finished = 1
 				}
+				
 			}
 			every_country = {
 				limit = {
 					is_subject_of = PREV
-					check_variable = {
-						resource_exported@tungsten < PREV.resource_imported@tungsten
-					}
-					check_variable = {
-						resource_exported@tungsten > 8
-					}
-					check_variable = {
-						ASG_tungsten_calculations_finished < 1
-					}
+					check_variable = { resource_exported@tungsten < PREV.resource_imported@tungsten }
+					check_variable = { resource_exported@tungsten > 8 }
+					check_variable = { ASG_tungsten_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_tungsten_price = 80
@@ -4366,9 +4314,7 @@ ASG_civilian_update_stats = {
 				}
 				if = {
 					limit = {
-						check_variable = {
-							ASG_tungsten < 1
-						}
+						check_variable = { ASG_tungsten < 1 }
 					}
 					add_to_temp_variable = {
 						ASG_tungsten_calculations_finished = 1
@@ -4377,9 +4323,7 @@ ASG_civilian_update_stats = {
 			}
 			if = {
 				limit = {
-					check_variable = {
-						ASG_tungsten_calculations_finished < 1
-					}
+					check_variable = { ASG_tungsten_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_tungsten_price = 8
@@ -4396,6 +4340,7 @@ ASG_civilian_update_stats = {
 				}
 			}
 		}
+		
 		#steel
 		set_temp_variable = {
 			ASG_steel = resource_imported@steel
@@ -4405,26 +4350,21 @@ ASG_civilian_update_stats = {
 		}
 		if = {
 			limit = {
-				check_variable = {
-					ASG_steel > 0
-				}
+				check_variable = { ASG_steel > 0 }
 			}
+
 			set_temp_variable = {
 				ASG_steel_calculations_finished = 0
 			}
 			every_country = {
 				limit = {
 					is_subject_of = PREV
-					check_variable = {
-						resource_exported@steel > PREV.resource_imported@steel
-					}
-					check_variable = {
-						ASG_steel_calculations_finished < 1
-					}
+					check_variable = { resource_exported@steel > PREV.resource_imported@steel }
+					check_variable = { ASG_steel_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_steel_price = 80
-				}
+				}	
 				divide_temp_variable = {
 					ASG_steel = ASG_steel_price
 				}
@@ -4438,19 +4378,14 @@ ASG_civilian_update_stats = {
 				add_to_temp_variable = {
 					ASG_steel_calculations_finished = 1
 				}
+				
 			}
 			every_country = {
 				limit = {
 					is_subject_of = PREV
-					check_variable = {
-						resource_exported@steel < PREV.resource_imported@steel
-					}
-					check_variable = {
-						resource_exported@steel > 8
-					}
-					check_variable = {
-						ASG_steel_calculations_finished < 1
-					}
+					check_variable = { resource_exported@steel < PREV.resource_imported@steel }
+					check_variable = { resource_exported@steel > 8 }
+					check_variable = { ASG_steel_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_steel_price = 80
@@ -4476,9 +4411,7 @@ ASG_civilian_update_stats = {
 				}
 				if = {
 					limit = {
-						check_variable = {
-							ASG_steel < 1
-						}
+						check_variable = { ASG_steel < 1 }
 					}
 					add_to_temp_variable = {
 						ASG_steel_calculations_finished = 1
@@ -4487,9 +4420,7 @@ ASG_civilian_update_stats = {
 			}
 			if = {
 				limit = {
-					check_variable = {
-						ASG_steel_calculations_finished < 1
-					}
+					check_variable = { ASG_steel_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_steel_price = 8
@@ -4506,6 +4437,7 @@ ASG_civilian_update_stats = {
 				}
 			}
 		}
+		
 		#chromium
 		set_temp_variable = {
 			ASG_chromium = resource_imported@chromium
@@ -4515,9 +4447,7 @@ ASG_civilian_update_stats = {
 		}
 		if = {
 			limit = {
-				check_variable = {
-					ASG_chromium > 0
-				}
+				check_variable = { ASG_chromium > 0 }
 			}
 			set_temp_variable = {
 				ASG_chromium_calculations_finished = 0
@@ -4525,16 +4455,12 @@ ASG_civilian_update_stats = {
 			every_country = {
 				limit = {
 					is_subject_of = PREV
-					check_variable = {
-						resource_exported@chromium > PREV.resource_imported@chromium
-					}
-					check_variable = {
-						ASG_chromium_calculations_finished < 1
-					}
+					check_variable = { resource_exported@chromium > PREV.resource_imported@chromium }
+					check_variable = { ASG_chromium_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_chromium_price = 80
-				}
+				}	
 				divide_temp_variable = {
 					ASG_chromium = ASG_chromium_price
 				}
@@ -4548,19 +4474,14 @@ ASG_civilian_update_stats = {
 				add_to_temp_variable = {
 					ASG_chromium_calculations_finished = 1
 				}
+				
 			}
 			every_country = {
 				limit = {
 					is_subject_of = PREV
-					check_variable = {
-						resource_exported@chromium < PREV.resource_imported@chromium
-					}
-					check_variable = {
-						resource_exported@chromium > 8
-					}
-					check_variable = {
-						ASG_chromium_calculations_finished < 1
-					}
+					check_variable = { resource_exported@chromium < PREV.resource_imported@chromium }
+					check_variable = { resource_exported@chromium > 8 }
+					check_variable = { ASG_chromium_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_chromium_price = 80
@@ -4586,9 +4507,7 @@ ASG_civilian_update_stats = {
 				}
 				if = {
 					limit = {
-						check_variable = {
-							ASG_chromium < 1
-						}
+						check_variable = { ASG_chromium < 1 }
 					}
 					add_to_temp_variable = {
 						ASG_chromium_calculations_finished = 1
@@ -4597,9 +4516,7 @@ ASG_civilian_update_stats = {
 			}
 			if = {
 				limit = {
-					check_variable = {
-						ASG_chromium_calculations_finished < 1
-					}
+					check_variable = { ASG_chromium_calculations_finished < 1 }
 				}
 				set_temp_variable = {
 					ASG_chromium_price = 8
@@ -4616,35 +4533,37 @@ ASG_civilian_update_stats = {
 				}
 			}
 		}
+
 		add_to_temp_variable = {
-			ASG_civilian_score = ASG_oil_civ_count_import
+			ASG_civilian_industrial_score = ASG_oil_civ_count_import
 		}
 		add_to_temp_variable = {
-			ASG_civilian_score = ASG_aluminium_civ_count_import
+			ASG_civilian_industrial_score = ASG_aluminium_civ_count_import
 		}
 		add_to_temp_variable = {
-			ASG_civilian_score = ASG_rubber_civ_count_import
+			ASG_civilian_industrial_score = ASG_rubber_civ_count_import
 		}
 		add_to_temp_variable = {
-			ASG_civilian_score = ASG_tungsten_civ_count_import
+			ASG_civilian_industrial_score = ASG_tungsten_civ_count_import
 		}
 		add_to_temp_variable = {
-			ASG_civilian_score = ASG_steel_civ_count_import
+			ASG_civilian_industrial_score = ASG_steel_civ_count_import
 		}
 		add_to_temp_variable = {
-			ASG_civilian_score = ASG_chromium_civ_count_import
+			ASG_civilian_industrial_score = ASG_chromium_civ_count_import
 		}
-		# log = "Civ Number [?ASG_civilian_score] tot_score [?ASG_civilian_score] goods [?modifier@consumer_goods_factor] THIS = [?THIS.GetName]"
+		# log = "Civ Number [?ASG_civilian_score] tot_score [?ASG_civilian_industrial_score] goods [?modifier@consumer_goods_factor] THIS = [?THIS.GetName]"
 		multiply_temp_variable = {
-			ASG_civilian_score = modifier@consumer_goods_factor
+			ASG_civilian_industrial_score = modifier@consumer_goods_factor
 		}
-		round_temp_variable = ASG_civilian_score
+		round_temp_variable = ASG_civilian_industrial_score
 		multiply_temp_variable = {
-			ASG_civilian_score = -1
+			ASG_civilian_industrial_score = -1
 		}
 		add_to_variable = {
-			ASG_civilian_score = ASG_civilian_score
+			ASG_civilian_score = ASG_civilian_industrial_score
 		}
+		
 		set_variable = {
 			ASG_civilian_score_modifier = modifier@production_speed_buildings_factor
 		}
@@ -4654,7 +4573,7 @@ ASG_civilian_update_stats = {
 		multiply_variable = {
 			ASG_civilian_score = ASG_civilian_score_modifier
 		}
-		# log = "Score = [?ASG_civilian_score] civilian_score [?ASG_civilian_score_modifier] ASG_civilian_score [?ASG_civilian_score] THIS = [?THIS.GetName]"
+		# log = "Score = [?ASG_civilian_score] civilian_score [?ASG_civilian_score_modifier] ASG_civilian_industrial_score [?ASG_civilian_industrial_score] THIS = [?THIS.GetName]"
 	}
 }
 
