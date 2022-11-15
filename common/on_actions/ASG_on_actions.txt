@@ -40,6 +40,12 @@ on_actions = {
 					GLOBAL.ASG_military_rendering_scale_factor = 1
 				}
 				set_variable = {
+					GLOBAL.ASG_manpower_rendering_scale_factor = 1
+				}
+				set_variable = {
+					GLOBAL.ASG_casualties_rendering_scale_factor = 1
+				}
+				set_variable = {
 					GLOBAL.ASG_graph_pixel_y_maximum_value = 390
 				}
 				set_variable = {

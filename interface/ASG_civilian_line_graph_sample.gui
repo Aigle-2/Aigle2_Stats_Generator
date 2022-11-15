@@ -88,7 +88,7 @@ guiTypes = {
 			name = "700"
 			position = { x= 65 y = 47}
 			font = "cg_18b"
-			text = "700"
+			text = "[GetCivilianYLabel7]"
 			maxWidth = 50
 			format = right
 		}
@@ -97,7 +97,7 @@ guiTypes = {
 			name = "600"
 			position = { x= 65 y = 107}
 			font = "cg_18b"
-			text = "600"
+			text = "[GetCivilianYLabel6]"
 			maxWidth = 50
 			format = right
 		}
@@ -106,7 +106,7 @@ guiTypes = {
 			name = "500"
 			position = { x= 65 y = 167}
 			font = "cg_18b"
-			text = "500"
+			text = "[GetCivilianYLabel5]"
 			maxWidth = 50
 			format = right
 		}
@@ -114,7 +114,7 @@ guiTypes = {
 			name = "400"
 			position = { x= 65 y = 227}
 			font = "cg_18b"
-			text = "400"
+			text = "[GetCivilianYLabel4]"
 			maxWidth = 50
 			format = right
 		}
@@ -122,7 +122,7 @@ guiTypes = {
 			name = "300"
 			position = { x= 65 y = 287}
 			font = "cg_18b"
-			text = "300"
+			text = "[GetCivilianYLabel3]"
 			maxWidth = 50
 			format = right
 		}
@@ -130,7 +130,7 @@ guiTypes = {
 			name = "200"
 			position = { x= 65 y = 347}
 			font = "cg_18b"
-			text = "200"
+			text = "[GetCivilianYLabel2]"
 			maxWidth = 50
 			format = right
 		}
@@ -138,7 +138,7 @@ guiTypes = {
 			name = "100"
 			position = { x= 65 y = 407}
 			font = "cg_18b"
-			text = "100"
+			text = "[GetCivilianYLabel1]"
 			maxWidth = 50
 			format = right
 		}
@@ -168,66 +168,58 @@ guiTypes = {
 			position = { x = 20 y = 50 }
 		}
 		instantTextboxType = {
-			name = "SCALE_FACTOR"
-			position = { x = 15 y = 90}
-			font = "cg_18b"
-			text = ASG_civilian_scale_factor
-			maxWidth = 55
-			format = center
-		}
-		instantTextboxType = {
-			name = "GER_legend"
+			name = "Grey_legend"
 			position = { x = 200 y = 510}
 			font = "cg_18b"
-			text = ASG_civilian_graph_legend_GER
+			text = ASG_civilian_graph_legend_grey
 			maxWidth = 55
 			format = center
 		}
 		instantTextboxType = {
-			name = "USA_legend"
+			name = "Blue_legend"
 			position = { x = 280 y = 510}
 			font = "cg_18b"
-			text = ASG_civilian_graph_legend_USA
+			text = ASG_civilian_graph_legend_blue
 			maxWidth = 55
 			format = center
 		}
 		instantTextboxType = {
-			name = "SOV_legend"
+			name = "Red_legend"
 			position = { x = 360 y = 510}
 			font = "cg_18b"
-			text = ASG_civilian_graph_legend_SOV
+			text = ASG_civilian_graph_legend_red
 			maxWidth = 55
 			format = center
 		}
 		instantTextboxType = {
-			name = "FRA_legend"
+			name = "Light_blue_legend"
 			position = { x = 440 y = 510}
 			font = "cg_18b"
-			text = ASG_civilian_graph_legend_FRA
+			text = ASG_civilian_graph_legend_light_blue
 			maxWidth = 55
 			format = center
 		}
 		instantTextboxType = {
-			name = "ITA_legend"
+			name = "Green_legend"
 			position = { x = 520 y = 510}
 			font = "cg_18b"
-			text = ASG_civilian_graph_legend_ITA
+			text = ASG_civilian_graph_legend_green
 			maxWidth = 55
 			format = center
 		}
 		instantTextboxType = {
-			name = "JAP_legend"
+			name = "Light_White_legend"
 			position = { x = 600 y = 510}
 			font = "cg_18b"
-			text = ASG_civilian_graph_legend_JAP
+			text = ASG_civilian_graph_legend_light_white
 			maxWidth = 55
 			format = center
 		}
 		instantTextboxType = {
-			name = "ENG_legend"
+			name = "Light_red_legend"
 			position = { x = 680 y = 510}
 			font = "cg_18b"
-			text = ASG_civilian_graph_legend_ENG
+			text = ASG_civilian_graph_legend_light_red
 			maxWidth = 55
 			format = center
 		}
@@ -353,7 +345,7 @@ guiTypes = {
 			name = "TITLE"
 			position = { x = 130 y = 20}
 			font = "cg_18b"
-			text = "CIVILIAN PRODUCTION (AVAILABLE CIVS x CONSTRUCTION SPEED / SCALE FACTOR) FOR MAJOR COUNTRIES"
+			text = "CIVILIAN PRODUCTION (AVAILABLE CIVS x CONSTRUCTION SPEED) FOR MAJOR COUNTRIES"
 			maxWidth = 750
 			format = center
 		}

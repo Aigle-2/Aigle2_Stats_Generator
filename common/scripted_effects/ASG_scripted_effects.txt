@@ -17,6 +17,9 @@ ASG_military_update_stats = {
 		multiply_variable = {
 			ASG_military_score = ASG_military_score_modifier
 		}
+		add_to_array = {
+			ASG_military_score_array = ASG_military_score
+		}
 		# log = "Score = [?ASG_military_score] THIS = [?THIS.GetName] ROOT = [?ROOT.GetName]"
 	}
 }
@@ -3928,6 +3931,9 @@ ASG_manpower_update_stats = {
 				ASG_manpower_score = 0
 			}
 		}
+		add_to_array = {
+			ASG_manpower_score_array = ASG_manpower_score
+		}
 	}
 }
 
@@ -3935,6 +3941,9 @@ ASG_casualties_update_stats = {
 	every_country = {
 		set_variable = {
 			ASG_casualties_score = THIS.casualties_k
+		}
+		add_to_array = {
+			ASG_casualties_score_array = ASG_casualties_score
 		}
 		# log = "Score = [?ASG_military_score] THIS = [?THIS.GetName] ROOT = [?ROOT.GetName]"
 	}
@@ -4572,6 +4581,9 @@ ASG_civilian_update_stats = {
 		}
 		multiply_variable = {
 			ASG_civilian_score = ASG_civilian_score_modifier
+		}
+		add_to_array = {
+			ASG_civilian_score_array = ASG_civilian_score
 		}
 		# log = "Score = [?ASG_civilian_score] civilian_score [?ASG_civilian_score_modifier] ASG_civilian_industrial_score [?ASG_civilian_industrial_score] THIS = [?THIS.GetName]"
 	}
@@ -6161,7 +6173,7 @@ ASG_military_add_point_to_line = {
 
 ASG_military_rescale_down = {
 	multiply_variable = {
-		GLOBAL.ASG_military_scale_factor = 2
+		GLOBAL.ASG_military_rendering_scale_factor = 2
 	}
 	for_each_loop = {
 		array = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue
@@ -6426,7 +6438,7 @@ ASG_military_rescale_down = {
 
 ASG_military_rescale_up = {
 	multiply_variable = {
-		GLOBAL.ASG_military_scale_factor = 0.5
+		GLOBAL.ASG_military_rendering_scale_factor = 0.5
 	}
 	for_each_loop = {
 		array = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue
