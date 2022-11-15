@@ -157,13 +157,16 @@ guiTypes = {
 			spriteType = "GFX_closebutton"
 			position = { x = 920 y = 20 }
 		}
-
-		# buttonType = {
-		# 	name = "add_button"
-		# 	spriteType = "GFX_NV_btn_add"
-		# 	position = { x = 20 y = 20 }
-		# }
-
+		buttonType = {
+			name = "add_button"
+			spriteType = "GFX_add_one"
+			position = { x = 20 y = 225}
+		}
+		buttonType = {
+			name = "substract_button"
+			spriteType = "GFX_subtract_one"
+			position = { x = 20 y = 300}
+		}
 		instantTextboxType = {
 			name = "Grey_legend"
 			position = { x = 200 y = 510}

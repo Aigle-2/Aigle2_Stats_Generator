@@ -151,8 +151,13 @@ guiTypes = {
 
 		buttonType = {
 			name = "add_button"
-			spriteType = "GFX_NV_btn_add"
-			position = { x = 20 y = 20 }
+			spriteType = "GFX_add_one"
+			position = { x = 20 y = 225}
+		}
+		buttonType = {
+			name = "substract_button"
+			spriteType = "GFX_subtract_one"
+			position = { x = 20 y = 300}
 		}
 
 		instantTextboxType = {
