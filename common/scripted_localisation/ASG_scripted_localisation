@@ -20,3 +20,94 @@ defined_text = {
         localization_key = "[?score]"
     }
 }
+
+defined_text = {
+    name = GetRedManpowerScore
+
+    text = {
+        trigger = { 
+            var:global.ASG_red_curve_tag = { 
+                set_temp_variable = { score = ASG_manpower_score }
+            }
+        }
+        localization_key = "[?score]"
+    }
+}
+
+defined_text = {
+    name = GetBlueManpowerScore
+
+    text = {
+        trigger = { 
+            var:global.ASG_blue_curve_tag = { 
+                set_temp_variable = { score = ASG_manpower_score }
+            }
+        }
+        localization_key = "[?score]"
+    }
+}
+
+defined_text = {
+    name = GetGreenManpowerScore
+
+    text = {
+        trigger = { 
+            var:global.ASG_green_curve_tag = { 
+                set_temp_variable = { score = ASG_manpower_score }
+            }
+        }
+        localization_key = "[?score]"
+    }
+}
+
+defined_text = {
+    name = GetLightBlueManpowerScore
+
+    text = {
+        trigger = { 
+            var:global.ASG_light_blue_curve_tag = { 
+                set_temp_variable = { score = ASG_manpower_score }
+            }
+        }
+        localization_key = "[?score]"
+    }
+}
+
+defined_text = {
+    name = GetLightRedManpowerScore
+
+    text = {
+        trigger = { 
+            var:global.ASG_light_red_curve_tag = { 
+                set_temp_variable = { score = ASG_manpower_score }
+            }
+        }
+        localization_key = "[?score]"
+    }
+}
+
+defined_text = {
+    name = GetLightYellowManpowerScore
+
+    text = {
+        trigger = { 
+            var:global.ASG_light_yellow_curve_tag = { 
+                set_temp_variable = { score = ASG_manpower_score }
+            }
+        }
+        localization_key = "[?score]"
+    }
+}
+
+defined_text = {
+    name = GetLightWhiteManpowerScore
+
+    text = {
+        trigger = { 
+            var:global.ASG_light_white_curve_tag = { 
+                set_temp_variable = { score = ASG_manpower_score }
+            }
+        }
+        localization_key = "[?score]"
+    }
+}
