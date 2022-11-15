@@ -14,10 +14,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_grey_curve_tag = { 
-                set_temp_variable = { score = ASG_manpower_score }
+                set_temp_variable = { score_var = ASG_manpower_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -27,10 +27,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_red_curve_tag = { 
-                set_temp_variable = { score = ASG_manpower_score }
+                set_temp_variable = { score_var = ASG_manpower_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -40,10 +40,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_blue_curve_tag = { 
-                set_temp_variable = { score = ASG_manpower_score }
+                set_temp_variable = { score_var = ASG_manpower_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -53,10 +53,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_green_curve_tag = { 
-                set_temp_variable = { score = ASG_manpower_score }
+                set_temp_variable = { score_var = ASG_manpower_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -66,10 +66,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_light_blue_curve_tag = { 
-                set_temp_variable = { score = ASG_manpower_score }
+                set_temp_variable = { score_var = ASG_manpower_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -79,10 +79,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_light_red_curve_tag = { 
-                set_temp_variable = { score = ASG_manpower_score }
+                set_temp_variable = { score_var = ASG_manpower_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -92,10 +92,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_light_yellow_curve_tag = { 
-                set_temp_variable = { score = ASG_manpower_score }
+                set_temp_variable = { score_var = ASG_manpower_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -105,10 +105,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_light_white_curve_tag = { 
-                set_temp_variable = { score = ASG_manpower_score }
+                set_temp_variable = { score_var = ASG_manpower_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -118,10 +118,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_grey_curve_tag = { 
-                set_temp_variable = { score = ASG_military_score }
+                set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -131,10 +131,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_red_curve_tag = { 
-                set_temp_variable = { score = ASG_military_score }
+                set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -144,10 +144,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_blue_curve_tag = { 
-                set_temp_variable = { score = ASG_military_score }
+                set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -157,10 +157,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_green_curve_tag = { 
-                set_temp_variable = { score = ASG_military_score }
+                set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -170,10 +170,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_light_blue_curve_tag = { 
-                set_temp_variable = { score = ASG_military_score }
+                set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -183,10 +183,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_light_red_curve_tag = { 
-                set_temp_variable = { score = ASG_military_score }
+                set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -196,10 +196,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_light_yellow_curve_tag = { 
-                set_temp_variable = { score = ASG_military_score }
+                set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -209,10 +209,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_light_white_curve_tag = { 
-                set_temp_variable = { score = ASG_military_score }
+                set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -222,10 +222,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_grey_curve_tag = { 
-                set_temp_variable = { score = ASG_civilian_score }
+                set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -235,10 +235,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_red_curve_tag = { 
-                set_temp_variable = { score = ASG_civilian_score }
+                set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -248,10 +248,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_blue_curve_tag = { 
-                set_temp_variable = { score = ASG_civilian_score }
+                set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -261,10 +261,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_green_curve_tag = { 
-                set_temp_variable = { score = ASG_civilian_score }
+                set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -274,10 +274,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_light_blue_curve_tag = { 
-                set_temp_variable = { score = ASG_civilian_score }
+                set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -287,10 +287,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_light_red_curve_tag = { 
-                set_temp_variable = { score = ASG_civilian_score }
+                set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -300,10 +300,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_light_yellow_curve_tag = { 
-                set_temp_variable = { score = ASG_civilian_score }
+                set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -313,10 +313,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_light_white_curve_tag = { 
-                set_temp_variable = { score = ASG_civilian_score }
+                set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -326,10 +326,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_grey_curve_tag = { 
-                set_temp_variable = { score = ASG_casualties_score }
+                set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -339,10 +339,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_red_curve_tag = { 
-                set_temp_variable = { score = ASG_casualties_score }
+                set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -352,10 +352,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_blue_curve_tag = { 
-                set_temp_variable = { score = ASG_casualties_score }
+                set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -365,10 +365,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_green_curve_tag = { 
-                set_temp_variable = { score = ASG_casualties_score }
+                set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -378,10 +378,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_light_blue_curve_tag = { 
-                set_temp_variable = { score = ASG_casualties_score }
+                set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -391,10 +391,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_light_red_curve_tag = { 
-                set_temp_variable = { score = ASG_casualties_score }
+                set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -404,10 +404,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_light_yellow_curve_tag = { 
-                set_temp_variable = { score = ASG_casualties_score }
+                set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -417,10 +417,10 @@ defined_text = {
     text = {
         trigger = { 
             var:global.ASG_light_white_curve_tag = { 
-                set_temp_variable = { score = ASG_casualties_score }
+                set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t"
     }
 }
 
@@ -429,12 +429,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 100 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_military_rendering_scale_factor
+                set_temp_variable = { score_var = 100 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_military_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t eq.factories"
     }
 }
 
@@ -443,12 +443,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 200 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_military_rendering_scale_factor
+                set_temp_variable = { score_var = 200 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_military_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t eq.factories"
     }
 }
 
@@ -457,12 +457,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 300 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_military_rendering_scale_factor
+                set_temp_variable = { score_var = 300 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_military_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t eq.factories"
     }
 }
 
@@ -471,12 +471,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 400 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_military_rendering_scale_factor
+                set_temp_variable = { score_var = 400 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_military_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t eq.factories"
     }
 }
 
@@ -485,12 +485,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 500 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_military_rendering_scale_factor
+                set_temp_variable = { score_var = 500 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_military_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t eq.factories"
     }
 }
 
@@ -498,13 +498,13 @@ defined_text = {
     name = GetMilitaryYLabel6
 
     text = {
-        trigger = { 
-                set_temp_variable = { score = 600 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_military_rendering_scale_factor
+        trigger = {
+                set_temp_variable = { score_var = 600 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_military_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t eq.factories"
     }
 }
 
@@ -513,12 +513,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 700 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_military_rendering_scale_factor
+                set_temp_variable = { score_var = 700 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_military_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t eq.factories"
     }
 }
 
@@ -527,12 +527,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 100 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_civilian_rendering_scale_factor
+                set_temp_variable = { score_var = 100 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_civilian_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t eq.factories"
     }
 }
 
@@ -541,12 +541,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 200 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_civilian_rendering_scale_factor
+                set_temp_variable = { score_var = 200 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_civilian_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t eq.factories"
     }
 }
 
@@ -555,12 +555,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 300 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_civilian_rendering_scale_factor
+                set_temp_variable = { score_var = 300 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_civilian_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t eq.factories"
     }
 }
 
@@ -569,12 +569,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 400 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_civilian_rendering_scale_factor
+                set_temp_variable = { score_var = 400 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_civilian_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t eq.factories"
     }
 }
 
@@ -583,12 +583,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 500 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_civilian_rendering_scale_factor
+                set_temp_variable = { score_var = 500 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_civilian_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t eq.factories"
     }
 }
 
@@ -597,12 +597,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 600 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_civilian_rendering_scale_factormilitary
+                set_temp_variable = { score_var = 600 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_civilian_rendering_scale_factormilitary
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t eq.factories"
     }
 }
 
@@ -611,12 +611,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 700 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_civilian_rendering_scale_factor
+                set_temp_variable = { score_var = 700 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_civilian_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t eq.factories"
     }
 }
 
@@ -625,12 +625,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 2 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_casualties_rendering_scale_factor
+                set_temp_variable = { score_var = 2 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_casualties_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t million"
     }
 }
 
@@ -639,12 +639,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 4 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_casualties_rendering_scale_factor
+                set_temp_variable = { score_var = 4 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_casualties_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t million"
     }
 }
 
@@ -653,12 +653,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 6 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_casualties_rendering_scale_factor
+                set_temp_variable = { score_var = 6 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_casualties_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t million"
     }
 }
 
@@ -667,12 +667,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 8 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_casualties_rendering_scale_factor
+                set_temp_variable = { score_var = 8 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_casualties_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t million"
     }
 }
 
@@ -681,12 +681,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 10 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_casualties_rendering_scale_factor
+                set_temp_variable = { score_var = 10 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_casualties_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t million"
     }
 }
 
@@ -695,12 +695,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 12 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_casualties_rendering_scale_factor
+                set_temp_variable = { score_var = 12 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_casualties_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t million"
     }
 }
 
@@ -709,12 +709,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 14 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_casualties_rendering_scale_factor
+                set_temp_variable = { score_var = 14 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_casualties_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t million"
     }
 }
 
@@ -723,12 +723,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 1.5 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_manpower_rendering_scale_factor
+                set_temp_variable = { score_var = 1.5 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_manpower_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t million"
     }
 }
 
@@ -737,12 +737,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 3 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_manpower_rendering_scale_factor
+                set_temp_variable = { score_var = 3 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_manpower_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t million"
     }
 }
 
@@ -751,12 +751,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 4.5 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_manpower_rendering_scale_factor
+                set_temp_variable = { score_var = 4.5 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_manpower_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t million"
     }
 }
 
@@ -765,12 +765,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 6 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_manpower_rendering_scale_factor
+                set_temp_variable = { score_var = 6 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_manpower_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t million"
     }
 }
 
@@ -779,12 +779,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 7.5 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_manpower_rendering_scale_factor
+                set_temp_variable = { score_var = 7.5 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_manpower_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t million"
     }
 }
 
@@ -793,12 +793,12 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 9 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_manpower_rendering_scale_factor
+                set_temp_variable = { score_var = 9 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_manpower_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t million"
     }
 }
 
@@ -807,11 +807,11 @@ defined_text = {
 
     text = {
         trigger = { 
-                set_temp_variable = { score = 10.5 }
-                mulitply_temp_variable = {
-                    score = GLOBAL.ASG_manpower_rendering_scale_factor
+                set_temp_variable = { score_var = 10.5 }
+                multiply_temp_variable = {
+                    score_var = GLOBAL.ASG_manpower_rendering_scale_factor
                 }
         }
-        localization_key = "[?score]"
+        localization_key = "t [?score_var] t million"
     }
 }

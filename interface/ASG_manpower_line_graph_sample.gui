@@ -88,7 +88,7 @@ guiTypes = {
 			name = "9 million"
 			position = { x= 40 y = 107}
 			font = "cg_18b"
-			text = "[GetManpowerYLabel6] million"
+			text = "[GetManpowerYLabel6]"
 			maxWidth = 80
 			format = right
 		}
@@ -97,7 +97,7 @@ guiTypes = {
 			name = "7.5 million"
 			position = { x= 40 y = 167}
 			font = "cg_18b"
-			text = "[GetManpowerYLabel5] million"
+			text = "[GetManpowerYLabel5]"
 			maxWidth = 80
 			format = right
 		}
@@ -105,7 +105,7 @@ guiTypes = {
 			name = "6 million"
 			position = { x= 40 y = 227}
 			font = "cg_18b"
-			text = "[GetManpowerYLabel4] million"
+			text = "[GetManpowerYLabel4]"
 			maxWidth = 80
 			format = right
 		}
@@ -113,7 +113,7 @@ guiTypes = {
 			name = "4.5 million"
 			position = { x= 40 y = 287}
 			font = "cg_18b"
-			text = "[GetManpowerYLabel3] million"
+			text = "[GetManpowerYLabel3]"
 			maxWidth = 80
 			format = right
 		}
@@ -121,7 +121,7 @@ guiTypes = {
 			name = "3 million"
 			position = { x= 40 y = 347}
 			font = "cg_18b"
-			text = "[GetManpowerYLabel2] million"
+			text = "[GetManpowerYLabel2]"
 			maxWidth = 80
 			format = right
 		}
@@ -129,7 +129,7 @@ guiTypes = {
 			name = "1.5 million"
 			position = { x= 40 y = 407}
 			font = "cg_18b"
-			text = "[GetManpowerYLabel1] million"
+			text = "[GetManpowerYLabel1]"
 			maxWidth = 80
 			format = right
 		}

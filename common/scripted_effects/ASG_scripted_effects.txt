@@ -20,7 +20,7 @@ ASG_military_update_stats = {
 		add_to_array = {
 			ASG_military_score_array = ASG_military_score
 		}
-		# log = "Score = [?ASG_military_score] THIS = [?THIS.GetName] ROOT = [?ROOT.GetName]"
+		# log = "score_var = [?ASG_military_score] THIS = [?THIS.GetName] ROOT = [?ROOT.GetName]"
 	}
 }
 
@@ -3945,7 +3945,7 @@ ASG_casualties_update_stats = {
 		add_to_array = {
 			ASG_casualties_score_array = ASG_casualties_score
 		}
-		# log = "Score = [?ASG_military_score] THIS = [?THIS.GetName] ROOT = [?ROOT.GetName]"
+		# log = "score_var = [?ASG_military_score] THIS = [?THIS.GetName] ROOT = [?ROOT.GetName]"
 	}
 }
 
@@ -3963,7 +3963,7 @@ ASG_civilian_update_stats = {
 		add_to_temp_variable = {
 			ASG_civilian_industrial_score = THIS.num_of_military_factories
 		}
-		# log = "Score = [?ASG_civilian_score] civ_score [?ASG_civilian_industrial_score] THIS = [?THIS.GetName]"
+		# log = "score_var = [?ASG_civilian_score] civ_score [?ASG_civilian_industrial_score] THIS = [?THIS.GetName]"
 		#trade factories calculations
 		#oil
 		set_temp_variable = {
@@ -4585,7 +4585,7 @@ ASG_civilian_update_stats = {
 		add_to_array = {
 			ASG_civilian_score_array = ASG_civilian_score
 		}
-		# log = "Score = [?ASG_civilian_score] civilian_score [?ASG_civilian_score_modifier] ASG_civilian_industrial_score [?ASG_civilian_industrial_score] THIS = [?THIS.GetName]"
+		# log = "score_var = [?ASG_civilian_score] civilian_score [?ASG_civilian_score_modifier] ASG_civilian_industrial_score [?ASG_civilian_industrial_score] THIS = [?THIS.GetName]"
 	}
 }
 
@@ -6703,7 +6703,7 @@ ASG_military_rescale_up = {
 
 ASG_civilian_rescale_down = {
 	multiply_variable = {
-		GLOBAL.ASG_civilian_scale_factor = 2
+		GLOBAL.ASG_civilian_rendering_scale_factor = 2
 	}
 	for_each_loop = {
 		array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue
@@ -6968,7 +6968,7 @@ ASG_civilian_rescale_down = {
 
 ASG_civilian_rescale_up = {
 	multiply_variable = {
-		GLOBAL.ASG_civilian_scale_factor = 0.5
+		GLOBAL.ASG_civilian_rendering_scale_factor = 0.5
 	}
 	for_each_loop = {
 		array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue
@@ -7228,5 +7228,29 @@ ASG_civilian_rescale_up = {
 				GLOBAL.ASG_civilian_graph_slopes_grey^index = value_slope
 			}
 		}
+	}
+}
+
+ASG_manpower_rescale_up = {
+	multiply_variable = {
+		GLOBAL.ASG_manpower_rendering_scale_factor = 0.5
+	}
+}
+
+ASG_manpower_rescale_down = {
+	multiply_variable = {
+		GLOBAL.ASG_manpower_rendering_scale_factor = 2
+	}
+}
+
+ASG_casualties_rescale_up = {
+	multiply_variable = {
+		GLOBAL.ASG_casualties_rendering_scale_factor = 0.5
+	}
+}
+
+ASG_casualties_rescale_down = {
+	multiply_variable = {
+		GLOBAL.ASG_casualties_rendering_scale_factor = 2
 	}
 }

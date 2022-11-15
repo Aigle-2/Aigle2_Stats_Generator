@@ -3,7 +3,8 @@ ASG_category = {
 		icon = generic_industry
 
 		visible = {
-			is_debug = yes
+			# is_debug = yes
+			always = yes
 		}
 
 		fire_only_once = no
@@ -17,7 +18,8 @@ ASG_category = {
 		icon = generic_industry
 
 		visible = {
-			is_debug = yes
+			# is_debug = yes
+			always = yes
 		}
 
 		fire_only_once = no
@@ -31,7 +33,8 @@ ASG_category = {
 		icon = generic_industry
 
 		visible = {
-			is_debug = yes
+			# is_debug = yes
+			always = yes
 		}
 
 		fire_only_once = no
@@ -45,7 +48,8 @@ ASG_category = {
 		icon = generic_industry
 
 		visible = {
-			is_debug = yes
+			# is_debug = yes
+			always = yes
 		}
 
 		fire_only_once = no
