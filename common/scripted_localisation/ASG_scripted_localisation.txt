@@ -17,7 +17,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_manpower_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -30,7 +30,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_manpower_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -43,7 +43,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_manpower_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -56,7 +56,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_manpower_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -69,7 +69,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_manpower_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -82,7 +82,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_manpower_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -95,7 +95,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_manpower_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -108,7 +108,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_manpower_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -121,7 +121,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -134,7 +134,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -147,7 +147,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -160,7 +160,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -173,7 +173,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -186,7 +186,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -199,7 +199,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -212,7 +212,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -225,7 +225,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -238,7 +238,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -251,7 +251,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -264,7 +264,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -277,7 +277,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -290,7 +290,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -303,7 +303,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -316,7 +316,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -329,7 +329,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -342,7 +342,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -355,7 +355,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -368,7 +368,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -381,7 +381,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -394,7 +394,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -407,7 +407,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -420,7 +420,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "t [?score_var] t"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -434,7 +434,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_military_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t eq.factories"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -448,7 +448,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_military_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t eq.factories"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -462,7 +462,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_military_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t eq.factories"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -476,7 +476,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_military_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t eq.factories"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -490,7 +490,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_military_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t eq.factories"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -504,7 +504,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_military_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t eq.factories"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -518,7 +518,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_military_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t eq.factories"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -532,7 +532,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_civilian_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t eq.factories"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -546,7 +546,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_civilian_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t eq.factories"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -560,7 +560,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_civilian_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t eq.factories"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -574,7 +574,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_civilian_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t eq.factories"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -588,7 +588,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_civilian_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t eq.factories"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -599,10 +599,10 @@ defined_text = {
         trigger = { 
                 set_temp_variable = { score_var = 600 }
                 multiply_temp_variable = {
-                    score_var = GLOBAL.ASG_civilian_rendering_scale_factormilitary
+                    score_var = GLOBAL.ASG_civilian_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t eq.factories"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -616,7 +616,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_civilian_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t eq.factories"
+        localization_key = "[?score_var]"
     }
 }
 
@@ -630,7 +630,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_casualties_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t million"
+        localization_key = "[?score_var] million"
     }
 }
 
@@ -644,7 +644,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_casualties_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t million"
+        localization_key = "[?score_var] million"
     }
 }
 
@@ -658,7 +658,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_casualties_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t million"
+        localization_key = "[?score_var] million"
     }
 }
 
@@ -672,7 +672,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_casualties_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t million"
+        localization_key = "[?score_var] million"
     }
 }
 
@@ -686,7 +686,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_casualties_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t million"
+        localization_key = "[?score_var] million"
     }
 }
 
@@ -700,7 +700,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_casualties_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t million"
+        localization_key = "[?score_var] million"
     }
 }
 
@@ -714,7 +714,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_casualties_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t million"
+        localization_key = "[?score_var] million"
     }
 }
 
@@ -728,7 +728,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_manpower_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t million"
+        localization_key = "[?score_var] million"
     }
 }
 
@@ -742,7 +742,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_manpower_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t million"
+        localization_key = "[?score_var] million"
     }
 }
 
@@ -756,7 +756,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_manpower_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t million"
+        localization_key = "[?score_var] million"
     }
 }
 
@@ -770,7 +770,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_manpower_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t million"
+        localization_key = "[?score_var] million"
     }
 }
 
@@ -784,7 +784,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_manpower_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t million"
+        localization_key = "[?score_var] million"
     }
 }
 
@@ -798,7 +798,7 @@ defined_text = {
                     score_var = GLOBAL.ASG_manpower_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t million"
+        localization_key = "[?score_var] million"
     }
 }
 
@@ -812,6 +812,6 @@ defined_text = {
                     score_var = GLOBAL.ASG_manpower_rendering_scale_factor
                 }
         }
-        localization_key = "t [?score_var] t million"
+        localization_key = "[?score_var] million"
     }
 }

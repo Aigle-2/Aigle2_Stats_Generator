@@ -6172,1085 +6172,1141 @@ ASG_military_add_point_to_line = {
 }
 
 ASG_military_rescale_down = {
-	multiply_variable = {
-		GLOBAL.ASG_military_rendering_scale_factor = 2
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 2
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
-				}
+	if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_military_rendering_scale_factor < 8
 			}
+		}
+		multiply_variable = {
+			GLOBAL.ASG_military_rendering_scale_factor = 2
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 2
 			}
 			set_variable = {
-				GLOBAL.ASG_military_graph_slopes_blue^index = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 2
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_blue^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 2
 			}
 			set_variable = {
-				GLOBAL.ASG_military_graph_slopes_light_blue^index = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 2
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_light_blue^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 2
 			}
 			set_variable = {
-				GLOBAL.ASG_military_graph_slopes_light_white^index = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 2
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_light_white^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 2
 			}
 			set_variable = {
-				GLOBAL.ASG_military_graph_slopes_light_red^index = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_military_graph_offsets_red
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 2
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_military_graph_offsets_red^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_light_red^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_red
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_red^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 2
 			}
 			set_variable = {
-				GLOBAL.ASG_military_graph_slopes_red^index = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_red^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_military_graph_offsets_green
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 2
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_military_graph_offsets_green^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_red^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_red^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_green
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_green^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 2
 			}
 			set_variable = {
-				GLOBAL.ASG_military_graph_slopes_green^index = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_green^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 2
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_green^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_green^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 2
 			}
 			set_variable = {
-				GLOBAL.ASG_military_graph_slopes_grey^index = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^i = value_slope
+			}
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_grey^index = value_slope
+				}
 			}
 		}
 	}
 }
 
 ASG_military_rescale_up = {
-	multiply_variable = {
-		GLOBAL.ASG_military_rendering_scale_factor = 0.5
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 0.5
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
-				}
+	if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_military_rendering_scale_factor > 0.125
 			}
+		}
+		multiply_variable = {
+			GLOBAL.ASG_military_rendering_scale_factor = 0.5
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_military_graph_slopes_blue^index = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 0.5
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_blue^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_military_graph_slopes_light_blue^index = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 0.5
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_light_blue^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_military_graph_slopes_light_white^index = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 0.5
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_light_white^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_military_graph_slopes_light_red^index = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_military_graph_offsets_red
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 0.5
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_military_graph_offsets_red^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_light_red^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_red
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_red^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_military_graph_slopes_red^index = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_red^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_military_graph_offsets_green
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 0.5
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_military_graph_offsets_green^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_red^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_red^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_green
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_green^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_military_graph_slopes_green^index = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_green^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 0.5
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_green^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_green^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_military_graph_slopes_grey^index = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^i = value_slope
+			}
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_grey^index = value_slope
+				}
 			}
 		}
 	}
 }
 
 ASG_civilian_rescale_down = {
-	multiply_variable = {
-		GLOBAL.ASG_civilian_rendering_scale_factor = 2
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 2
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
-				}
+	if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_civilian_rendering_scale_factor < 8
 			}
+		}
+		multiply_variable = {
+			GLOBAL.ASG_civilian_rendering_scale_factor = 2
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 2
 			}
 			set_variable = {
-				GLOBAL.ASG_civilian_graph_slopes_blue^index = value_slope
+				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 2
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_civilian_graph_slopes_blue^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 2
 			}
 			set_variable = {
-				GLOBAL.ASG_civilian_graph_slopes_light_blue^index = value_slope
+				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 2
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_civilian_graph_slopes_light_blue^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 2
 			}
 			set_variable = {
-				GLOBAL.ASG_civilian_graph_slopes_light_white^index = value_slope
+				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 2
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_civilian_graph_slopes_light_white^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 2
 			}
 			set_variable = {
-				GLOBAL.ASG_civilian_graph_slopes_light_red^index = value_slope
+				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 2
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_civilian_graph_slopes_light_red^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 2
 			}
 			set_variable = {
-				GLOBAL.ASG_civilian_graph_slopes_red^index = value_slope
+				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 2
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_civilian_graph_slopes_red^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 2
 			}
 			set_variable = {
-				GLOBAL.ASG_civilian_graph_slopes_green^index = value_slope
+				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 2
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_civilian_graph_slopes_green^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 2
 			}
 			set_variable = {
-				GLOBAL.ASG_civilian_graph_slopes_grey^index = value_slope
+				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey^i = value_slope
+			}
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_civilian_graph_slopes_grey^index = value_slope
+				}
 			}
 		}
 	}
 }
 
 ASG_civilian_rescale_up = {
-	multiply_variable = {
-		GLOBAL.ASG_civilian_rendering_scale_factor = 0.5
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 0.5
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
-				}
+	if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_civilian_rendering_scale_factor > 0.125
 			}
+		}
+		multiply_variable = {
+			GLOBAL.ASG_civilian_rendering_scale_factor = 0.5
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_civilian_graph_slopes_blue^index = value_slope
+				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 0.5
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_civilian_graph_slopes_blue^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_civilian_graph_slopes_light_blue^index = value_slope
+				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 0.5
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_civilian_graph_slopes_light_blue^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_civilian_graph_slopes_light_white^index = value_slope
+				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 0.5
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_civilian_graph_slopes_light_white^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_civilian_graph_slopes_light_red^index = value_slope
+				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 0.5
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_civilian_graph_slopes_light_red^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_civilian_graph_slopes_red^index = value_slope
+				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 0.5
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_civilian_graph_slopes_red^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_civilian_graph_slopes_green^index = value_slope
+				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green^i = value_slope
 			}
-		}
-	}
-	for_each_loop = {
-		array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey
-		set_temp_variable = {
-			value_slope = v
-		}
-		divide_temp_variable = {
-			value_slope = 0.5
-		}
-		set_variable = {
-			GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey^i = value_slope
-		}
-		if = {
-			limit = {
-				check_variable = {
-					i > 0
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_civilian_graph_slopes_green^index = value_slope
 				}
 			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey
 			set_temp_variable = {
-				index = i
-			}
-			subtract_from_temp_variable = {
-				index = 1
-			}
-			subtract_from_temp_variable = {
-				value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey^index
+				value_slope = v
 			}
 			divide_temp_variable = {
-				value_slope = -2
-			}
-			add_to_temp_variable = {
-				value_slope = 50
+				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_civilian_graph_slopes_grey^index = value_slope
+				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey^i = value_slope
+			}
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_civilian_graph_slopes_grey^index = value_slope
+				}
 			}
 		}
 	}
 }
 
 ASG_manpower_rescale_up = {
-	multiply_variable = {
-		GLOBAL.ASG_manpower_rendering_scale_factor = 0.5
+	if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_manpower_rendering_scale_factor > 0.5
+			}
+		}
+		multiply_variable = {
+			GLOBAL.ASG_manpower_rendering_scale_factor = 0.5
+		}
 	}
 }
 
 ASG_manpower_rescale_down = {
-	multiply_variable = {
-		GLOBAL.ASG_manpower_rendering_scale_factor = 2
+	if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_manpower_rendering_scale_factor < 8
+			}
+		}
+		multiply_variable = {
+			GLOBAL.ASG_manpower_rendering_scale_factor = 2
+		}
 	}
 }
 
 ASG_casualties_rescale_up = {
-	multiply_variable = {
-		GLOBAL.ASG_casualties_rendering_scale_factor = 0.5
+	if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_casualties_rendering_scale_factor > 0.25
+			}
+		}
+		multiply_variable = {
+			GLOBAL.ASG_casualties_rendering_scale_factor = 0.5
+		}
 	}
 }
 
 ASG_casualties_rescale_down = {
-	multiply_variable = {
-		GLOBAL.ASG_casualties_rendering_scale_factor = 2
+	if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_casualties_rendering_scale_factor < 4
+			}
+		}
+		multiply_variable = {
+			GLOBAL.ASG_casualties_rendering_scale_factor = 2
+		}
 	}
 }

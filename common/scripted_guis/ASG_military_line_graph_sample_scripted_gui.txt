@@ -12,11 +12,13 @@ scripted_gui = {
 			substract_button_click = {
 				# Invoke scripted effect to add a random point to the line
 				# See scripted effect file
+				log = "dezoom"
 				ASG_military_rescale_down = yes
 			}
 			add_button_click = {
 				# Invoke scripted effect to add a random point to the line
 				# See scripted effect file
+				log = "zoom"
 				ASG_military_rescale_up = yes
 			}
 		}
