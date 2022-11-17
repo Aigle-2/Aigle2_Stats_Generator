@@ -1,3 +1,661 @@
+ASG_graph_update = {
+	ASG_civilian_add_point_to_line = yes
+	ASG_military_add_point_to_line = yes
+	ASG_manpower_add_point_to_line = yes
+	ASG_casualties_add_point_to_line = yes
+}
+ASG_stats_update = {
+	ASG_civilian_update_stats = yes
+	ASG_military_update_stats = yes
+	ASG_manpower_update_stats = yes
+	ASG_casualties_update_stats = yes
+}
+ASG_clear_every_graph = {
+	ASG_clear_military_graph = yes
+	ASG_clear_civilian_graph = yes
+	ASG_clear_casualties_graph = yes
+	ASG_clear_manpower_graph = yes
+}
+
+ASG_civilian_update_stats = {
+	every_country = {
+		# set_variable = {
+		# 	ASG_civilian_score = THIS.num_of_civilian_factories_available_for_projects
+		# }
+		set_variable = {
+			ASG_civilian_score = THIS.num_of_civilian_factories
+		}
+		set_temp_variable = {
+			ASG_civilian_industrial_score = THIS.num_of_civilian_factories
+		}
+		add_to_temp_variable = {
+			ASG_civilian_industrial_score = THIS.num_of_military_factories
+		}
+		# log = "score_var = [?ASG_civilian_score] civ_score [?ASG_civilian_industrial_score] THIS = [?THIS.GetName]"
+		#trade factories calculations
+		#oil
+		set_temp_variable = {
+			ASG_oil = resource_imported@oil
+		}
+		set_variable = {
+			ASG_oil_civ_count_import = 0
+		}
+		if = {
+			limit = {
+				check_variable = { ASG_oil > 0 }
+			}
+			set_temp_variable = {
+				ASG_oil_calculations_finished = 0
+			}
+			every_country = {
+				limit = {
+					is_subject_of = PREV
+					check_variable = { resource_exported@oil > PREV.resource_imported@oil }
+					check_variable = { ASG_oil_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_oil_price = 80
+				}	
+				divide_temp_variable = {
+					ASG_oil = ASG_oil_price
+				}
+				round_temp_variable = ASG_oil
+				# add_to_temp_variable = {
+				# 	ASG_oil = 1
+				# }
+				add_to_variable = {
+					ASG_oil_civ_count_import = ASG_oil
+				}
+				add_to_temp_variable = {
+					ASG_oil_calculations_finished = 1
+				}
+				
+			}
+			every_country = {
+				limit = {
+					is_subject_of = PREV
+					check_variable = { resource_exported@oil < PREV.resource_imported@oil }
+					check_variable = { resource_exported@oil > 8 }
+					check_variable = { ASG_oil_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_oil_price = 80
+				}
+				set_temp_variable = {
+					ASG_local_oil = resource_exported@oil
+				}
+				divide_temp_variable = {
+					ASG_local_oil = ASG_oil_price
+				}
+				round_temp_variable = ASG_local_oil
+				# add_to_temp_variable = {
+				# 	ASG_local_oil = 1
+				# }
+				add_to_variable = {
+					ASG_oil_civ_count_import = ASG_local_oil
+				}
+				multiply_temp_variable = {
+					ASG_local_oil = -1
+				}
+				add_to_temp_variable = {
+					ASG_oil = ASG_local_oil
+				}
+				if = {
+					limit = {
+						check_variable = { ASG_oil < 1 }
+					}
+					add_to_temp_variable = {
+						ASG_oil_calculations_finished = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ASG_oil_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_oil_price = 8
+				}
+				divide_temp_variable = {
+					ASG_oil = ASG_oil_price
+				}
+				round_temp_variable = ASG_oil
+				# add_to_temp_variable = {
+				# 	ASG_oil = 1
+				# }
+				add_to_variable = {
+					ASG_oil_civ_count_import = ASG_oil
+				}
+			}
+		}
+		
+		#aluminium
+		set_temp_variable = {
+			ASG_aluminium = resource_imported@aluminium
+		}
+		set_variable = {
+			ASG_aluminium_civ_count_import = 0
+		}
+		if = {
+			limit = {
+				check_variable = { ASG_aluminium > 0 }
+			}
+			set_temp_variable = {
+				ASG_aluminium_calculations_finished = 0
+			}
+			every_country = {
+				limit = {
+					is_subject_of = PREV
+					check_variable = { resource_exported@aluminium > PREV.resource_imported@aluminium }
+					check_variable = { ASG_aluminium_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_aluminium_price = 80
+				}	
+				divide_temp_variable = {
+					ASG_aluminium = ASG_aluminium_price
+				}
+				round_temp_variable = ASG_aluminium
+				# add_to_temp_variable = {
+				# 	ASG_aluminium = 1
+				# }
+				add_to_variable = {
+					ASG_aluminium_civ_count_import = ASG_aluminium
+				}
+				add_to_temp_variable = {
+					ASG_aluminium_calculations_finished = 1
+				}
+				
+			}
+			every_country = {
+				limit = {
+					is_subject_of = PREV
+					check_variable = { resource_exported@aluminium < PREV.resource_imported@aluminium }
+					check_variable = { resource_exported@aluminium > 8 }
+					check_variable = { ASG_aluminium_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_aluminium_price = 80
+				}
+				set_temp_variable = {
+					ASG_local_aluminium = resource_exported@aluminium
+				}
+				divide_temp_variable = {
+					ASG_local_aluminium = ASG_aluminium_price
+				}
+				round_temp_variable = ASG_local_aluminium
+				# add_to_temp_variable = {
+				# 	ASG_local_aluminium = 1
+				# }
+				add_to_variable = {
+					ASG_aluminium_civ_count_import = ASG_local_aluminium
+				}
+				multiply_temp_variable = {
+					ASG_local_aluminium = -1
+				}
+				add_to_temp_variable = {
+					ASG_aluminium = ASG_local_aluminium
+				}
+				if = {
+					limit = {
+						check_variable = { ASG_aluminium < 1 }
+					}
+					add_to_temp_variable = {
+						ASG_aluminium_calculations_finished = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ASG_aluminium_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_aluminium_price = 8
+				}
+				divide_temp_variable = {
+					ASG_aluminium = ASG_aluminium_price
+				}
+				round_temp_variable = ASG_aluminium
+				# add_to_temp_variable = {
+				# 	ASG_aluminium = 1
+				# }
+				add_to_variable = {
+					ASG_aluminium_civ_count_import = ASG_aluminium
+				}
+			}
+		}
+		
+		#rubber
+		set_temp_variable = {
+			ASG_rubber = resource_imported@rubber
+		}
+		set_variable = {
+			ASG_rubber_civ_count_import = 0
+		}
+		if = {
+			limit = {
+				check_variable = { ASG_rubber > 0 }
+			}
+			set_temp_variable = {
+				ASG_rubber_calculations_finished = 0
+			}
+			every_country = {
+				limit = {
+					is_subject_of = PREV
+					check_variable = { resource_exported@rubber > PREV.resource_imported@rubber }
+					check_variable = { ASG_rubber_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_rubber_price = 80
+				}	
+				divide_temp_variable = {
+					ASG_rubber = ASG_rubber_price
+				}
+				round_temp_variable = ASG_rubber
+				# add_to_temp_variable = {
+				# 	ASG_rubber = 1
+				# }
+				add_to_variable = {
+					ASG_rubber_civ_count_import = ASG_rubber
+				}
+				add_to_temp_variable = {
+					ASG_rubber_calculations_finished = 1
+				}
+				
+			}
+			every_country = {
+				limit = {
+					is_subject_of = PREV
+					check_variable = { resource_exported@rubber < PREV.resource_imported@rubber }
+					check_variable = { resource_exported@rubber > 8 }
+					check_variable = { ASG_rubber_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_rubber_price = 80
+				}
+				set_temp_variable = {
+					ASG_local_rubber = resource_exported@rubber
+				}
+				divide_temp_variable = {
+					ASG_local_rubber = ASG_rubber_price
+				}
+				round_temp_variable = ASG_local_rubber
+				# add_to_temp_variable = {
+				# 	ASG_local_rubber = 1
+				# }
+				add_to_variable = {
+					ASG_rubber_civ_count_import = ASG_local_rubber
+				}
+				multiply_temp_variable = {
+					ASG_local_rubber = -1
+				}
+				add_to_temp_variable = {
+					ASG_rubber = ASG_local_rubber
+				}
+				if = {
+					limit = {
+						check_variable = { ASG_rubber < 1 }
+					}
+					add_to_temp_variable = {
+						ASG_rubber_calculations_finished = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ASG_rubber_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_rubber_price = 8
+				}
+				divide_temp_variable = {
+					ASG_rubber = ASG_rubber_price
+				}
+				round_temp_variable = ASG_rubber
+				# add_to_temp_variable = {
+				# 	ASG_rubber = 1
+				# }
+				add_to_variable = {
+					ASG_rubber_civ_count_import = ASG_rubber
+				}
+			}
+		}
+		
+		#tungsten
+		set_temp_variable = {
+			ASG_tungsten = resource_imported@tungsten
+		}
+		set_variable = {
+			ASG_tungsten_civ_count_import = 0
+		}
+		if = {
+			limit = {
+				check_variable = { ASG_tungsten > 0 }
+			}
+
+			set_temp_variable = {
+				ASG_tungsten_calculations_finished = 0
+			}
+			every_country = {
+				limit = {
+					is_subject_of = PREV
+					check_variable = { resource_exported@tungsten > PREV.resource_imported@tungsten }
+					check_variable = { ASG_tungsten_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_tungsten_price = 80
+				}	
+				divide_temp_variable = {
+					ASG_tungsten = ASG_tungsten_price
+				}
+				round_temp_variable = ASG_tungsten
+				# add_to_temp_variable = {
+				# 	ASG_tungsten = 1
+				# }
+				add_to_variable = {
+					ASG_tungsten_civ_count_import = ASG_tungsten
+				}
+				add_to_temp_variable = {
+					ASG_tungsten_calculations_finished = 1
+				}
+				
+			}
+			every_country = {
+				limit = {
+					is_subject_of = PREV
+					check_variable = { resource_exported@tungsten < PREV.resource_imported@tungsten }
+					check_variable = { resource_exported@tungsten > 8 }
+					check_variable = { ASG_tungsten_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_tungsten_price = 80
+				}
+				set_temp_variable = {
+					ASG_local_tungsten = resource_exported@tungsten
+				}
+				divide_temp_variable = {
+					ASG_local_tungsten = ASG_tungsten_price
+				}
+				round_temp_variable = ASG_local_tungsten
+				# add_to_temp_variable = {
+				# 	ASG_local_tungsten = 1
+				# }
+				add_to_variable = {
+					ASG_tungsten_civ_count_import = ASG_local_tungsten
+				}
+				multiply_temp_variable = {
+					ASG_local_tungsten = -1
+				}
+				add_to_temp_variable = {
+					ASG_tungsten = ASG_local_tungsten
+				}
+				if = {
+					limit = {
+						check_variable = { ASG_tungsten < 1 }
+					}
+					add_to_temp_variable = {
+						ASG_tungsten_calculations_finished = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ASG_tungsten_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_tungsten_price = 8
+				}
+				divide_temp_variable = {
+					ASG_tungsten = ASG_tungsten_price
+				}
+				round_temp_variable = ASG_tungsten
+				# add_to_temp_variable = {
+				# 	ASG_tungsten = 1
+				# }
+				add_to_variable = {
+					ASG_tungsten_civ_count_import = ASG_tungsten
+				}
+			}
+		}
+		
+		#steel
+		set_temp_variable = {
+			ASG_steel = resource_imported@steel
+		}
+		set_variable = {
+			ASG_steel_civ_count_import = 0
+		}
+		if = {
+			limit = {
+				check_variable = { ASG_steel > 0 }
+			}
+
+			set_temp_variable = {
+				ASG_steel_calculations_finished = 0
+			}
+			every_country = {
+				limit = {
+					is_subject_of = PREV
+					check_variable = { resource_exported@steel > PREV.resource_imported@steel }
+					check_variable = { ASG_steel_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_steel_price = 80
+				}	
+				divide_temp_variable = {
+					ASG_steel = ASG_steel_price
+				}
+				round_temp_variable = ASG_steel
+				# add_to_temp_variable = {
+				# 	ASG_steel = 1
+				# }
+				add_to_variable = {
+					ASG_steel_civ_count_import = ASG_steel
+				}
+				add_to_temp_variable = {
+					ASG_steel_calculations_finished = 1
+				}
+				
+			}
+			every_country = {
+				limit = {
+					is_subject_of = PREV
+					check_variable = { resource_exported@steel < PREV.resource_imported@steel }
+					check_variable = { resource_exported@steel > 8 }
+					check_variable = { ASG_steel_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_steel_price = 80
+				}
+				set_temp_variable = {
+					ASG_local_steel = resource_exported@steel
+				}
+				divide_temp_variable = {
+					ASG_local_steel = ASG_steel_price
+				}
+				round_temp_variable = ASG_local_steel
+				# add_to_temp_variable = {
+				# 	ASG_local_steel = 1
+				# }
+				add_to_variable = {
+					ASG_steel_civ_count_import = ASG_local_steel
+				}
+				multiply_temp_variable = {
+					ASG_local_steel = -1
+				}
+				add_to_temp_variable = {
+					ASG_steel = ASG_local_steel
+				}
+				if = {
+					limit = {
+						check_variable = { ASG_steel < 1 }
+					}
+					add_to_temp_variable = {
+						ASG_steel_calculations_finished = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ASG_steel_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_steel_price = 8
+				}
+				divide_temp_variable = {
+					ASG_steel = ASG_steel_price
+				}
+				round_temp_variable = ASG_steel
+				# add_to_temp_variable = {
+				# 	ASG_steel = 1
+				# }
+				add_to_variable = {
+					ASG_steel_civ_count_import = ASG_steel
+				}
+			}
+		}
+		
+		#chromium
+		set_temp_variable = {
+			ASG_chromium = resource_imported@chromium
+		}
+		set_variable = {
+			ASG_chromium_civ_count_import = 0
+		}
+		if = {
+			limit = {
+				check_variable = { ASG_chromium > 0 }
+			}
+			set_temp_variable = {
+				ASG_chromium_calculations_finished = 0
+			}
+			every_country = {
+				limit = {
+					is_subject_of = PREV
+					check_variable = { resource_exported@chromium > PREV.resource_imported@chromium }
+					check_variable = { ASG_chromium_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_chromium_price = 80
+				}	
+				divide_temp_variable = {
+					ASG_chromium = ASG_chromium_price
+				}
+				round_temp_variable = ASG_chromium
+				# add_to_temp_variable = {
+				# 	ASG_chromium = 1
+				# }
+				add_to_variable = {
+					ASG_chromium_civ_count_import = ASG_chromium
+				}
+				add_to_temp_variable = {
+					ASG_chromium_calculations_finished = 1
+				}
+				
+			}
+			every_country = {
+				limit = {
+					is_subject_of = PREV
+					check_variable = { resource_exported@chromium < PREV.resource_imported@chromium }
+					check_variable = { resource_exported@chromium > 8 }
+					check_variable = { ASG_chromium_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_chromium_price = 80
+				}
+				set_temp_variable = {
+					ASG_local_chromium = resource_exported@chromium
+				}
+				divide_temp_variable = {
+					ASG_local_chromium = ASG_chromium_price
+				}
+				round_temp_variable = ASG_local_chromium
+				# add_to_temp_variable = {
+				# 	ASG_local_chromium = 1
+				# }
+				add_to_variable = {
+					ASG_chromium_civ_count_import = ASG_local_chromium
+				}
+				multiply_temp_variable = {
+					ASG_local_chromium = -1
+				}
+				add_to_temp_variable = {
+					ASG_chromium = ASG_local_chromium
+				}
+				if = {
+					limit = {
+						check_variable = { ASG_chromium < 1 }
+					}
+					add_to_temp_variable = {
+						ASG_chromium_calculations_finished = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ASG_chromium_calculations_finished < 1 }
+				}
+				set_temp_variable = {
+					ASG_chromium_price = 8
+				}
+				divide_temp_variable = {
+					ASG_chromium = ASG_chromium_price
+				}
+				round_temp_variable = ASG_chromium
+				# add_to_temp_variable = {
+				# 	ASG_chromium = 1
+				# }
+				add_to_variable = {
+					ASG_chromium_civ_count_import = ASG_chromium
+				}
+			}
+		}
+
+		add_to_temp_variable = {
+			ASG_civilian_industrial_score = ASG_oil_civ_count_import
+		}
+		add_to_temp_variable = {
+			ASG_civilian_industrial_score = ASG_aluminium_civ_count_import
+		}
+		add_to_temp_variable = {
+			ASG_civilian_industrial_score = ASG_rubber_civ_count_import
+		}
+		add_to_temp_variable = {
+			ASG_civilian_industrial_score = ASG_tungsten_civ_count_import
+		}
+		add_to_temp_variable = {
+			ASG_civilian_industrial_score = ASG_steel_civ_count_import
+		}
+		add_to_temp_variable = {
+			ASG_civilian_industrial_score = ASG_chromium_civ_count_import
+		}
+		# log = "Civ Number [?ASG_civilian_score] tot_score [?ASG_civilian_industrial_score] goods [?modifier@consumer_goods_factor] THIS = [?THIS.GetName]"
+		multiply_temp_variable = {
+			ASG_civilian_industrial_score = modifier@consumer_goods_factor
+		}
+		round_temp_variable = ASG_civilian_industrial_score
+		multiply_temp_variable = {
+			ASG_civilian_industrial_score = -1
+		}
+		add_to_variable = {
+			ASG_civilian_score = ASG_civilian_industrial_score
+		}
+		
+		set_variable = {
+			ASG_civilian_score_modifier = modifier@production_speed_buildings_factor
+		}
+		add_to_variable = {
+			ASG_civilian_score_modifier = 1
+		}
+		multiply_variable = {
+			ASG_civilian_score = ASG_civilian_score_modifier
+		}
+		add_to_array = {
+			ASG_civilian_score_array = ASG_civilian_score
+		}
+		# log = "score_var = [?ASG_civilian_score] civilian_score [?ASG_civilian_score_modifier] ASG_civilian_industrial_score [?ASG_civilian_industrial_score] THIS = [?THIS.GetName]"
+	}
+}
 ASG_military_update_stats = {
 	every_country = {
 		set_variable = {
@@ -23,7 +681,6 @@ ASG_military_update_stats = {
 		# log = "score_var = [?ASG_military_score] THIS = [?THIS.GetName] ROOT = [?ROOT.GetName]"
 	}
 }
-
 ASG_manpower_update_stats = {
 	every_country = {
 		IF = {
@@ -3936,7 +4593,6 @@ ASG_manpower_update_stats = {
 		}
 	}
 }
-
 ASG_casualties_update_stats = {
 	every_country = {
 		set_variable = {
@@ -3947,660 +4603,6 @@ ASG_casualties_update_stats = {
 		}
 		# log = "score_var = [?ASG_military_score] THIS = [?THIS.GetName] ROOT = [?ROOT.GetName]"
 	}
-}
-
-ASG_civilian_update_stats = {
-	every_country = {
-		# set_variable = {
-		# 	ASG_civilian_score = THIS.num_of_civilian_factories_available_for_projects
-		# }
-		set_variable = {
-			ASG_civilian_score = THIS.num_of_civilian_factories
-		}
-		set_temp_variable = {
-			ASG_civilian_industrial_score = THIS.num_of_civilian_factories
-		}
-		add_to_temp_variable = {
-			ASG_civilian_industrial_score = THIS.num_of_military_factories
-		}
-		# log = "score_var = [?ASG_civilian_score] civ_score [?ASG_civilian_industrial_score] THIS = [?THIS.GetName]"
-		#trade factories calculations
-		#oil
-		set_temp_variable = {
-			ASG_oil = resource_imported@oil
-		}
-		set_variable = {
-			ASG_oil_civ_count_import = 0
-		}
-		if = {
-			limit = {
-				check_variable = { ASG_oil > 0 }
-			}
-			set_temp_variable = {
-				ASG_oil_calculations_finished = 0
-			}
-			every_country = {
-				limit = {
-					is_subject_of = PREV
-					check_variable = { resource_exported@oil > PREV.resource_imported@oil }
-					check_variable = { ASG_oil_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_oil_price = 80
-				}	
-				divide_temp_variable = {
-					ASG_oil = ASG_oil_price
-				}
-				round_temp_variable = ASG_oil
-				# add_to_temp_variable = {
-				# 	ASG_oil = 1
-				# }
-				add_to_variable = {
-					ASG_oil_civ_count_import = ASG_oil
-				}
-				add_to_temp_variable = {
-					ASG_oil_calculations_finished = 1
-				}
-				
-			}
-			every_country = {
-				limit = {
-					is_subject_of = PREV
-					check_variable = { resource_exported@oil < PREV.resource_imported@oil }
-					check_variable = { resource_exported@oil > 8 }
-					check_variable = { ASG_oil_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_oil_price = 80
-				}
-				set_temp_variable = {
-					ASG_local_oil = resource_exported@oil
-				}
-				divide_temp_variable = {
-					ASG_local_oil = ASG_oil_price
-				}
-				round_temp_variable = ASG_local_oil
-				# add_to_temp_variable = {
-				# 	ASG_local_oil = 1
-				# }
-				add_to_variable = {
-					ASG_oil_civ_count_import = ASG_local_oil
-				}
-				multiply_temp_variable = {
-					ASG_local_oil = -1
-				}
-				add_to_temp_variable = {
-					ASG_oil = ASG_local_oil
-				}
-				if = {
-					limit = {
-						check_variable = { ASG_oil < 1 }
-					}
-					add_to_temp_variable = {
-						ASG_oil_calculations_finished = 1
-					}
-				}
-			}
-			if = {
-				limit = {
-					check_variable = { ASG_oil_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_oil_price = 8
-				}
-				divide_temp_variable = {
-					ASG_oil = ASG_oil_price
-				}
-				round_temp_variable = ASG_oil
-				# add_to_temp_variable = {
-				# 	ASG_oil = 1
-				# }
-				add_to_variable = {
-					ASG_oil_civ_count_import = ASG_oil
-				}
-			}
-		}
-		
-		#aluminium
-		set_temp_variable = {
-			ASG_aluminium = resource_imported@aluminium
-		}
-		set_variable = {
-			ASG_aluminium_civ_count_import = 0
-		}
-		if = {
-			limit = {
-				check_variable = { ASG_aluminium > 0 }
-			}
-			set_temp_variable = {
-				ASG_aluminium_calculations_finished = 0
-			}
-			every_country = {
-				limit = {
-					is_subject_of = PREV
-					check_variable = { resource_exported@aluminium > PREV.resource_imported@aluminium }
-					check_variable = { ASG_aluminium_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_aluminium_price = 80
-				}	
-				divide_temp_variable = {
-					ASG_aluminium = ASG_aluminium_price
-				}
-				round_temp_variable = ASG_aluminium
-				# add_to_temp_variable = {
-				# 	ASG_aluminium = 1
-				# }
-				add_to_variable = {
-					ASG_aluminium_civ_count_import = ASG_aluminium
-				}
-				add_to_temp_variable = {
-					ASG_aluminium_calculations_finished = 1
-				}
-				
-			}
-			every_country = {
-				limit = {
-					is_subject_of = PREV
-					check_variable = { resource_exported@aluminium < PREV.resource_imported@aluminium }
-					check_variable = { resource_exported@aluminium > 8 }
-					check_variable = { ASG_aluminium_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_aluminium_price = 80
-				}
-				set_temp_variable = {
-					ASG_local_aluminium = resource_exported@aluminium
-				}
-				divide_temp_variable = {
-					ASG_local_aluminium = ASG_aluminium_price
-				}
-				round_temp_variable = ASG_local_aluminium
-				# add_to_temp_variable = {
-				# 	ASG_local_aluminium = 1
-				# }
-				add_to_variable = {
-					ASG_aluminium_civ_count_import = ASG_local_aluminium
-				}
-				multiply_temp_variable = {
-					ASG_local_aluminium = -1
-				}
-				add_to_temp_variable = {
-					ASG_aluminium = ASG_local_aluminium
-				}
-				if = {
-					limit = {
-						check_variable = { ASG_aluminium < 1 }
-					}
-					add_to_temp_variable = {
-						ASG_aluminium_calculations_finished = 1
-					}
-				}
-			}
-			if = {
-				limit = {
-					check_variable = { ASG_aluminium_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_aluminium_price = 8
-				}
-				divide_temp_variable = {
-					ASG_aluminium = ASG_aluminium_price
-				}
-				round_temp_variable = ASG_aluminium
-				# add_to_temp_variable = {
-				# 	ASG_aluminium = 1
-				# }
-				add_to_variable = {
-					ASG_aluminium_civ_count_import = ASG_aluminium
-				}
-			}
-		}
-		
-		#rubber
-		set_temp_variable = {
-			ASG_rubber = resource_imported@rubber
-		}
-		set_variable = {
-			ASG_rubber_civ_count_import = 0
-		}
-		if = {
-			limit = {
-				check_variable = { ASG_rubber > 0 }
-			}
-			set_temp_variable = {
-				ASG_rubber_calculations_finished = 0
-			}
-			every_country = {
-				limit = {
-					is_subject_of = PREV
-					check_variable = { resource_exported@rubber > PREV.resource_imported@rubber }
-					check_variable = { ASG_rubber_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_rubber_price = 80
-				}	
-				divide_temp_variable = {
-					ASG_rubber = ASG_rubber_price
-				}
-				round_temp_variable = ASG_rubber
-				# add_to_temp_variable = {
-				# 	ASG_rubber = 1
-				# }
-				add_to_variable = {
-					ASG_rubber_civ_count_import = ASG_rubber
-				}
-				add_to_temp_variable = {
-					ASG_rubber_calculations_finished = 1
-				}
-				
-			}
-			every_country = {
-				limit = {
-					is_subject_of = PREV
-					check_variable = { resource_exported@rubber < PREV.resource_imported@rubber }
-					check_variable = { resource_exported@rubber > 8 }
-					check_variable = { ASG_rubber_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_rubber_price = 80
-				}
-				set_temp_variable = {
-					ASG_local_rubber = resource_exported@rubber
-				}
-				divide_temp_variable = {
-					ASG_local_rubber = ASG_rubber_price
-				}
-				round_temp_variable = ASG_local_rubber
-				# add_to_temp_variable = {
-				# 	ASG_local_rubber = 1
-				# }
-				add_to_variable = {
-					ASG_rubber_civ_count_import = ASG_local_rubber
-				}
-				multiply_temp_variable = {
-					ASG_local_rubber = -1
-				}
-				add_to_temp_variable = {
-					ASG_rubber = ASG_local_rubber
-				}
-				if = {
-					limit = {
-						check_variable = { ASG_rubber < 1 }
-					}
-					add_to_temp_variable = {
-						ASG_rubber_calculations_finished = 1
-					}
-				}
-			}
-			if = {
-				limit = {
-					check_variable = { ASG_rubber_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_rubber_price = 8
-				}
-				divide_temp_variable = {
-					ASG_rubber = ASG_rubber_price
-				}
-				round_temp_variable = ASG_rubber
-				# add_to_temp_variable = {
-				# 	ASG_rubber = 1
-				# }
-				add_to_variable = {
-					ASG_rubber_civ_count_import = ASG_rubber
-				}
-			}
-		}
-		
-		#tungsten
-		set_temp_variable = {
-			ASG_tungsten = resource_imported@tungsten
-		}
-		set_variable = {
-			ASG_tungsten_civ_count_import = 0
-		}
-		if = {
-			limit = {
-				check_variable = { ASG_tungsten > 0 }
-			}
-
-			set_temp_variable = {
-				ASG_tungsten_calculations_finished = 0
-			}
-			every_country = {
-				limit = {
-					is_subject_of = PREV
-					check_variable = { resource_exported@tungsten > PREV.resource_imported@tungsten }
-					check_variable = { ASG_tungsten_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_tungsten_price = 80
-				}	
-				divide_temp_variable = {
-					ASG_tungsten = ASG_tungsten_price
-				}
-				round_temp_variable = ASG_tungsten
-				# add_to_temp_variable = {
-				# 	ASG_tungsten = 1
-				# }
-				add_to_variable = {
-					ASG_tungsten_civ_count_import = ASG_tungsten
-				}
-				add_to_temp_variable = {
-					ASG_tungsten_calculations_finished = 1
-				}
-				
-			}
-			every_country = {
-				limit = {
-					is_subject_of = PREV
-					check_variable = { resource_exported@tungsten < PREV.resource_imported@tungsten }
-					check_variable = { resource_exported@tungsten > 8 }
-					check_variable = { ASG_tungsten_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_tungsten_price = 80
-				}
-				set_temp_variable = {
-					ASG_local_tungsten = resource_exported@tungsten
-				}
-				divide_temp_variable = {
-					ASG_local_tungsten = ASG_tungsten_price
-				}
-				round_temp_variable = ASG_local_tungsten
-				# add_to_temp_variable = {
-				# 	ASG_local_tungsten = 1
-				# }
-				add_to_variable = {
-					ASG_tungsten_civ_count_import = ASG_local_tungsten
-				}
-				multiply_temp_variable = {
-					ASG_local_tungsten = -1
-				}
-				add_to_temp_variable = {
-					ASG_tungsten = ASG_local_tungsten
-				}
-				if = {
-					limit = {
-						check_variable = { ASG_tungsten < 1 }
-					}
-					add_to_temp_variable = {
-						ASG_tungsten_calculations_finished = 1
-					}
-				}
-			}
-			if = {
-				limit = {
-					check_variable = { ASG_tungsten_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_tungsten_price = 8
-				}
-				divide_temp_variable = {
-					ASG_tungsten = ASG_tungsten_price
-				}
-				round_temp_variable = ASG_tungsten
-				# add_to_temp_variable = {
-				# 	ASG_tungsten = 1
-				# }
-				add_to_variable = {
-					ASG_tungsten_civ_count_import = ASG_tungsten
-				}
-			}
-		}
-		
-		#steel
-		set_temp_variable = {
-			ASG_steel = resource_imported@steel
-		}
-		set_variable = {
-			ASG_steel_civ_count_import = 0
-		}
-		if = {
-			limit = {
-				check_variable = { ASG_steel > 0 }
-			}
-
-			set_temp_variable = {
-				ASG_steel_calculations_finished = 0
-			}
-			every_country = {
-				limit = {
-					is_subject_of = PREV
-					check_variable = { resource_exported@steel > PREV.resource_imported@steel }
-					check_variable = { ASG_steel_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_steel_price = 80
-				}	
-				divide_temp_variable = {
-					ASG_steel = ASG_steel_price
-				}
-				round_temp_variable = ASG_steel
-				# add_to_temp_variable = {
-				# 	ASG_steel = 1
-				# }
-				add_to_variable = {
-					ASG_steel_civ_count_import = ASG_steel
-				}
-				add_to_temp_variable = {
-					ASG_steel_calculations_finished = 1
-				}
-				
-			}
-			every_country = {
-				limit = {
-					is_subject_of = PREV
-					check_variable = { resource_exported@steel < PREV.resource_imported@steel }
-					check_variable = { resource_exported@steel > 8 }
-					check_variable = { ASG_steel_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_steel_price = 80
-				}
-				set_temp_variable = {
-					ASG_local_steel = resource_exported@steel
-				}
-				divide_temp_variable = {
-					ASG_local_steel = ASG_steel_price
-				}
-				round_temp_variable = ASG_local_steel
-				# add_to_temp_variable = {
-				# 	ASG_local_steel = 1
-				# }
-				add_to_variable = {
-					ASG_steel_civ_count_import = ASG_local_steel
-				}
-				multiply_temp_variable = {
-					ASG_local_steel = -1
-				}
-				add_to_temp_variable = {
-					ASG_steel = ASG_local_steel
-				}
-				if = {
-					limit = {
-						check_variable = { ASG_steel < 1 }
-					}
-					add_to_temp_variable = {
-						ASG_steel_calculations_finished = 1
-					}
-				}
-			}
-			if = {
-				limit = {
-					check_variable = { ASG_steel_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_steel_price = 8
-				}
-				divide_temp_variable = {
-					ASG_steel = ASG_steel_price
-				}
-				round_temp_variable = ASG_steel
-				# add_to_temp_variable = {
-				# 	ASG_steel = 1
-				# }
-				add_to_variable = {
-					ASG_steel_civ_count_import = ASG_steel
-				}
-			}
-		}
-		
-		#chromium
-		set_temp_variable = {
-			ASG_chromium = resource_imported@chromium
-		}
-		set_variable = {
-			ASG_chromium_civ_count_import = 0
-		}
-		if = {
-			limit = {
-				check_variable = { ASG_chromium > 0 }
-			}
-			set_temp_variable = {
-				ASG_chromium_calculations_finished = 0
-			}
-			every_country = {
-				limit = {
-					is_subject_of = PREV
-					check_variable = { resource_exported@chromium > PREV.resource_imported@chromium }
-					check_variable = { ASG_chromium_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_chromium_price = 80
-				}	
-				divide_temp_variable = {
-					ASG_chromium = ASG_chromium_price
-				}
-				round_temp_variable = ASG_chromium
-				# add_to_temp_variable = {
-				# 	ASG_chromium = 1
-				# }
-				add_to_variable = {
-					ASG_chromium_civ_count_import = ASG_chromium
-				}
-				add_to_temp_variable = {
-					ASG_chromium_calculations_finished = 1
-				}
-				
-			}
-			every_country = {
-				limit = {
-					is_subject_of = PREV
-					check_variable = { resource_exported@chromium < PREV.resource_imported@chromium }
-					check_variable = { resource_exported@chromium > 8 }
-					check_variable = { ASG_chromium_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_chromium_price = 80
-				}
-				set_temp_variable = {
-					ASG_local_chromium = resource_exported@chromium
-				}
-				divide_temp_variable = {
-					ASG_local_chromium = ASG_chromium_price
-				}
-				round_temp_variable = ASG_local_chromium
-				# add_to_temp_variable = {
-				# 	ASG_local_chromium = 1
-				# }
-				add_to_variable = {
-					ASG_chromium_civ_count_import = ASG_local_chromium
-				}
-				multiply_temp_variable = {
-					ASG_local_chromium = -1
-				}
-				add_to_temp_variable = {
-					ASG_chromium = ASG_local_chromium
-				}
-				if = {
-					limit = {
-						check_variable = { ASG_chromium < 1 }
-					}
-					add_to_temp_variable = {
-						ASG_chromium_calculations_finished = 1
-					}
-				}
-			}
-			if = {
-				limit = {
-					check_variable = { ASG_chromium_calculations_finished < 1 }
-				}
-				set_temp_variable = {
-					ASG_chromium_price = 8
-				}
-				divide_temp_variable = {
-					ASG_chromium = ASG_chromium_price
-				}
-				round_temp_variable = ASG_chromium
-				# add_to_temp_variable = {
-				# 	ASG_chromium = 1
-				# }
-				add_to_variable = {
-					ASG_chromium_civ_count_import = ASG_chromium
-				}
-			}
-		}
-
-		add_to_temp_variable = {
-			ASG_civilian_industrial_score = ASG_oil_civ_count_import
-		}
-		add_to_temp_variable = {
-			ASG_civilian_industrial_score = ASG_aluminium_civ_count_import
-		}
-		add_to_temp_variable = {
-			ASG_civilian_industrial_score = ASG_rubber_civ_count_import
-		}
-		add_to_temp_variable = {
-			ASG_civilian_industrial_score = ASG_tungsten_civ_count_import
-		}
-		add_to_temp_variable = {
-			ASG_civilian_industrial_score = ASG_steel_civ_count_import
-		}
-		add_to_temp_variable = {
-			ASG_civilian_industrial_score = ASG_chromium_civ_count_import
-		}
-		# log = "Civ Number [?ASG_civilian_score] tot_score [?ASG_civilian_industrial_score] goods [?modifier@consumer_goods_factor] THIS = [?THIS.GetName]"
-		multiply_temp_variable = {
-			ASG_civilian_industrial_score = modifier@consumer_goods_factor
-		}
-		round_temp_variable = ASG_civilian_industrial_score
-		multiply_temp_variable = {
-			ASG_civilian_industrial_score = -1
-		}
-		add_to_variable = {
-			ASG_civilian_score = ASG_civilian_industrial_score
-		}
-		
-		set_variable = {
-			ASG_civilian_score_modifier = modifier@production_speed_buildings_factor
-		}
-		add_to_variable = {
-			ASG_civilian_score_modifier = 1
-		}
-		multiply_variable = {
-			ASG_civilian_score = ASG_civilian_score_modifier
-		}
-		add_to_array = {
-			ASG_civilian_score_array = ASG_civilian_score
-		}
-		# log = "score_var = [?ASG_civilian_score] civilian_score [?ASG_civilian_score_modifier] ASG_civilian_industrial_score [?ASG_civilian_industrial_score] THIS = [?THIS.GetName]"
-	}
-}
-
-ASG_graph_update = {
-	ASG_military_add_point_to_line = yes
-	ASG_civilian_add_point_to_line = yes
-	ASG_manpower_add_point_to_line = yes
-	ASG_casualties_add_point_to_line = yes
-}
-
-ASG_stats_update = {
-	ASG_military_update_stats = yes
-	ASG_civilian_update_stats = yes
-	ASG_manpower_update_stats = yes
-	ASG_casualties_update_stats = yes
 }
 
 ASG_civilian_add_point_to_line = {
@@ -4994,7 +4996,6 @@ ASG_civilian_add_point_to_line = {
 		# debug = yes
 	}
 }
-
 ASG_casualties_add_point_to_line = {
 	ASG_casualties_update_stats = yes
 	# log = "ASG : NEW casualties GRAPH UPDATE : [GetDateText]"
@@ -5386,7 +5387,6 @@ ASG_casualties_add_point_to_line = {
 		# debug = yes
 	}
 }
-
 ASG_manpower_add_point_to_line = {
 	ASG_manpower_update_stats = yes
 	# log = "ASG : NEW manpower GRAPH UPDATE : [GetDateText]"
@@ -5778,7 +5778,6 @@ ASG_manpower_add_point_to_line = {
 		# debug = yes
 	}
 }
-
 ASG_military_add_point_to_line = {
 	ASG_military_update_stats = yes
 	# This count is displayed as an x-axis label, increment it
@@ -6171,550 +6170,18 @@ ASG_military_add_point_to_line = {
 	}
 }
 
-ASG_military_rescale_down = {
+ASG_civilian_rescale_up = {
 	if = {
 		limit = {
 			check_variable = {
-				GLOBAL.ASG_military_rendering_scale_factor < 8
+				GLOBAL.ASG_civilian_rendering_scale_factor > 0.125
 			}
 		}
 		multiply_variable = {
-			GLOBAL.ASG_military_rendering_scale_factor = 2
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_blue^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_light_blue^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_light_white^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_light_red^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_red
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_red^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_red^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_red^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_green
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_green^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_green^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_green^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_grey^index = value_slope
-				}
-			}
+			GLOBAL.ASG_civilian_rendering_scale_factor = 0.5
 		}
 	}
 }
-
-ASG_military_rescale_up = {
-	if = {
-		limit = {
-			check_variable = {
-				GLOBAL.ASG_military_rendering_scale_factor > 0.125
-			}
-		}
-		multiply_variable = {
-			GLOBAL.ASG_military_rendering_scale_factor = 0.5
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 0.5
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_blue^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 0.5
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_light_blue^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 0.5
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_light_white^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 0.5
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_light_red^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_red
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 0.5
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_red^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_red^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_red^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_green
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 0.5
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_green^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_green^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_green^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 0.5
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_grey^index = value_slope
-				}
-			}
-		}
-	}
-}
-
 ASG_civilian_rescale_down = {
 	if = {
 		limit = {
@@ -6986,19 +6453,18 @@ ASG_civilian_rescale_down = {
 		}
 	}
 }
-
-ASG_civilian_rescale_up = {
+ASG_military_rescale_up = {
 	if = {
 		limit = {
 			check_variable = {
-				GLOBAL.ASG_civilian_rendering_scale_factor > 0.125
+				GLOBAL.ASG_military_rendering_scale_factor > 0.125
 			}
 		}
 		multiply_variable = {
-			GLOBAL.ASG_civilian_rendering_scale_factor = 0.5
+			GLOBAL.ASG_military_rendering_scale_factor = 0.5
 		}
 		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue
 			set_temp_variable = {
 				value_slope = v
 			}
@@ -7006,7 +6472,7 @@ ASG_civilian_rescale_up = {
 				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue^i = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^i = value_slope
 			}
 			if = {
 				limit = {
@@ -7021,7 +6487,7 @@ ASG_civilian_rescale_up = {
 					index = 1
 				}
 				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue^index
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^index
 				}
 				divide_temp_variable = {
 					value_slope = -2
@@ -7030,12 +6496,12 @@ ASG_civilian_rescale_up = {
 					value_slope = 50
 				}
 				set_variable = {
-					GLOBAL.ASG_civilian_graph_slopes_blue^index = value_slope
+					GLOBAL.ASG_military_graph_slopes_blue^index = value_slope
 				}
 			}
 		}
 		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue
 			set_temp_variable = {
 				value_slope = v
 			}
@@ -7043,7 +6509,7 @@ ASG_civilian_rescale_up = {
 				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue^i = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^i = value_slope
 			}
 			if = {
 				limit = {
@@ -7058,7 +6524,7 @@ ASG_civilian_rescale_up = {
 					index = 1
 				}
 				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue^index
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^index
 				}
 				divide_temp_variable = {
 					value_slope = -2
@@ -7067,12 +6533,12 @@ ASG_civilian_rescale_up = {
 					value_slope = 50
 				}
 				set_variable = {
-					GLOBAL.ASG_civilian_graph_slopes_light_blue^index = value_slope
+					GLOBAL.ASG_military_graph_slopes_light_blue^index = value_slope
 				}
 			}
 		}
 		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white
 			set_temp_variable = {
 				value_slope = v
 			}
@@ -7080,7 +6546,7 @@ ASG_civilian_rescale_up = {
 				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white^i = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^i = value_slope
 			}
 			if = {
 				limit = {
@@ -7095,7 +6561,7 @@ ASG_civilian_rescale_up = {
 					index = 1
 				}
 				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white^index
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^index
 				}
 				divide_temp_variable = {
 					value_slope = -2
@@ -7104,12 +6570,12 @@ ASG_civilian_rescale_up = {
 					value_slope = 50
 				}
 				set_variable = {
-					GLOBAL.ASG_civilian_graph_slopes_light_white^index = value_slope
+					GLOBAL.ASG_military_graph_slopes_light_white^index = value_slope
 				}
 			}
 		}
 		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red
 			set_temp_variable = {
 				value_slope = v
 			}
@@ -7117,7 +6583,7 @@ ASG_civilian_rescale_up = {
 				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red^i = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^i = value_slope
 			}
 			if = {
 				limit = {
@@ -7132,7 +6598,7 @@ ASG_civilian_rescale_up = {
 					index = 1
 				}
 				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red^index
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^index
 				}
 				divide_temp_variable = {
 					value_slope = -2
@@ -7141,12 +6607,12 @@ ASG_civilian_rescale_up = {
 					value_slope = 50
 				}
 				set_variable = {
-					GLOBAL.ASG_civilian_graph_slopes_light_red^index = value_slope
+					GLOBAL.ASG_military_graph_slopes_light_red^index = value_slope
 				}
 			}
 		}
 		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_red
 			set_temp_variable = {
 				value_slope = v
 			}
@@ -7154,7 +6620,7 @@ ASG_civilian_rescale_up = {
 				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red^i = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_red^i = value_slope
 			}
 			if = {
 				limit = {
@@ -7169,7 +6635,7 @@ ASG_civilian_rescale_up = {
 					index = 1
 				}
 				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red^index
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_red^index
 				}
 				divide_temp_variable = {
 					value_slope = -2
@@ -7178,12 +6644,12 @@ ASG_civilian_rescale_up = {
 					value_slope = 50
 				}
 				set_variable = {
-					GLOBAL.ASG_civilian_graph_slopes_red^index = value_slope
+					GLOBAL.ASG_military_graph_slopes_red^index = value_slope
 				}
 			}
 		}
 		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_green
 			set_temp_variable = {
 				value_slope = v
 			}
@@ -7191,7 +6657,7 @@ ASG_civilian_rescale_up = {
 				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green^i = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_green^i = value_slope
 			}
 			if = {
 				limit = {
@@ -7206,7 +6672,7 @@ ASG_civilian_rescale_up = {
 					index = 1
 				}
 				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green^index
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_green^index
 				}
 				divide_temp_variable = {
 					value_slope = -2
@@ -7215,12 +6681,12 @@ ASG_civilian_rescale_up = {
 					value_slope = 50
 				}
 				set_variable = {
-					GLOBAL.ASG_civilian_graph_slopes_green^index = value_slope
+					GLOBAL.ASG_military_graph_slopes_green^index = value_slope
 				}
 			}
 		}
 		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey
 			set_temp_variable = {
 				value_slope = v
 			}
@@ -7228,7 +6694,7 @@ ASG_civilian_rescale_up = {
 				value_slope = 0.5
 			}
 			set_variable = {
-				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey^i = value_slope
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^i = value_slope
 			}
 			if = {
 				limit = {
@@ -7243,7 +6709,7 @@ ASG_civilian_rescale_up = {
 					index = 1
 				}
 				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey^index
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^index
 				}
 				divide_temp_variable = {
 					value_slope = -2
@@ -7252,13 +6718,283 @@ ASG_civilian_rescale_up = {
 					value_slope = 50
 				}
 				set_variable = {
-					GLOBAL.ASG_civilian_graph_slopes_grey^index = value_slope
+					GLOBAL.ASG_military_graph_slopes_grey^index = value_slope
 				}
 			}
 		}
 	}
 }
-
+ASG_military_rescale_down = {
+	if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_military_rendering_scale_factor < 8
+			}
+		}
+		multiply_variable = {
+			GLOBAL.ASG_military_rendering_scale_factor = 2
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue
+			set_temp_variable = {
+				value_slope = v
+			}
+			divide_temp_variable = {
+				value_slope = 2
+			}
+			set_variable = {
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^i = value_slope
+			}
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_blue^index = value_slope
+				}
+			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue
+			set_temp_variable = {
+				value_slope = v
+			}
+			divide_temp_variable = {
+				value_slope = 2
+			}
+			set_variable = {
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^i = value_slope
+			}
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_light_blue^index = value_slope
+				}
+			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white
+			set_temp_variable = {
+				value_slope = v
+			}
+			divide_temp_variable = {
+				value_slope = 2
+			}
+			set_variable = {
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^i = value_slope
+			}
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_light_white^index = value_slope
+				}
+			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red
+			set_temp_variable = {
+				value_slope = v
+			}
+			divide_temp_variable = {
+				value_slope = 2
+			}
+			set_variable = {
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^i = value_slope
+			}
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_light_red^index = value_slope
+				}
+			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_red
+			set_temp_variable = {
+				value_slope = v
+			}
+			divide_temp_variable = {
+				value_slope = 2
+			}
+			set_variable = {
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_red^i = value_slope
+			}
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_red^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_red^index = value_slope
+				}
+			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_green
+			set_temp_variable = {
+				value_slope = v
+			}
+			divide_temp_variable = {
+				value_slope = 2
+			}
+			set_variable = {
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_green^i = value_slope
+			}
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_green^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_green^index = value_slope
+				}
+			}
+		}
+		for_each_loop = {
+			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey
+			set_temp_variable = {
+				value_slope = v
+			}
+			divide_temp_variable = {
+				value_slope = 2
+			}
+			set_variable = {
+				GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^i = value_slope
+			}
+			if = {
+				limit = {
+					check_variable = {
+						i > 0
+					}
+				}
+				set_temp_variable = {
+					index = i
+				}
+				subtract_from_temp_variable = {
+					index = 1
+				}
+				subtract_from_temp_variable = {
+					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^index
+				}
+				divide_temp_variable = {
+					value_slope = -2
+				}
+				add_to_temp_variable = {
+					value_slope = 50
+				}
+				set_variable = {
+					GLOBAL.ASG_military_graph_slopes_grey^index = value_slope
+				}
+			}
+		}
+	}
+}
 ASG_manpower_rescale_up = {
 	if = {
 		limit = {
@@ -7271,7 +7007,6 @@ ASG_manpower_rescale_up = {
 		}
 	}
 }
-
 ASG_manpower_rescale_down = {
 	if = {
 		limit = {
@@ -7284,7 +7019,6 @@ ASG_manpower_rescale_down = {
 		}
 	}
 }
-
 ASG_casualties_rescale_up = {
 	if = {
 		limit = {
@@ -7297,7 +7031,6 @@ ASG_casualties_rescale_up = {
 		}
 	}
 }
-
 ASG_casualties_rescale_down = {
 	if = {
 		limit = {
@@ -7308,5 +7041,848 @@ ASG_casualties_rescale_down = {
 		multiply_variable = {
 			GLOBAL.ASG_casualties_rendering_scale_factor = 2
 		}
+	}
+}
+
+ASG_clear_civilian_graph = {
+	meta_effect = {
+		text = {
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_green
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_blue
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_grey
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_red
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_red
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_blue
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_yellow
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_white
+		
+			clear_array = ASG_[categorie]_graph_slopes_green
+			clear_array = ASG_[categorie]_graph_slopes_blue
+			clear_array = ASG_[categorie]_graph_slopes_grey
+			clear_array = ASG_[categorie]_graph_slopes_red
+			clear_array = ASG_[categorie]_graph_slopes_light_red
+			clear_array = ASG_[categorie]_graph_slopes_light_blue
+			clear_array = ASG_[categorie]_graph_slopes_light_yellow
+			clear_array = ASG_[categorie]_graph_slopes_light_white
+		}
+		categorie = "civilian"
+	}
+}
+ASG_clear_military_graph = {
+	meta_effect = {
+		text = {
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_green
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_blue
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_grey
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_red
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_red
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_blue
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_yellow
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_white
+		
+			clear_array = ASG_[categorie]_graph_slopes_green
+			clear_array = ASG_[categorie]_graph_slopes_blue
+			clear_array = ASG_[categorie]_graph_slopes_grey
+			clear_array = ASG_[categorie]_graph_slopes_red
+			clear_array = ASG_[categorie]_graph_slopes_light_red
+			clear_array = ASG_[categorie]_graph_slopes_light_blue
+			clear_array = ASG_[categorie]_graph_slopes_light_yellow
+			clear_array = ASG_[categorie]_graph_slopes_light_white
+		}
+		categorie = "military"
+	}
+}
+ASG_clear_manpower_graph = {
+	meta_effect = {
+		text = {
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_green
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_blue
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_grey
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_red
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_red
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_blue
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_yellow
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_white
+		
+			clear_array = ASG_[categorie]_graph_slopes_green
+			clear_array = ASG_[categorie]_graph_slopes_blue
+			clear_array = ASG_[categorie]_graph_slopes_grey
+			clear_array = ASG_[categorie]_graph_slopes_red
+			clear_array = ASG_[categorie]_graph_slopes_light_red
+			clear_array = ASG_[categorie]_graph_slopes_light_blue
+			clear_array = ASG_[categorie]_graph_slopes_light_yellow
+			clear_array = ASG_[categorie]_graph_slopes_light_white
+		}
+		categorie = "manpower"
+	}
+}
+ASG_clear_casualties_graph = {
+	meta_effect = {
+		text = {
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_green
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_blue
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_grey
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_red
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_red
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_blue
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_yellow
+			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_white
+		
+			clear_array = ASG_[categorie]_graph_slopes_green
+			clear_array = ASG_[categorie]_graph_slopes_blue
+			clear_array = ASG_[categorie]_graph_slopes_grey
+			clear_array = ASG_[categorie]_graph_slopes_red
+			clear_array = ASG_[categorie]_graph_slopes_light_red
+			clear_array = ASG_[categorie]_graph_slopes_light_blue
+			clear_array = ASG_[categorie]_graph_slopes_light_yellow
+			clear_array = ASG_[categorie]_graph_slopes_light_white
+		}
+		categorie = "casualties"
+	}
+}
+
+ASG_calculate_initial_graph_point_civilian = {
+	meta_effect = {
+		text = {
+			set_temp_variable = {
+				ASG_[categorie]_green_pixel_value = [tag1].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_blue_pixel_value = [tag2].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_grey_pixel_value = [tag3].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_red_pixel_value = [tag4].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_light_red_pixel_value = [tag5].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_light_blue_pixel_value = [tag6].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_light_yellow_pixel_value = [tag7].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
+			}
+
+			multiply_temp_variable = {
+				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+
+			add_to_temp_variable = {
+				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+
+			round_temp_variable = ASG_[categorie]_green_pixel_value
+			round_temp_variable = ASG_[categorie]_blue_pixel_value
+			round_temp_variable = ASG_[categorie]_grey_pixel_value
+			round_temp_variable = ASG_[categorie]_red_pixel_value
+			round_temp_variable = ASG_[categorie]_light_red_pixel_value
+			round_temp_variable = ASG_[categorie]_light_blue_pixel_value
+			round_temp_variable = ASG_[categorie]_light_yellow_pixel_value
+			round_temp_variable = ASG_[categorie]_light_white_pixel_value
+
+			clamp_variable = {
+				var = ASG_[categorie]_green_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_blue_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_grey_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_red_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_light_red_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_light_blue_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_light_yellow_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_light_white_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_green = [tag1].ASG_[categorie]_green_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_blue = [tag2].ASG_[categorie]_blue_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_grey = [tag3].ASG_[categorie]_grey_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_red = [tag4].ASG_[categorie]_red_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_light_red = [tag5].ASG_[categorie]_light_red_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_light_blue = [tag6].ASG_[categorie]_light_blue_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_light_yellow = [tag7].ASG_[categorie]_light_yellow_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_light_white = [tag8].ASG_[categorie]_light_white_pixel_value
+			}
+			log = "ASG : INITIAL [categorie] GRAPH UPDATE : [GetDateText]"
+			log = "ASG : END OF [categorie] GRAPH INITIAL UPDATE"
+		}
+		categorie = "civilian"
+		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
+		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
+		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
+		tag4 = "[?GLOBAL.ASG_red_curve_tag.GetTag]"
+		tag5 = "[?GLOBAL.ASG_light_red_curve_tag.GetTag]"
+		tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
+		tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
+		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
+		# debug = yes
+	}
+}
+ASG_calculate_initial_graph_point_military = {
+	meta_effect = {
+		text = {
+			set_temp_variable = {
+				ASG_[categorie]_green_pixel_value = [tag1].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_blue_pixel_value = [tag2].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_grey_pixel_value = [tag3].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_red_pixel_value = [tag4].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_light_red_pixel_value = [tag5].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_light_blue_pixel_value = [tag6].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_light_yellow_pixel_value = [tag7].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
+			}
+
+			multiply_temp_variable = {
+				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+
+			add_to_temp_variable = {
+				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+
+			round_temp_variable = ASG_[categorie]_green_pixel_value
+			round_temp_variable = ASG_[categorie]_blue_pixel_value
+			round_temp_variable = ASG_[categorie]_grey_pixel_value
+			round_temp_variable = ASG_[categorie]_red_pixel_value
+			round_temp_variable = ASG_[categorie]_light_red_pixel_value
+			round_temp_variable = ASG_[categorie]_light_blue_pixel_value
+			round_temp_variable = ASG_[categorie]_light_yellow_pixel_value
+			round_temp_variable = ASG_[categorie]_light_white_pixel_value
+
+			clamp_variable = {
+				var = ASG_[categorie]_green_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_blue_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_grey_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_red_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_light_red_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_light_blue_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_light_yellow_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_light_white_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_green = [tag1].ASG_[categorie]_green_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_blue = [tag2].ASG_[categorie]_blue_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_grey = [tag3].ASG_[categorie]_grey_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_red = [tag4].ASG_[categorie]_red_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_light_red = [tag5].ASG_[categorie]_light_red_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_light_blue = [tag6].ASG_[categorie]_light_blue_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_light_yellow = [tag7].ASG_[categorie]_light_yellow_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_light_white = [tag8].ASG_[categorie]_light_white_pixel_value
+			}
+			log = "ASG : INITIAL [categorie] GRAPH UPDATE : [GetDateText]"
+			log = "ASG : END OF [categorie] GRAPH INITIAL UPDATE"
+		}
+		categorie = "military"
+		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
+		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
+		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
+		tag4 = "[?GLOBAL.ASG_red_curve_tag.GetTag]"
+		tag5 = "[?GLOBAL.ASG_light_red_curve_tag.GetTag]"
+		tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
+		tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
+		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
+		# debug = yes
+	}
+}
+ASG_calculate_initial_graph_point_manpower = {
+	meta_effect = {
+		text = {
+			set_temp_variable = {
+				ASG_[categorie]_green_pixel_value = [tag1].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_blue_pixel_value = [tag2].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_grey_pixel_value = [tag3].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_red_pixel_value = [tag4].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_light_red_pixel_value = [tag5].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_light_blue_pixel_value = [tag6].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_light_yellow_pixel_value = [tag7].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
+			}
+
+			multiply_temp_variable = {
+				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+
+			add_to_temp_variable = {
+				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+
+			round_temp_variable = ASG_[categorie]_green_pixel_value
+			round_temp_variable = ASG_[categorie]_blue_pixel_value
+			round_temp_variable = ASG_[categorie]_grey_pixel_value
+			round_temp_variable = ASG_[categorie]_red_pixel_value
+			round_temp_variable = ASG_[categorie]_light_red_pixel_value
+			round_temp_variable = ASG_[categorie]_light_blue_pixel_value
+			round_temp_variable = ASG_[categorie]_light_yellow_pixel_value
+			round_temp_variable = ASG_[categorie]_light_white_pixel_value
+
+			clamp_variable = {
+				var = ASG_[categorie]_green_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_blue_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_grey_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_red_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_light_red_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_light_blue_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_light_yellow_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_light_white_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_green = [tag1].ASG_[categorie]_green_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_blue = [tag2].ASG_[categorie]_blue_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_grey = [tag3].ASG_[categorie]_grey_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_red = [tag4].ASG_[categorie]_red_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_light_red = [tag5].ASG_[categorie]_light_red_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_light_blue = [tag6].ASG_[categorie]_light_blue_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_light_yellow = [tag7].ASG_[categorie]_light_yellow_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_light_white = [tag8].ASG_[categorie]_light_white_pixel_value
+			}
+			log = "ASG : INITIAL [categorie] GRAPH UPDATE : [GetDateText]"
+			log = "ASG : END OF [categorie] GRAPH INITIAL UPDATE"
+		}
+		categorie = "manpower"
+		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
+		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
+		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
+		tag4 = "[?GLOBAL.ASG_red_curve_tag.GetTag]"
+		tag5 = "[?GLOBAL.ASG_light_red_curve_tag.GetTag]"
+		tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
+		tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
+		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
+		# debug = yes
+	}
+}
+ASG_calculate_initial_graph_point_casualties = {
+	meta_effect = {
+		text = {
+			set_temp_variable = {
+				ASG_[categorie]_green_pixel_value = [tag1].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_blue_pixel_value = [tag2].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_grey_pixel_value = [tag3].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_red_pixel_value = [tag4].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_light_red_pixel_value = [tag5].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_light_blue_pixel_value = [tag6].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_light_yellow_pixel_value = [tag7].ASG_[categorie]_score
+			}
+			set_temp_variable = {
+				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
+			}
+
+			multiply_temp_variable = {
+				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+			multiply_temp_variable = {
+				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			}
+
+			add_to_temp_variable = {
+				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+			add_to_temp_variable = {
+				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
+			}
+
+			round_temp_variable = ASG_[categorie]_green_pixel_value
+			round_temp_variable = ASG_[categorie]_blue_pixel_value
+			round_temp_variable = ASG_[categorie]_grey_pixel_value
+			round_temp_variable = ASG_[categorie]_red_pixel_value
+			round_temp_variable = ASG_[categorie]_light_red_pixel_value
+			round_temp_variable = ASG_[categorie]_light_blue_pixel_value
+			round_temp_variable = ASG_[categorie]_light_yellow_pixel_value
+			round_temp_variable = ASG_[categorie]_light_white_pixel_value
+
+			clamp_variable = {
+				var = ASG_[categorie]_green_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_blue_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_grey_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_red_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_light_red_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_light_blue_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_light_yellow_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			clamp_variable = {
+				var = ASG_[categorie]_light_white_pixel_value
+				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+			}
+			
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_green = [tag1].ASG_[categorie]_green_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_blue = [tag2].ASG_[categorie]_blue_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_grey = [tag3].ASG_[categorie]_grey_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_red = [tag4].ASG_[categorie]_red_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_light_red = [tag5].ASG_[categorie]_light_red_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_light_blue = [tag6].ASG_[categorie]_light_blue_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_light_yellow = [tag7].ASG_[categorie]_light_yellow_pixel_value
+			}
+			set_variable = {
+				GLOBAL.ASG_[categorie]_y_position_light_white = [tag8].ASG_[categorie]_light_white_pixel_value
+			}
+			log = "ASG : INITIAL [categorie] GRAPH UPDATE : [GetDateText]"
+			log = "ASG : END OF [categorie] GRAPH INITIAL UPDATE"
+		}
+		categorie = "casualties"
+		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
+		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
+		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
+		tag4 = "[?GLOBAL.ASG_red_curve_tag.GetTag]"
+		tag5 = "[?GLOBAL.ASG_light_red_curve_tag.GetTag]"
+		tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
+		tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
+		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
+		# debug = yes
+	}
+}
+ASG_replot_civilian_graph = {
+	meta_effect = {
+		text = {
+			ASG_clear_[categorie]_graph = yes
+			ASG_calculate_initial_graph_point_[categorie] = yes
+			
+			for_each_loop = {
+				array = [tag1].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_green = GLOBAL.ASG_[categorie]_y_position_green
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					multiply_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_green = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_green = GLOBAL.ASG_[categorie]_last_y_position_green
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_green = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_green = [categorie]_offset_green
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_green = GLOBAL.ASG_[categorie]_y_position_green
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_green = GLOBAL.ASG_[categorie]_last_y_position_green
+					}
+					divide_temp_variable = {
+						[categorie]_diff_green = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_green = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_green = [categorie]_diff_green
+					}
+				}
+			}
+		}
+		categorie = "civilian"
+		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
+		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
+		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
+		tag4 = "[?GLOBAL.ASG_red_curve_tag.GetTag]"
+		tag5 = "[?GLOBAL.ASG_light_red_curve_tag.GetTag]"
+		tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
+		tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
+		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
+		# debug = yes
 	}
 }
