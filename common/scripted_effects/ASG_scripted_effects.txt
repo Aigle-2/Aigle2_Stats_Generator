@@ -4598,7 +4598,7 @@ ASG_casualties_update_stats = {
 		if = {
 			limit = {
 				check_variable = {
-					ASG_casualties_score = THIS.casualties_k
+					ASG_casualties_score < THIS.casualties_k
 				}
 			}
 			set_variable = {
