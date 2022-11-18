@@ -57,6 +57,15 @@ guiTypes = {
 		}
 
 		gridboxtype = {
+			name = "ASG_military_line_segments_light_yellow"
+			position = { x = 132	 y = 380 }
+			size = { width = 0 height = 200 }
+			slotsize = { width = 5 height = 200 }
+			max_slots_horizontal = 400
+			add_horizontal = yes
+		}
+
+		gridboxtype = {
 			name = "ASG_civilian_line_segments_light_white"
 			position = { x = 132	 y = 380 }
 			size = { width = 0 height = 200 }
