@@ -121,7 +121,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|2]"
     }
 }
 
@@ -134,7 +134,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|2]"
     }
 }
 
@@ -147,7 +147,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|2]"
     }
 }
 
@@ -160,7 +160,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|2]"
     }
 }
 
@@ -173,7 +173,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|2]"
     }
 }
 
@@ -186,7 +186,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|2]"
     }
 }
 
@@ -199,7 +199,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|2]"
     }
 }
 
@@ -212,7 +212,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_military_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|2]"
     }
 }
 
@@ -225,7 +225,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|2]"
     }
 }
 
@@ -238,7 +238,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|2]"
     }
 }
 
@@ -251,7 +251,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|2]"
     }
 }
 
@@ -264,7 +264,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|2]"
     }
 }
 
@@ -277,7 +277,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|2]"
     }
 }
 
@@ -290,7 +290,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|2]"
     }
 }
 
@@ -303,7 +303,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|2]"
     }
 }
 
@@ -316,7 +316,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_civilian_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|2]"
     }
 }
 
@@ -329,7 +329,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|1]"
     }
 }
 
@@ -342,7 +342,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|1]"
     }
 }
 
@@ -355,7 +355,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|1]"
     }
 }
 
@@ -368,7 +368,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|1]"
     }
 }
 
@@ -381,7 +381,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|1]"
     }
 }
 
@@ -394,7 +394,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|1]"
     }
 }
 
@@ -407,7 +407,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|1]"
     }
 }
 
@@ -420,7 +420,7 @@ defined_text = {
                 set_temp_variable = { score_var = ASG_casualties_score }
             }
         }
-        localization_key = "[?score_var]"
+        localization_key = "[?score_var|1]"
     }
 }
 
