@@ -1,8 +1,8 @@
 ASG_graph_update = {
-	ASG_civilian_add_point_to_line = yes
-	ASG_military_add_point_to_line = yes
-	ASG_manpower_add_point_to_line = yes
-	ASG_casualties_add_point_to_line = yes
+	ASG_replot_civilian_graph = yes
+	ASG_replot_military_graph = yes
+	ASG_replot_manpower_graph = yes
+	ASG_replot_casualties_graph = yes
 }
 ASG_stats_update = {
 	ASG_civilian_update_stats = yes
@@ -651,7 +651,7 @@ ASG_civilian_update_stats = {
 			ASG_civilian_score = ASG_civilian_score_modifier
 		}
 		add_to_array = {
-			ASG_civilian_score_array = ASG_civilian_score
+			THIS.ASG_civilian_score_array = ASG_civilian_score
 		}
 		# log = "score_var = [?ASG_civilian_score] civilian_score [?ASG_civilian_score_modifier] ASG_civilian_industrial_score [?ASG_civilian_industrial_score] THIS = [?THIS.GetName]"
 	}
@@ -676,7 +676,7 @@ ASG_military_update_stats = {
 			ASG_military_score = ASG_military_score_modifier
 		}
 		add_to_array = {
-			ASG_military_score_array = ASG_military_score
+			THIS.ASG_military_score_array = ASG_military_score
 		}
 		# log = "score_var = [?ASG_military_score] THIS = [?THIS.GetName] ROOT = [?ROOT.GetName]"
 	}
@@ -4589,1584 +4589,26 @@ ASG_manpower_update_stats = {
 			}
 		}
 		add_to_array = {
-			ASG_manpower_score_array = ASG_manpower_score
+			THIS.ASG_manpower_score_array = ASG_manpower_score
 		}
 	}
 }
 ASG_casualties_update_stats = {
 	every_country = {
-		set_variable = {
-			ASG_casualties_score = THIS.casualties_k
+		if = {
+			limit = {
+				check_variable = {
+					ASG_casualties_score = THIS.casualties_k
+				}
+			}
+			set_variable = {
+				ASG_casualties_score = THIS.casualties_k
+			}
 		}
 		add_to_array = {
-			ASG_casualties_score_array = ASG_casualties_score
+			THIS.ASG_casualties_score_array = ASG_casualties_score
 		}
 		# log = "score_var = [?ASG_military_score] THIS = [?THIS.GetName] ROOT = [?ROOT.GetName]"
-	}
-}
-
-ASG_civilian_add_point_to_line = {
-	ASG_civilian_update_stats = yes
-	# log = "ASG : NEW CIVILIAN GRAPH UPDATE : [GetDateText]"
-	# log = "ASG : ITA.ASG_civilian_score = [?ITA.ASG_civilian_score]    ITA Y Value = [?GLOBAL.ASG_civilian_y_position_green]       "
-	# log = "ASG : SOV.ASG_civilian_score = [?SOV.ASG_civilian_score]    SOV Y Value = [?GLOBAL.ASG_civilian_y_position_red]         "
-	# log = "ASG : FRA.ASG_civilian_score = [?FRA.ASG_civilian_score]    FRA Y Value = [?GLOBAL.ASG_civilian_y_position_light_blue]  "
-	# log = "ASG : USA.ASG_civilian_score = [?USA.ASG_civilian_score]    USA Y Value = [?GLOBAL.ASG_civilian_y_position_blue]        "
-	# log = "ASG : JAP.ASG_civilian_score = [?JAP.ASG_civilian_score]    JAP Y Value = [?GLOBAL.ASG_civilian_y_position_light_white] "
-	# log = "ASG : ENG.ASG_civilian_score = [?ENG.ASG_civilian_score]    ENG Y Value = [?GLOBAL.ASG_civilian_y_position_light_Red]   "
-	# log = "ASG : GER.ASG_civilian_score = [?GER.ASG_civilian_score]    GER Y Value = [?GLOBAL.ASG_civilian_y_position_grey]        "
-	# log = "ASG : END OF CIVILIAN GRAPH UPDATE"
-	# This count is displayed as an x-axis label, increment it
-	# We keep track of the last y position so we can calculate the slope
-	meta_effect = {
-		text = {
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_green = GLOBAL.ASG_[categorie]_y_position_green
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_blue = GLOBAL.ASG_[categorie]_y_position_blue
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_grey = GLOBAL.ASG_[categorie]_y_position_grey
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_red = GLOBAL.ASG_[categorie]_y_position_red
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_light_red = GLOBAL.ASG_[categorie]_y_position_light_red
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_light_blue = GLOBAL.ASG_[categorie]_y_position_light_blue
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_yellow_white = GLOBAL.ASG_[categorie]_y_position_light_yellow
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_light_white = GLOBAL.ASG_[categorie]_y_position_light_white
-			}
-			set_temp_variable = {
-				ASG_[categorie]_green_pixel_value = [tag1].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = [tag2].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = [tag3].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_red_pixel_value = [tag4].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = [tag5].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = [tag6].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = [tag7].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			round_temp_variable = ASG_[categorie]_green_pixel_value
-			round_temp_variable = ASG_[categorie]_blue_pixel_value
-			round_temp_variable = ASG_[categorie]_grey_pixel_value
-			round_temp_variable = ASG_[categorie]_red_pixel_value
-			round_temp_variable = ASG_[categorie]_light_red_pixel_value
-			round_temp_variable = ASG_[categorie]_light_blue_pixel_value
-			round_temp_variable = ASG_[categorie]_light_yellow_pixel_value
-			round_temp_variable = ASG_[categorie]_light_white_pixel_value
-			clamp_variable = {
-				var = ASG_[categorie]_green_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_blue_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_grey_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_red_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_light_red_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_light_blue_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_light_yellow_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_light_white_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_green = [tag1].ASG_[categorie]_green_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_blue = [tag2].ASG_[categorie]_blue_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_grey = [tag3].ASG_[categorie]_grey_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_red = [tag4].ASG_[categorie]_red_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_light_red = [tag5].ASG_[categorie]_light_red_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_light_blue = [tag6].ASG_[categorie]_light_blue_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_light_yellow = [tag7].ASG_[categorie]_light_yellow_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_light_white = [tag8].ASG_[categorie]_light_white_pixel_value
-			}
-			# The y position offset is the inverse of the y position
-			set_temp_variable = {
-				[categorie]_offset_green = GLOBAL.ASG_[categorie]_last_y_position_green
-			}
-			set_temp_variable = {
-				[categorie]_offset_blue = GLOBAL.ASG_[categorie]_last_y_position_blue
-			}
-			set_temp_variable = {
-				[categorie]_offset_grey = GLOBAL.ASG_[categorie]_last_y_position_grey
-			}
-			set_temp_variable = {
-				[categorie]_offset_red = GLOBAL.ASG_[categorie]_last_y_position_red
-			}
-			set_temp_variable = {
-				[categorie]_offset_light_red = GLOBAL.ASG_[categorie]_last_y_position_light_red
-			}
-			set_temp_variable = {
-				[categorie]_offset_light_blue = GLOBAL.ASG_[categorie]_last_y_position_light_blue
-			}
-			set_temp_variable = {
-				[categorie]_offset_light_yellow = GLOBAL.ASG_[categorie]_last_y_position_light_yellow
-			}
-			set_temp_variable = {
-				[categorie]_offset_light_white = GLOBAL.ASG_[categorie]_last_y_position_light_white
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_green = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_blue = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_grey = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_red = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_light_red = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_light_blue = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_light_yellow = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_light_white = -1
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_green = [categorie]_offset_green
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_blue = [categorie]_offset_blue
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_grey = [categorie]_offset_grey
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_red = [categorie]_offset_red
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_red = [categorie]_offset_light_red
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_blue = [categorie]_offset_light_blue
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_yellow = [categorie]_offset_light_yellow
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_white = [categorie]_offset_light_white
-			}
-			# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
-			# These last two changes are needed for the shader
-			set_temp_variable = {
-				[categorie]_diff_green = GLOBAL.ASG_[categorie]_y_position_green
-			}
-			set_temp_variable = {
-				[categorie]_diff_blue = GLOBAL.ASG_[categorie]_y_position_blue
-			}
-			set_temp_variable = {
-				[categorie]_diff_grey = GLOBAL.ASG_[categorie]_y_position_grey
-			}
-			set_temp_variable = {
-				[categorie]_diff_red = GLOBAL.ASG_[categorie]_y_position_red
-			}
-			set_temp_variable = {
-				[categorie]_diff_light_red = GLOBAL.ASG_[categorie]_y_position_light_red
-			}
-			set_temp_variable = {
-				[categorie]_diff_light_blue = GLOBAL.ASG_[categorie]_y_position_light_blue
-			}
-			set_temp_variable = {
-				[categorie]_diff_light_yellow = GLOBAL.ASG_[categorie]_y_position_light_yellow
-			}
-			set_temp_variable = {
-				[categorie]_diff_light_white = GLOBAL.ASG_[categorie]_y_position_light_white
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_green = GLOBAL.ASG_[categorie]_last_y_position_green
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_blue = GLOBAL.ASG_[categorie]_last_y_position_blue
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_grey = GLOBAL.ASG_[categorie]_last_y_position_grey
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_red = GLOBAL.ASG_[categorie]_last_y_position_red
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_light_red = GLOBAL.ASG_[categorie]_last_y_position_light_red
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_light_blue = GLOBAL.ASG_[categorie]_last_y_position_light_blue
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_light_white = GLOBAL.ASG_[categorie]_last_y_position_light_white
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_light_yellow = GLOBAL.ASG_[categorie]_last_y_position_light_yellow
-			}
-			divide_temp_variable = {
-				[categorie]_diff_green = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_blue = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_grey = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_red = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_light_red = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_light_blue = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_light_yellow = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_light_white = 2
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_green = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_blue = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_grey = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_red = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_light_red = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_light_blue = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_light_yellow = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_light_white = 50
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_green = [categorie]_diff_green
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_blue = [categorie]_diff_blue
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_grey = [categorie]_diff_grey
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_red = [categorie]_diff_red
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_light_red = [categorie]_diff_light_red
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_light_blue = [categorie]_diff_light_blue
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_light_yellow = [categorie]_diff_light_white
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_light_white = [categorie]_diff_light_white
-			}
-		}
-		categorie = "civilian"
-		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
-		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
-		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
-		tag4 = "[?GLOBAL.ASG_red_curve_tag.GetTag]"
-		tag5 = "[?GLOBAL.ASG_light_red_curve_tag.GetTag]"
-		tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
-		tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
-		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
-		# debug = yes
-	}
-}
-ASG_casualties_add_point_to_line = {
-	ASG_casualties_update_stats = yes
-	# log = "ASG : NEW casualties GRAPH UPDATE : [GetDateText]"
-	# log = "ASG : ITA.ASG_casualties_score = [?ITA.ASG_casualties_score]    ITA Y Value = [?GLOBAL.ASG_casualties_y_position_green]       "
-	# log = "ASG : SOV.ASG_casualties_score = [?SOV.ASG_casualties_score]    SOV Y Value = [?GLOBAL.ASG_casualties_y_position_red]         "
-	# log = "ASG : FRA.ASG_casualties_score = [?FRA.ASG_casualties_score]    FRA Y Value = [?GLOBAL.ASG_casualties_y_position_light_blue]  "
-	# log = "ASG : USA.ASG_casualties_score = [?USA.ASG_casualties_score]    USA Y Value = [?GLOBAL.ASG_casualties_y_position_blue]        "
-	# log = "ASG : JAP.ASG_casualties_score = [?JAP.ASG_casualties_score]    JAP Y Value = [?GLOBAL.ASG_casualties_y_position_light_white] "
-	# log = "ASG : ENG.ASG_casualties_score = [?ENG.ASG_casualties_score]    ENG Y Value = [?GLOBAL.ASG_casualties_y_position_light_Red]   "
-	# log = "ASG : GER.ASG_casualties_score = [?GER.ASG_casualties_score]    GER Y Value = [?GLOBAL.ASG_casualties_y_position_grey]        "
-	# log = "ASG : END OF casualties GRAPH UPDATE"
-	# This count is displayed as an x-axis label, increment it
-	# We keep track of the last y position so we can calculate the slope
-	meta_effect = {
-		text = {
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_green = GLOBAL.ASG_[categorie]_y_position_green
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_blue = GLOBAL.ASG_[categorie]_y_position_blue
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_grey = GLOBAL.ASG_[categorie]_y_position_grey
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_red = GLOBAL.ASG_[categorie]_y_position_red
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_light_red = GLOBAL.ASG_[categorie]_y_position_light_red
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_light_blue = GLOBAL.ASG_[categorie]_y_position_light_blue
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_yellow_white = GLOBAL.ASG_[categorie]_y_position_light_yellow
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_light_white = GLOBAL.ASG_[categorie]_y_position_light_white
-			}
-			set_temp_variable = {
-				ASG_[categorie]_green_pixel_value = [tag1].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = [tag2].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = [tag3].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_red_pixel_value = [tag4].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = [tag5].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = [tag6].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = [tag7].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			round_temp_variable = ASG_[categorie]_green_pixel_value
-			round_temp_variable = ASG_[categorie]_blue_pixel_value
-			round_temp_variable = ASG_[categorie]_grey_pixel_value
-			round_temp_variable = ASG_[categorie]_red_pixel_value
-			round_temp_variable = ASG_[categorie]_light_red_pixel_value
-			round_temp_variable = ASG_[categorie]_light_blue_pixel_value
-			round_temp_variable = ASG_[categorie]_light_yellow_pixel_value
-			round_temp_variable = ASG_[categorie]_light_white_pixel_value
-			clamp_variable = {
-				var = ASG_[categorie]_green_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_blue_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_grey_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_red_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_light_red_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_light_blue_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_light_yellow_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_light_white_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_green = [tag1].ASG_[categorie]_green_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_blue = [tag2].ASG_[categorie]_blue_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_grey = [tag3].ASG_[categorie]_grey_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_red = [tag4].ASG_[categorie]_red_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_light_red = [tag5].ASG_[categorie]_light_red_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_light_blue = [tag6].ASG_[categorie]_light_blue_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_light_yellow = [tag7].ASG_[categorie]_light_yellow_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_light_white = [tag8].ASG_[categorie]_light_white_pixel_value
-			}
-			# The y position offset is the inverse of the y position
-			set_temp_variable = {
-				[categorie]_offset_green = GLOBAL.ASG_[categorie]_last_y_position_green
-			}
-			set_temp_variable = {
-				[categorie]_offset_blue = GLOBAL.ASG_[categorie]_last_y_position_blue
-			}
-			set_temp_variable = {
-				[categorie]_offset_grey = GLOBAL.ASG_[categorie]_last_y_position_grey
-			}
-			set_temp_variable = {
-				[categorie]_offset_red = GLOBAL.ASG_[categorie]_last_y_position_red
-			}
-			set_temp_variable = {
-				[categorie]_offset_light_red = GLOBAL.ASG_[categorie]_last_y_position_light_red
-			}
-			set_temp_variable = {
-				[categorie]_offset_light_blue = GLOBAL.ASG_[categorie]_last_y_position_light_blue
-			}
-			set_temp_variable = {
-				[categorie]_offset_light_yellow = GLOBAL.ASG_[categorie]_last_y_position_light_yellow
-			}
-			set_temp_variable = {
-				[categorie]_offset_light_white = GLOBAL.ASG_[categorie]_last_y_position_light_white
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_green = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_blue = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_grey = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_red = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_light_red = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_light_blue = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_light_yellow = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_light_white = -1
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_green = [categorie]_offset_green
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_blue = [categorie]_offset_blue
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_grey = [categorie]_offset_grey
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_red = [categorie]_offset_red
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_red = [categorie]_offset_light_red
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_blue = [categorie]_offset_light_blue
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_yellow = [categorie]_offset_light_yellow
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_white = [categorie]_offset_light_white
-			}
-			# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
-			# These last two changes are needed for the shader
-			set_temp_variable = {
-				[categorie]_diff_green = GLOBAL.ASG_[categorie]_y_position_green
-			}
-			set_temp_variable = {
-				[categorie]_diff_blue = GLOBAL.ASG_[categorie]_y_position_blue
-			}
-			set_temp_variable = {
-				[categorie]_diff_grey = GLOBAL.ASG_[categorie]_y_position_grey
-			}
-			set_temp_variable = {
-				[categorie]_diff_red = GLOBAL.ASG_[categorie]_y_position_red
-			}
-			set_temp_variable = {
-				[categorie]_diff_light_red = GLOBAL.ASG_[categorie]_y_position_light_red
-			}
-			set_temp_variable = {
-				[categorie]_diff_light_blue = GLOBAL.ASG_[categorie]_y_position_light_blue
-			}
-			set_temp_variable = {
-				[categorie]_diff_light_yellow = GLOBAL.ASG_[categorie]_y_position_light_yellow
-			}
-			set_temp_variable = {
-				[categorie]_diff_light_white = GLOBAL.ASG_[categorie]_y_position_light_white
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_green = GLOBAL.ASG_[categorie]_last_y_position_green
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_blue = GLOBAL.ASG_[categorie]_last_y_position_blue
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_grey = GLOBAL.ASG_[categorie]_last_y_position_grey
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_red = GLOBAL.ASG_[categorie]_last_y_position_red
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_light_red = GLOBAL.ASG_[categorie]_last_y_position_light_red
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_light_blue = GLOBAL.ASG_[categorie]_last_y_position_light_blue
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_light_white = GLOBAL.ASG_[categorie]_last_y_position_light_white
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_light_yellow = GLOBAL.ASG_[categorie]_last_y_position_light_yellow
-			}
-			divide_temp_variable = {
-				[categorie]_diff_green = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_blue = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_grey = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_red = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_light_red = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_light_blue = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_light_yellow = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_light_white = 2
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_green = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_blue = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_grey = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_red = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_light_red = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_light_blue = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_light_yellow = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_light_white = 50
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_green = [categorie]_diff_green
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_blue = [categorie]_diff_blue
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_grey = [categorie]_diff_grey
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_red = [categorie]_diff_red
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_light_red = [categorie]_diff_light_red
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_light_blue = [categorie]_diff_light_blue
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_light_yellow = [categorie]_diff_light_white
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_light_white = [categorie]_diff_light_white
-			}
-		}
-		categorie = "casualties"
-		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
-		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
-		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
-		tag4 = "[?GLOBAL.ASG_red_curve_tag.GetTag]"
-		tag5 = "[?GLOBAL.ASG_light_red_curve_tag.GetTag]"
-		tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
-		tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
-		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
-		# debug = yes
-	}
-}
-ASG_manpower_add_point_to_line = {
-	ASG_manpower_update_stats = yes
-	# log = "ASG : NEW manpower GRAPH UPDATE : [GetDateText]"
-	# log = "ASG : ITA.ASG_manpower_score = [?ITA.ASG_manpower_score]    ITA Y Value = [?GLOBAL.ASG_manpower_y_position_green]       "
-	# log = "ASG : SOV.ASG_manpower_score = [?SOV.ASG_manpower_score]    SOV Y Value = [?GLOBAL.ASG_manpower_y_position_red]         "
-	# log = "ASG : FRA.ASG_manpower_score = [?FRA.ASG_manpower_score]    FRA Y Value = [?GLOBAL.ASG_manpower_y_position_light_blue]  "
-	# log = "ASG : USA.ASG_manpower_score = [?USA.ASG_manpower_score]    USA Y Value = [?GLOBAL.ASG_manpower_y_position_blue]        "
-	# log = "ASG : JAP.ASG_manpower_score = [?JAP.ASG_manpower_score]    JAP Y Value = [?GLOBAL.ASG_manpower_y_position_light_white] "
-	# log = "ASG : ENG.ASG_manpower_score = [?ENG.ASG_manpower_score]    ENG Y Value = [?GLOBAL.ASG_manpower_y_position_light_Red]   "
-	# log = "ASG : GER.ASG_manpower_score = [?GER.ASG_manpower_score]    GER Y Value = [?GLOBAL.ASG_manpower_y_position_grey]        "
-	# log = "ASG : END OF manpower GRAPH UPDATE"
-	# This count is displayed as an x-axis label, increment it
-	# We keep track of the last y position so we can calculate the slope
-	meta_effect = {
-		text = {
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_green = GLOBAL.ASG_[categorie]_y_position_green
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_blue = GLOBAL.ASG_[categorie]_y_position_blue
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_grey = GLOBAL.ASG_[categorie]_y_position_grey
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_red = GLOBAL.ASG_[categorie]_y_position_red
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_light_red = GLOBAL.ASG_[categorie]_y_position_light_red
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_light_blue = GLOBAL.ASG_[categorie]_y_position_light_blue
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_yellow_white = GLOBAL.ASG_[categorie]_y_position_light_yellow
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_light_white = GLOBAL.ASG_[categorie]_y_position_light_white
-			}
-			set_temp_variable = {
-				ASG_[categorie]_green_pixel_value = [tag1].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = [tag2].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = [tag3].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_red_pixel_value = [tag4].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = [tag5].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = [tag6].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = [tag7].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			round_temp_variable = ASG_[categorie]_green_pixel_value
-			round_temp_variable = ASG_[categorie]_blue_pixel_value
-			round_temp_variable = ASG_[categorie]_grey_pixel_value
-			round_temp_variable = ASG_[categorie]_red_pixel_value
-			round_temp_variable = ASG_[categorie]_light_red_pixel_value
-			round_temp_variable = ASG_[categorie]_light_blue_pixel_value
-			round_temp_variable = ASG_[categorie]_light_yellow_pixel_value
-			round_temp_variable = ASG_[categorie]_light_white_pixel_value
-			clamp_variable = {
-				var = ASG_[categorie]_green_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_blue_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_grey_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_red_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_light_red_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_light_blue_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_light_yellow_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_light_white_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_green = [tag1].ASG_[categorie]_green_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_blue = [tag2].ASG_[categorie]_blue_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_grey = [tag3].ASG_[categorie]_grey_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_red = [tag4].ASG_[categorie]_red_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_light_red = [tag5].ASG_[categorie]_light_red_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_light_blue = [tag6].ASG_[categorie]_light_blue_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_light_yellow = [tag7].ASG_[categorie]_light_yellow_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_light_white = [tag8].ASG_[categorie]_light_white_pixel_value
-			}
-			# The y position offset is the inverse of the y position
-			set_temp_variable = {
-				[categorie]_offset_green = GLOBAL.ASG_[categorie]_last_y_position_green
-			}
-			set_temp_variable = {
-				[categorie]_offset_blue = GLOBAL.ASG_[categorie]_last_y_position_blue
-			}
-			set_temp_variable = {
-				[categorie]_offset_grey = GLOBAL.ASG_[categorie]_last_y_position_grey
-			}
-			set_temp_variable = {
-				[categorie]_offset_red = GLOBAL.ASG_[categorie]_last_y_position_red
-			}
-			set_temp_variable = {
-				[categorie]_offset_light_red = GLOBAL.ASG_[categorie]_last_y_position_light_red
-			}
-			set_temp_variable = {
-				[categorie]_offset_light_blue = GLOBAL.ASG_[categorie]_last_y_position_light_blue
-			}
-			set_temp_variable = {
-				[categorie]_offset_light_yellow = GLOBAL.ASG_[categorie]_last_y_position_light_yellow
-			}
-			set_temp_variable = {
-				[categorie]_offset_light_white = GLOBAL.ASG_[categorie]_last_y_position_light_white
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_green = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_blue = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_grey = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_red = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_light_red = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_light_blue = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_light_yellow = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_light_white = -1
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_green = [categorie]_offset_green
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_blue = [categorie]_offset_blue
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_grey = [categorie]_offset_grey
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_red = [categorie]_offset_red
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_red = [categorie]_offset_light_red
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_blue = [categorie]_offset_light_blue
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_yellow = [categorie]_offset_light_yellow
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_white = [categorie]_offset_light_white
-			}
-			# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
-			# These last two changes are needed for the shader
-			set_temp_variable = {
-				[categorie]_diff_green = GLOBAL.ASG_[categorie]_y_position_green
-			}
-			set_temp_variable = {
-				[categorie]_diff_blue = GLOBAL.ASG_[categorie]_y_position_blue
-			}
-			set_temp_variable = {
-				[categorie]_diff_grey = GLOBAL.ASG_[categorie]_y_position_grey
-			}
-			set_temp_variable = {
-				[categorie]_diff_red = GLOBAL.ASG_[categorie]_y_position_red
-			}
-			set_temp_variable = {
-				[categorie]_diff_light_red = GLOBAL.ASG_[categorie]_y_position_light_red
-			}
-			set_temp_variable = {
-				[categorie]_diff_light_blue = GLOBAL.ASG_[categorie]_y_position_light_blue
-			}
-			set_temp_variable = {
-				[categorie]_diff_light_yellow = GLOBAL.ASG_[categorie]_y_position_light_yellow
-			}
-			set_temp_variable = {
-				[categorie]_diff_light_white = GLOBAL.ASG_[categorie]_y_position_light_white
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_green = GLOBAL.ASG_[categorie]_last_y_position_green
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_blue = GLOBAL.ASG_[categorie]_last_y_position_blue
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_grey = GLOBAL.ASG_[categorie]_last_y_position_grey
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_red = GLOBAL.ASG_[categorie]_last_y_position_red
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_light_red = GLOBAL.ASG_[categorie]_last_y_position_light_red
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_light_blue = GLOBAL.ASG_[categorie]_last_y_position_light_blue
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_light_white = GLOBAL.ASG_[categorie]_last_y_position_light_white
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_light_yellow = GLOBAL.ASG_[categorie]_last_y_position_light_yellow
-			}
-			divide_temp_variable = {
-				[categorie]_diff_green = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_blue = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_grey = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_red = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_light_red = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_light_blue = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_light_yellow = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_light_white = 2
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_green = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_blue = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_grey = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_red = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_light_red = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_light_blue = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_light_yellow = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_light_white = 50
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_green = [categorie]_diff_green
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_blue = [categorie]_diff_blue
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_grey = [categorie]_diff_grey
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_red = [categorie]_diff_red
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_light_red = [categorie]_diff_light_red
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_light_blue = [categorie]_diff_light_blue
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_light_yellow = [categorie]_diff_light_white
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_light_white = [categorie]_diff_light_white
-			}
-		}
-		categorie = "manpower"
-		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
-		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
-		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
-		tag4 = "[?GLOBAL.ASG_red_curve_tag.GetTag]"
-		tag5 = "[?GLOBAL.ASG_light_red_curve_tag.GetTag]"
-		tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
-		tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
-		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
-		# debug = yes
-	}
-}
-ASG_military_add_point_to_line = {
-	ASG_military_update_stats = yes
-	# This count is displayed as an x-axis label, increment it
-	# We keep track of the last y position so we can calculate the slope
-	# log = "ASG : NEW MILITARY GRAPH UPDATE : [GetDateText]"
-	# log = "ASG : ITA.ASG_military_score = [?ITA.ASG_military_score]    ITA Y Value = [?GLOBAL.ASG_military_y_position_green]       "
-	# log = "ASG : SOV.ASG_military_score = [?SOV.ASG_military_score]    SOV Y Value = [?GLOBAL.ASG_military_y_position_red]         "
-	# log = "ASG : FRA.ASG_military_score = [?FRA.ASG_military_score]    FRA Y Value = [?GLOBAL.ASG_military_y_position_light_blue]  "
-	# log = "ASG : USA.ASG_military_score = [?USA.ASG_military_score]    USA Y Value = [?GLOBAL.ASG_military_y_position_blue]        "
-	# log = "ASG : JAP.ASG_military_score = [?JAP.ASG_military_score]    JAP Y Value = [?GLOBAL.ASG_military_y_position_light_white] "
-	# log = "ASG : ENG.ASG_military_score = [?ENG.ASG_military_score]    ENG Y Value = [?GLOBAL.ASG_military_y_position_light_Red]   "
-	# log = "ASG : GER.ASG_military_score = [?GER.ASG_military_score]    GER Y Value = [?GLOBAL.ASG_military_y_position_grey]        "
-	# log = "ASG : END OF MILITARY GRAPH UPDATE"
-	meta_effect = {
-		text = {
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_green = GLOBAL.ASG_[categorie]_y_position_green
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_blue = GLOBAL.ASG_[categorie]_y_position_blue
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_grey = GLOBAL.ASG_[categorie]_y_position_grey
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_red = GLOBAL.ASG_[categorie]_y_position_red
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_light_red = GLOBAL.ASG_[categorie]_y_position_light_red
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_light_blue = GLOBAL.ASG_[categorie]_y_position_light_blue
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_yellow_white = GLOBAL.ASG_[categorie]_y_position_light_yellow
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_last_y_position_light_white = GLOBAL.ASG_[categorie]_y_position_light_white
-			}
-			set_temp_variable = {
-				ASG_[categorie]_green_pixel_value = [tag1].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = [tag2].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = [tag3].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_red_pixel_value = [tag4].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = [tag5].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = [tag6].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = [tag7].ASG_[categorie]_score
-			}
-			set_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			add_to_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_graph_pixel_y_offset_value
-			}
-			round_temp_variable = ASG_[categorie]_green_pixel_value
-			round_temp_variable = ASG_[categorie]_blue_pixel_value
-			round_temp_variable = ASG_[categorie]_grey_pixel_value
-			round_temp_variable = ASG_[categorie]_red_pixel_value
-			round_temp_variable = ASG_[categorie]_light_red_pixel_value
-			round_temp_variable = ASG_[categorie]_light_blue_pixel_value
-			round_temp_variable = ASG_[categorie]_light_yellow_pixel_value
-			round_temp_variable = ASG_[categorie]_light_white_pixel_value
-			clamp_variable = {
-				var = ASG_[categorie]_green_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_blue_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_grey_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_red_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_light_red_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_light_blue_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_light_yellow_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			clamp_variable = {
-				var = ASG_[categorie]_light_white_pixel_value
-				min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
-				max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_green = [tag1].ASG_[categorie]_green_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_blue = [tag2].ASG_[categorie]_blue_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_grey = [tag3].ASG_[categorie]_grey_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_red = [tag4].ASG_[categorie]_red_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_light_red = [tag5].ASG_[categorie]_light_red_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_light_blue = [tag6].ASG_[categorie]_light_blue_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_light_yellow = [tag7].ASG_[categorie]_light_yellow_pixel_value
-			}
-			set_variable = {
-				GLOBAL.ASG_[categorie]_y_position_light_white = [tag8].ASG_[categorie]_light_white_pixel_value
-			}
-			# The y position offset is the inverse of the y position
-			set_temp_variable = {
-				[categorie]_offset_green = GLOBAL.ASG_[categorie]_last_y_position_green
-			}
-			set_temp_variable = {
-				[categorie]_offset_blue = GLOBAL.ASG_[categorie]_last_y_position_blue
-			}
-			set_temp_variable = {
-				[categorie]_offset_grey = GLOBAL.ASG_[categorie]_last_y_position_grey
-			}
-			set_temp_variable = {
-				[categorie]_offset_red = GLOBAL.ASG_[categorie]_last_y_position_red
-			}
-			set_temp_variable = {
-				[categorie]_offset_light_red = GLOBAL.ASG_[categorie]_last_y_position_light_red
-			}
-			set_temp_variable = {
-				[categorie]_offset_light_blue = GLOBAL.ASG_[categorie]_last_y_position_light_blue
-			}
-			set_temp_variable = {
-				[categorie]_offset_light_yellow = GLOBAL.ASG_[categorie]_last_y_position_light_yellow
-			}
-			set_temp_variable = {
-				[categorie]_offset_light_white = GLOBAL.ASG_[categorie]_last_y_position_light_white
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_green = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_blue = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_grey = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_red = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_light_red = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_light_blue = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_light_yellow = -1
-			}
-			multiply_temp_variable = {
-				[categorie]_offset_light_white = -1
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_green = [categorie]_offset_green
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_blue = [categorie]_offset_blue
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_grey = [categorie]_offset_grey
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_red = [categorie]_offset_red
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_red = [categorie]_offset_light_red
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_blue = [categorie]_offset_light_blue
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_yellow = [categorie]_offset_light_yellow
-			}
-			add_to_array = {
-				GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_white = [categorie]_offset_light_white
-			}
-			# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
-			# These last two changes are needed for the shader
-			set_temp_variable = {
-				[categorie]_diff_green = GLOBAL.ASG_[categorie]_y_position_green
-			}
-			set_temp_variable = {
-				[categorie]_diff_blue = GLOBAL.ASG_[categorie]_y_position_blue
-			}
-			set_temp_variable = {
-				[categorie]_diff_grey = GLOBAL.ASG_[categorie]_y_position_grey
-			}
-			set_temp_variable = {
-				[categorie]_diff_red = GLOBAL.ASG_[categorie]_y_position_red
-			}
-			set_temp_variable = {
-				[categorie]_diff_light_red = GLOBAL.ASG_[categorie]_y_position_light_red
-			}
-			set_temp_variable = {
-				[categorie]_diff_light_blue = GLOBAL.ASG_[categorie]_y_position_light_blue
-			}
-			set_temp_variable = {
-				[categorie]_diff_light_yellow = GLOBAL.ASG_[categorie]_y_position_light_yellow
-			}
-			set_temp_variable = {
-				[categorie]_diff_light_white = GLOBAL.ASG_[categorie]_y_position_light_white
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_green = GLOBAL.ASG_[categorie]_last_y_position_green
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_blue = GLOBAL.ASG_[categorie]_last_y_position_blue
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_grey = GLOBAL.ASG_[categorie]_last_y_position_grey
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_red = GLOBAL.ASG_[categorie]_last_y_position_red
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_light_red = GLOBAL.ASG_[categorie]_last_y_position_light_red
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_light_blue = GLOBAL.ASG_[categorie]_last_y_position_light_blue
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_light_white = GLOBAL.ASG_[categorie]_last_y_position_light_white
-			}
-			subtract_from_temp_variable = {
-				[categorie]_diff_light_yellow = GLOBAL.ASG_[categorie]_last_y_position_light_yellow
-			}
-			divide_temp_variable = {
-				[categorie]_diff_green = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_blue = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_grey = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_red = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_light_red = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_light_blue = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_light_yellow = 2
-			}
-			divide_temp_variable = {
-				[categorie]_diff_light_white = 2
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_green = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_blue = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_grey = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_red = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_light_red = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_light_blue = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_light_yellow = 50
-			}
-			add_to_temp_variable = {
-				[categorie]_diff_light_white = 50
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_green = [categorie]_diff_green
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_blue = [categorie]_diff_blue
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_grey = [categorie]_diff_grey
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_red = [categorie]_diff_red
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_light_red = [categorie]_diff_light_red
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_light_blue = [categorie]_diff_light_blue
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_light_yellow = [categorie]_diff_light_white
-			}
-			add_to_array = {
-				GLOBAL.ASG_[categorie]_graph_slopes_light_white = [categorie]_diff_light_white
-			}
-		}
-		categorie = "military"
-		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
-		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
-		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
-		tag4 = "[?GLOBAL.ASG_red_curve_tag.GetTag]"
-		tag5 = "[?GLOBAL.ASG_light_red_curve_tag.GetTag]"
-		tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
-		tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
-		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
-		# debug = yes
 	}
 }
 
@@ -6180,6 +4622,7 @@ ASG_civilian_rescale_up = {
 		multiply_variable = {
 			GLOBAL.ASG_civilian_rendering_scale_factor = 0.5
 		}
+		ASG_replot_civilian_graph = yes
 	}
 }
 ASG_civilian_rescale_down = {
@@ -6192,265 +4635,266 @@ ASG_civilian_rescale_down = {
 		multiply_variable = {
 			GLOBAL.ASG_civilian_rendering_scale_factor = 2
 		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_civilian_graph_slopes_blue^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_civilian_graph_slopes_light_blue^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_civilian_graph_slopes_light_white^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_civilian_graph_slopes_light_red^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_civilian_graph_slopes_red^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_civilian_graph_slopes_green^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_civilian_graph_slopes_grey^index = value_slope
-				}
-			}
-		}
+		ASG_replot_civilian_graph = yes
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 2
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_blue^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_civilian_graph_slopes_blue^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 2
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_blue^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_civilian_graph_slopes_light_blue^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 2
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_white^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_civilian_graph_slopes_light_white^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 2
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_light_red^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_civilian_graph_slopes_light_red^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 2
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_red^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_civilian_graph_slopes_red^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 2
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_green^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_civilian_graph_slopes_green^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 2
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_civilian_graph_offsets_grey^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_civilian_graph_slopes_grey^index = value_slope
+		# 		}
+		# 	}
+		# }
 	}
 }
 ASG_military_rescale_up = {
@@ -6463,265 +4907,266 @@ ASG_military_rescale_up = {
 		multiply_variable = {
 			GLOBAL.ASG_military_rendering_scale_factor = 0.5
 		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 0.5
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_blue^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 0.5
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_light_blue^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 0.5
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_light_white^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 0.5
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_light_red^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_red
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 0.5
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_red^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_red^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_red^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_green
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 0.5
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_green^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_green^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_green^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 0.5
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_grey^index = value_slope
-				}
-			}
-		}
+		ASG_replot_military_graph = yes
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 0.5
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_military_graph_slopes_blue^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 0.5
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_military_graph_slopes_light_blue^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 0.5
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_military_graph_slopes_light_white^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 0.5
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_military_graph_slopes_light_red^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_military_graph_offsets_red
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 0.5
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_military_graph_offsets_red^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_red^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_military_graph_slopes_red^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_military_graph_offsets_green
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 0.5
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_military_graph_offsets_green^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_green^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_military_graph_slopes_green^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 0.5
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_military_graph_slopes_grey^index = value_slope
+		# 		}
+		# 	}
+		# }
 	}
 }
 ASG_military_rescale_down = {
@@ -6734,265 +5179,266 @@ ASG_military_rescale_down = {
 		multiply_variable = {
 			GLOBAL.ASG_military_rendering_scale_factor = 2
 		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_blue^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_light_blue^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_light_white^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_light_red^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_red
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_red^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_red^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_red^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_green
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_green^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_green^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_green^index = value_slope
-				}
-			}
-		}
-		for_each_loop = {
-			array = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey
-			set_temp_variable = {
-				value_slope = v
-			}
-			divide_temp_variable = {
-				value_slope = 2
-			}
-			set_variable = {
-				GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^i = value_slope
-			}
-			if = {
-				limit = {
-					check_variable = {
-						i > 0
-					}
-				}
-				set_temp_variable = {
-					index = i
-				}
-				subtract_from_temp_variable = {
-					index = 1
-				}
-				subtract_from_temp_variable = {
-					value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^index
-				}
-				divide_temp_variable = {
-					value_slope = -2
-				}
-				add_to_temp_variable = {
-					value_slope = 50
-				}
-				set_variable = {
-					GLOBAL.ASG_military_graph_slopes_grey^index = value_slope
-				}
-			}
-		}
+		ASG_replot_military_graph = yes
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 2
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_blue^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_military_graph_slopes_blue^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 2
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_blue^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_military_graph_slopes_light_blue^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 2
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_white^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_military_graph_slopes_light_white^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 2
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_light_red^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_military_graph_slopes_light_red^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_military_graph_offsets_red
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 2
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_military_graph_offsets_red^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_red^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_military_graph_slopes_red^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_military_graph_offsets_green
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 2
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_military_graph_offsets_green^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_green^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_military_graph_slopes_green^index = value_slope
+		# 		}
+		# 	}
+		# }
+		# for_each_loop = {
+		# 	array = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey
+		# 	set_temp_variable = {
+		# 		value_slope = v
+		# 	}
+		# 	divide_temp_variable = {
+		# 		value_slope = 2
+		# 	}
+		# 	set_variable = {
+		# 		GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^i = value_slope
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			check_variable = {
+		# 				i > 0
+		# 			}
+		# 		}
+		# 		set_temp_variable = {
+		# 			index = i
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			index = 1
+		# 		}
+		# 		subtract_from_temp_variable = {
+		# 			value_slope = GLOBAL.ASG_SAMPLE_military_graph_offsets_grey^index
+		# 		}
+		# 		divide_temp_variable = {
+		# 			value_slope = -2
+		# 		}
+		# 		add_to_temp_variable = {
+		# 			value_slope = 50
+		# 		}
+		# 		set_variable = {
+		# 			GLOBAL.ASG_military_graph_slopes_grey^index = value_slope
+		# 		}
+		# 	}
+		# }
 	}
 }
 ASG_manpower_rescale_up = {
@@ -7005,6 +5451,7 @@ ASG_manpower_rescale_up = {
 		multiply_variable = {
 			GLOBAL.ASG_manpower_rendering_scale_factor = 0.5
 		}
+		ASG_replot_manpower_graph = yes
 	}
 }
 ASG_manpower_rescale_down = {
@@ -7017,6 +5464,7 @@ ASG_manpower_rescale_down = {
 		multiply_variable = {
 			GLOBAL.ASG_manpower_rendering_scale_factor = 2
 		}
+		
 	}
 }
 ASG_casualties_rescale_up = {
@@ -7029,6 +5477,7 @@ ASG_casualties_rescale_up = {
 		multiply_variable = {
 			GLOBAL.ASG_casualties_rendering_scale_factor = 0.5
 		}
+		ASG_replot_casualties_graph = yes
 	}
 }
 ASG_casualties_rescale_down = {
@@ -7041,29 +5490,30 @@ ASG_casualties_rescale_down = {
 		multiply_variable = {
 			GLOBAL.ASG_casualties_rendering_scale_factor = 2
 		}
+		ASG_replot_casualties_graph = yes
 	}
 }
 
 ASG_clear_civilian_graph = {
 	meta_effect = {
 		text = {
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_green
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_blue
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_grey
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_red
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_red
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_blue
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_yellow
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_white
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_green
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_blue
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_grey
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_red
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_red
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_blue
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_yellow
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_white
 		
-			clear_array = ASG_[categorie]_graph_slopes_green
-			clear_array = ASG_[categorie]_graph_slopes_blue
-			clear_array = ASG_[categorie]_graph_slopes_grey
-			clear_array = ASG_[categorie]_graph_slopes_red
-			clear_array = ASG_[categorie]_graph_slopes_light_red
-			clear_array = ASG_[categorie]_graph_slopes_light_blue
-			clear_array = ASG_[categorie]_graph_slopes_light_yellow
-			clear_array = ASG_[categorie]_graph_slopes_light_white
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_green
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_blue
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_grey
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_red
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_light_red
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_light_blue
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_light_yellow
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_light_white
 		}
 		categorie = "civilian"
 	}
@@ -7071,23 +5521,23 @@ ASG_clear_civilian_graph = {
 ASG_clear_military_graph = {
 	meta_effect = {
 		text = {
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_green
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_blue
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_grey
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_red
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_red
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_blue
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_yellow
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_white
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_green
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_blue
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_grey
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_red
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_red
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_blue
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_yellow
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_white
 		
-			clear_array = ASG_[categorie]_graph_slopes_green
-			clear_array = ASG_[categorie]_graph_slopes_blue
-			clear_array = ASG_[categorie]_graph_slopes_grey
-			clear_array = ASG_[categorie]_graph_slopes_red
-			clear_array = ASG_[categorie]_graph_slopes_light_red
-			clear_array = ASG_[categorie]_graph_slopes_light_blue
-			clear_array = ASG_[categorie]_graph_slopes_light_yellow
-			clear_array = ASG_[categorie]_graph_slopes_light_white
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_green
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_blue
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_grey
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_red
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_light_red
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_light_blue
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_light_yellow
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_light_white
 		}
 		categorie = "military"
 	}
@@ -7095,23 +5545,23 @@ ASG_clear_military_graph = {
 ASG_clear_manpower_graph = {
 	meta_effect = {
 		text = {
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_green
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_blue
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_grey
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_red
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_red
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_blue
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_yellow
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_white
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_green
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_blue
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_grey
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_red
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_red
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_blue
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_yellow
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_white
 		
-			clear_array = ASG_[categorie]_graph_slopes_green
-			clear_array = ASG_[categorie]_graph_slopes_blue
-			clear_array = ASG_[categorie]_graph_slopes_grey
-			clear_array = ASG_[categorie]_graph_slopes_red
-			clear_array = ASG_[categorie]_graph_slopes_light_red
-			clear_array = ASG_[categorie]_graph_slopes_light_blue
-			clear_array = ASG_[categorie]_graph_slopes_light_yellow
-			clear_array = ASG_[categorie]_graph_slopes_light_white
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_green
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_blue
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_grey
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_red
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_light_red
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_light_blue
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_light_yellow
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_light_white
 		}
 		categorie = "manpower"
 	}
@@ -7119,23 +5569,23 @@ ASG_clear_manpower_graph = {
 ASG_clear_casualties_graph = {
 	meta_effect = {
 		text = {
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_green
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_blue
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_grey
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_red
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_red
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_blue
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_yellow
-			clear_array = ASG_SAMPLE_[categorie]_graph_offsets_light_white
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_green
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_blue
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_grey
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_red
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_red
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_blue
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_yellow
+			clear_array = GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_white
 		
-			clear_array = ASG_[categorie]_graph_slopes_green
-			clear_array = ASG_[categorie]_graph_slopes_blue
-			clear_array = ASG_[categorie]_graph_slopes_grey
-			clear_array = ASG_[categorie]_graph_slopes_red
-			clear_array = ASG_[categorie]_graph_slopes_light_red
-			clear_array = ASG_[categorie]_graph_slopes_light_blue
-			clear_array = ASG_[categorie]_graph_slopes_light_yellow
-			clear_array = ASG_[categorie]_graph_slopes_light_white
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_green
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_blue
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_grey
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_red
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_light_red
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_light_blue
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_light_yellow
+			clear_array = GLOBAL.ASG_[categorie]_graph_slopes_light_white
 		}
 		categorie = "casualties"
 	}
@@ -7169,29 +5619,29 @@ ASG_calculate_initial_graph_point_civilian = {
 				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
 			}
 
-			multiply_temp_variable = {
-				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
 
 			add_to_temp_variable = {
@@ -7293,8 +5743,8 @@ ASG_calculate_initial_graph_point_civilian = {
 			set_variable = {
 				GLOBAL.ASG_[categorie]_y_position_light_white = [tag8].ASG_[categorie]_light_white_pixel_value
 			}
-			log = "ASG : INITIAL [categorie] GRAPH UPDATE : [GetDateText]"
-			log = "ASG : END OF [categorie] GRAPH INITIAL UPDATE"
+			# log = "ASG : INITIAL [categorie] GRAPH UPDATE : [GetDateText]"
+			# log = "ASG : END OF [categorie] GRAPH INITIAL UPDATE"
 		}
 		categorie = "civilian"
 		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
@@ -7336,29 +5786,29 @@ ASG_calculate_initial_graph_point_military = {
 				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
 			}
 
-			multiply_temp_variable = {
-				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
 
 			add_to_temp_variable = {
@@ -7460,8 +5910,8 @@ ASG_calculate_initial_graph_point_military = {
 			set_variable = {
 				GLOBAL.ASG_[categorie]_y_position_light_white = [tag8].ASG_[categorie]_light_white_pixel_value
 			}
-			log = "ASG : INITIAL [categorie] GRAPH UPDATE : [GetDateText]"
-			log = "ASG : END OF [categorie] GRAPH INITIAL UPDATE"
+			# log = "ASG : INITIAL [categorie] GRAPH UPDATE : [GetDateText]"
+			# log = "ASG : END OF [categorie] GRAPH INITIAL UPDATE"
 		}
 		categorie = "military"
 		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
@@ -7503,29 +5953,29 @@ ASG_calculate_initial_graph_point_manpower = {
 				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
 			}
 
-			multiply_temp_variable = {
-				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
 
 			add_to_temp_variable = {
@@ -7627,8 +6077,8 @@ ASG_calculate_initial_graph_point_manpower = {
 			set_variable = {
 				GLOBAL.ASG_[categorie]_y_position_light_white = [tag8].ASG_[categorie]_light_white_pixel_value
 			}
-			log = "ASG : INITIAL [categorie] GRAPH UPDATE : [GetDateText]"
-			log = "ASG : END OF [categorie] GRAPH INITIAL UPDATE"
+			# log = "ASG : INITIAL [categorie] GRAPH UPDATE : [GetDateText]"
+			# log = "ASG : END OF [categorie] GRAPH INITIAL UPDATE"
 		}
 		categorie = "manpower"
 		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
@@ -7670,29 +6120,29 @@ ASG_calculate_initial_graph_point_casualties = {
 				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
 			}
 
-			multiply_temp_variable = {
-				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_green_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_blue_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_grey_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_red_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_light_red_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_light_blue_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_light_yellow_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
-			multiply_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+			divide_temp_variable = {
+				ASG_[categorie]_light_white_pixel_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 			}
 
 			add_to_temp_variable = {
@@ -7794,8 +6244,8 @@ ASG_calculate_initial_graph_point_casualties = {
 			set_variable = {
 				GLOBAL.ASG_[categorie]_y_position_light_white = [tag8].ASG_[categorie]_light_white_pixel_value
 			}
-			log = "ASG : INITIAL [categorie] GRAPH UPDATE : [GetDateText]"
-			log = "ASG : END OF [categorie] GRAPH INITIAL UPDATE"
+			# log = "ASG : INITIAL [categorie] GRAPH UPDATE : [GetDateText]"
+			# log = "ASG : END OF [categorie] GRAPH INITIAL UPDATE"
 		}
 		categorie = "casualties"
 		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
@@ -7809,6 +6259,7 @@ ASG_calculate_initial_graph_point_casualties = {
 		# debug = yes
 	}
 }
+
 ASG_replot_civilian_graph = {
 	meta_effect = {
 		text = {
@@ -7829,8 +6280,8 @@ ASG_replot_civilian_graph = {
 					set_temp_variable = {
 						score_value = v
 					}
-					multiply_temp_variable = {
-						score_value = GLOBAL.ASG_[categorie]_amount_to_pixel_scale_factor
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
 					}
 					add_to_temp_variable = {
 						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
@@ -7873,8 +6324,1863 @@ ASG_replot_civilian_graph = {
 					}
 				}
 			}
+			for_each_loop = {
+				array = [tag2].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_blue = GLOBAL.ASG_[categorie]_y_position_blue
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_blue = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_blue = GLOBAL.ASG_[categorie]_last_y_position_blue
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_blue = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_blue = [categorie]_offset_blue
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_blue = GLOBAL.ASG_[categorie]_y_position_blue
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_blue = GLOBAL.ASG_[categorie]_last_y_position_blue
+					}
+					divide_temp_variable = {
+						[categorie]_diff_blue = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_blue = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_blue = [categorie]_diff_blue
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag3].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_grey = GLOBAL.ASG_[categorie]_y_position_grey
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_grey = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_grey = GLOBAL.ASG_[categorie]_last_y_position_grey
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_grey = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_grey = [categorie]_offset_grey
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_grey = GLOBAL.ASG_[categorie]_y_position_grey
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_grey = GLOBAL.ASG_[categorie]_last_y_position_grey
+					}
+					divide_temp_variable = {
+						[categorie]_diff_grey = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_grey = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_grey = [categorie]_diff_grey
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag4].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_red = GLOBAL.ASG_[categorie]_y_position_red
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_red = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_red = GLOBAL.ASG_[categorie]_last_y_position_red
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_red = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_red = [categorie]_offset_red
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_red = GLOBAL.ASG_[categorie]_y_position_red
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_red = GLOBAL.ASG_[categorie]_last_y_position_red
+					}
+					divide_temp_variable = {
+						[categorie]_diff_red = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_red = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_red = [categorie]_diff_red
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag5].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_light_red = GLOBAL.ASG_[categorie]_y_position_light_red
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_light_red = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_light_red = GLOBAL.ASG_[categorie]_last_y_position_light_red
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_light_red = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_red = [categorie]_offset_light_red
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_light_red = GLOBAL.ASG_[categorie]_y_position_light_red
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_light_red = GLOBAL.ASG_[categorie]_last_y_position_light_red
+					}
+					divide_temp_variable = {
+						[categorie]_diff_light_red = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_light_red = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_light_red = [categorie]_diff_light_red
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag6].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_light_blue = GLOBAL.ASG_[categorie]_y_position_light_blue
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_light_blue = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_light_blue = GLOBAL.ASG_[categorie]_last_y_position_light_blue
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_light_blue = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_blue = [categorie]_offset_light_blue
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_light_blue = GLOBAL.ASG_[categorie]_y_position_light_blue
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_light_blue = GLOBAL.ASG_[categorie]_last_y_position_light_blue
+					}
+					divide_temp_variable = {
+						[categorie]_diff_light_blue = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_light_blue = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_light_blue = [categorie]_diff_light_blue
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag7].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_light_yellow = GLOBAL.ASG_[categorie]_y_position_light_yellow
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_light_yellow = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_light_yellow = GLOBAL.ASG_[categorie]_last_y_position_light_yellow
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_light_yellow = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_yellow = [categorie]_offset_light_yellow
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_light_yellow = GLOBAL.ASG_[categorie]_y_position_light_yellow
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_light_yellow = GLOBAL.ASG_[categorie]_last_y_position_light_yellow
+					}
+					divide_temp_variable = {
+						[categorie]_diff_light_yellow = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_light_yellow = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_light_yellow = [categorie]_diff_light_yellow
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag8].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_light_white = GLOBAL.ASG_[categorie]_y_position_light_white
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_light_white = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_light_white = GLOBAL.ASG_[categorie]_last_y_position_light_white
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_light_white = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_white = [categorie]_offset_light_white
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_light_white = GLOBAL.ASG_[categorie]_y_position_light_white
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_light_white = GLOBAL.ASG_[categorie]_last_y_position_light_white
+					}
+					divide_temp_variable = {
+						[categorie]_diff_light_white = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_light_white = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_light_white = [categorie]_diff_light_white
+					}
+				}
+			}
 		}
 		categorie = "civilian"
+		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
+		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
+		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
+		tag4 = "[?GLOBAL.ASG_red_curve_tag.GetTag]"
+		tag5 = "[?GLOBAL.ASG_light_red_curve_tag.GetTag]"
+		tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
+		tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
+		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
+		# debug = yes
+	}
+}
+ASG_replot_military_graph = {
+	meta_effect = {
+		text = {
+			ASG_clear_[categorie]_graph = yes
+			ASG_calculate_initial_graph_point_[categorie] = yes
+			
+			for_each_loop = {
+				array = [tag1].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_green = GLOBAL.ASG_[categorie]_y_position_green
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_green = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_green = GLOBAL.ASG_[categorie]_last_y_position_green
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_green = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_green = [categorie]_offset_green
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_green = GLOBAL.ASG_[categorie]_y_position_green
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_green = GLOBAL.ASG_[categorie]_last_y_position_green
+					}
+					divide_temp_variable = {
+						[categorie]_diff_green = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_green = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_green = [categorie]_diff_green
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag2].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_blue = GLOBAL.ASG_[categorie]_y_position_blue
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_blue = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_blue = GLOBAL.ASG_[categorie]_last_y_position_blue
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_blue = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_blue = [categorie]_offset_blue
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_blue = GLOBAL.ASG_[categorie]_y_position_blue
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_blue = GLOBAL.ASG_[categorie]_last_y_position_blue
+					}
+					divide_temp_variable = {
+						[categorie]_diff_blue = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_blue = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_blue = [categorie]_diff_blue
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag3].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_grey = GLOBAL.ASG_[categorie]_y_position_grey
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_grey = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_grey = GLOBAL.ASG_[categorie]_last_y_position_grey
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_grey = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_grey = [categorie]_offset_grey
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_grey = GLOBAL.ASG_[categorie]_y_position_grey
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_grey = GLOBAL.ASG_[categorie]_last_y_position_grey
+					}
+					divide_temp_variable = {
+						[categorie]_diff_grey = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_grey = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_grey = [categorie]_diff_grey
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag4].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_red = GLOBAL.ASG_[categorie]_y_position_red
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_red = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_red = GLOBAL.ASG_[categorie]_last_y_position_red
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_red = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_red = [categorie]_offset_red
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_red = GLOBAL.ASG_[categorie]_y_position_red
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_red = GLOBAL.ASG_[categorie]_last_y_position_red
+					}
+					divide_temp_variable = {
+						[categorie]_diff_red = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_red = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_red = [categorie]_diff_red
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag5].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_light_red = GLOBAL.ASG_[categorie]_y_position_light_red
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_light_red = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_light_red = GLOBAL.ASG_[categorie]_last_y_position_light_red
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_light_red = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_red = [categorie]_offset_light_red
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_light_red = GLOBAL.ASG_[categorie]_y_position_light_red
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_light_red = GLOBAL.ASG_[categorie]_last_y_position_light_red
+					}
+					divide_temp_variable = {
+						[categorie]_diff_light_red = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_light_red = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_light_red = [categorie]_diff_light_red
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag6].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_light_blue = GLOBAL.ASG_[categorie]_y_position_light_blue
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_light_blue = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_light_blue = GLOBAL.ASG_[categorie]_last_y_position_light_blue
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_light_blue = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_blue = [categorie]_offset_light_blue
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_light_blue = GLOBAL.ASG_[categorie]_y_position_light_blue
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_light_blue = GLOBAL.ASG_[categorie]_last_y_position_light_blue
+					}
+					divide_temp_variable = {
+						[categorie]_diff_light_blue = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_light_blue = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_light_blue = [categorie]_diff_light_blue
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag7].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_light_yellow = GLOBAL.ASG_[categorie]_y_position_light_yellow
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_light_yellow = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_light_yellow = GLOBAL.ASG_[categorie]_last_y_position_light_yellow
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_light_yellow = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_yellow = [categorie]_offset_light_yellow
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_light_yellow = GLOBAL.ASG_[categorie]_y_position_light_yellow
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_light_yellow = GLOBAL.ASG_[categorie]_last_y_position_light_yellow
+					}
+					divide_temp_variable = {
+						[categorie]_diff_light_yellow = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_light_yellow = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_light_yellow = [categorie]_diff_light_yellow
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag8].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_light_white = GLOBAL.ASG_[categorie]_y_position_light_white
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_light_white = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_light_white = GLOBAL.ASG_[categorie]_last_y_position_light_white
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_light_white = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_white = [categorie]_offset_light_white
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_light_white = GLOBAL.ASG_[categorie]_y_position_light_white
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_light_white = GLOBAL.ASG_[categorie]_last_y_position_light_white
+					}
+					divide_temp_variable = {
+						[categorie]_diff_light_white = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_light_white = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_light_white = [categorie]_diff_light_white
+					}
+				}
+			}
+		}
+		categorie = "military"
+		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
+		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
+		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
+		tag4 = "[?GLOBAL.ASG_red_curve_tag.GetTag]"
+		tag5 = "[?GLOBAL.ASG_light_red_curve_tag.GetTag]"
+		tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
+		tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
+		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
+		# debug = yes
+	}
+}
+ASG_replot_manpower_graph = {
+	meta_effect = {
+		text = {
+			ASG_clear_[categorie]_graph = yes
+			ASG_calculate_initial_graph_point_[categorie] = yes
+			
+			for_each_loop = {
+				array = [tag1].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_green = GLOBAL.ASG_[categorie]_y_position_green
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_green = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_green = GLOBAL.ASG_[categorie]_last_y_position_green
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_green = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_green = [categorie]_offset_green
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_green = GLOBAL.ASG_[categorie]_y_position_green
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_green = GLOBAL.ASG_[categorie]_last_y_position_green
+					}
+					divide_temp_variable = {
+						[categorie]_diff_green = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_green = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_green = [categorie]_diff_green
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag2].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_blue = GLOBAL.ASG_[categorie]_y_position_blue
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_blue = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_blue = GLOBAL.ASG_[categorie]_last_y_position_blue
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_blue = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_blue = [categorie]_offset_blue
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_blue = GLOBAL.ASG_[categorie]_y_position_blue
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_blue = GLOBAL.ASG_[categorie]_last_y_position_blue
+					}
+					divide_temp_variable = {
+						[categorie]_diff_blue = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_blue = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_blue = [categorie]_diff_blue
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag3].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_grey = GLOBAL.ASG_[categorie]_y_position_grey
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_grey = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_grey = GLOBAL.ASG_[categorie]_last_y_position_grey
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_grey = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_grey = [categorie]_offset_grey
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_grey = GLOBAL.ASG_[categorie]_y_position_grey
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_grey = GLOBAL.ASG_[categorie]_last_y_position_grey
+					}
+					divide_temp_variable = {
+						[categorie]_diff_grey = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_grey = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_grey = [categorie]_diff_grey
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag4].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_red = GLOBAL.ASG_[categorie]_y_position_red
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_red = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_red = GLOBAL.ASG_[categorie]_last_y_position_red
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_red = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_red = [categorie]_offset_red
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_red = GLOBAL.ASG_[categorie]_y_position_red
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_red = GLOBAL.ASG_[categorie]_last_y_position_red
+					}
+					divide_temp_variable = {
+						[categorie]_diff_red = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_red = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_red = [categorie]_diff_red
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag5].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_light_red = GLOBAL.ASG_[categorie]_y_position_light_red
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_light_red = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_light_red = GLOBAL.ASG_[categorie]_last_y_position_light_red
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_light_red = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_red = [categorie]_offset_light_red
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_light_red = GLOBAL.ASG_[categorie]_y_position_light_red
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_light_red = GLOBAL.ASG_[categorie]_last_y_position_light_red
+					}
+					divide_temp_variable = {
+						[categorie]_diff_light_red = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_light_red = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_light_red = [categorie]_diff_light_red
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag6].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_light_blue = GLOBAL.ASG_[categorie]_y_position_light_blue
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_light_blue = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_light_blue = GLOBAL.ASG_[categorie]_last_y_position_light_blue
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_light_blue = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_blue = [categorie]_offset_light_blue
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_light_blue = GLOBAL.ASG_[categorie]_y_position_light_blue
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_light_blue = GLOBAL.ASG_[categorie]_last_y_position_light_blue
+					}
+					divide_temp_variable = {
+						[categorie]_diff_light_blue = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_light_blue = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_light_blue = [categorie]_diff_light_blue
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag7].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_light_yellow = GLOBAL.ASG_[categorie]_y_position_light_yellow
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_light_yellow = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_light_yellow = GLOBAL.ASG_[categorie]_last_y_position_light_yellow
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_light_yellow = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_yellow = [categorie]_offset_light_yellow
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_light_yellow = GLOBAL.ASG_[categorie]_y_position_light_yellow
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_light_yellow = GLOBAL.ASG_[categorie]_last_y_position_light_yellow
+					}
+					divide_temp_variable = {
+						[categorie]_diff_light_yellow = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_light_yellow = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_light_yellow = [categorie]_diff_light_yellow
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag8].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_light_white = GLOBAL.ASG_[categorie]_y_position_light_white
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_light_white = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_light_white = GLOBAL.ASG_[categorie]_last_y_position_light_white
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_light_white = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_white = [categorie]_offset_light_white
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_light_white = GLOBAL.ASG_[categorie]_y_position_light_white
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_light_white = GLOBAL.ASG_[categorie]_last_y_position_light_white
+					}
+					divide_temp_variable = {
+						[categorie]_diff_light_white = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_light_white = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_light_white = [categorie]_diff_light_white
+					}
+				}
+			}
+		}
+		categorie = "manpower"
+		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
+		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
+		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
+		tag4 = "[?GLOBAL.ASG_red_curve_tag.GetTag]"
+		tag5 = "[?GLOBAL.ASG_light_red_curve_tag.GetTag]"
+		tag6 = "[?GLOBAL.ASG_light_blue_curve_tag.GetTag]"
+		tag7 = "[?GLOBAL.ASG_light_yellow_curve_tag.GetTag]"
+		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
+		# debug = yes
+	}
+}
+ASG_replot_casualties_graph = {
+	meta_effect = {
+		text = {
+			ASG_clear_[categorie]_graph = yes
+			ASG_calculate_initial_graph_point_[categorie] = yes
+			
+			for_each_loop = {
+				array = [tag1].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_green = GLOBAL.ASG_[categorie]_y_position_green
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_green = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_green = GLOBAL.ASG_[categorie]_last_y_position_green
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_green = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_green = [categorie]_offset_green
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_green = GLOBAL.ASG_[categorie]_y_position_green
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_green = GLOBAL.ASG_[categorie]_last_y_position_green
+					}
+					divide_temp_variable = {
+						[categorie]_diff_green = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_green = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_green = [categorie]_diff_green
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag2].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_blue = GLOBAL.ASG_[categorie]_y_position_blue
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_blue = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_blue = GLOBAL.ASG_[categorie]_last_y_position_blue
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_blue = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_blue = [categorie]_offset_blue
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_blue = GLOBAL.ASG_[categorie]_y_position_blue
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_blue = GLOBAL.ASG_[categorie]_last_y_position_blue
+					}
+					divide_temp_variable = {
+						[categorie]_diff_blue = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_blue = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_blue = [categorie]_diff_blue
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag3].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_grey = GLOBAL.ASG_[categorie]_y_position_grey
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_grey = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_grey = GLOBAL.ASG_[categorie]_last_y_position_grey
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_grey = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_grey = [categorie]_offset_grey
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_grey = GLOBAL.ASG_[categorie]_y_position_grey
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_grey = GLOBAL.ASG_[categorie]_last_y_position_grey
+					}
+					divide_temp_variable = {
+						[categorie]_diff_grey = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_grey = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_grey = [categorie]_diff_grey
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag4].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_red = GLOBAL.ASG_[categorie]_y_position_red
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_red = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_red = GLOBAL.ASG_[categorie]_last_y_position_red
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_red = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_red = [categorie]_offset_red
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_red = GLOBAL.ASG_[categorie]_y_position_red
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_red = GLOBAL.ASG_[categorie]_last_y_position_red
+					}
+					divide_temp_variable = {
+						[categorie]_diff_red = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_red = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_red = [categorie]_diff_red
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag5].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_light_red = GLOBAL.ASG_[categorie]_y_position_light_red
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_light_red = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_light_red = GLOBAL.ASG_[categorie]_last_y_position_light_red
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_light_red = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_red = [categorie]_offset_light_red
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_light_red = GLOBAL.ASG_[categorie]_y_position_light_red
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_light_red = GLOBAL.ASG_[categorie]_last_y_position_light_red
+					}
+					divide_temp_variable = {
+						[categorie]_diff_light_red = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_light_red = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_light_red = [categorie]_diff_light_red
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag6].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_light_blue = GLOBAL.ASG_[categorie]_y_position_light_blue
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_light_blue = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_light_blue = GLOBAL.ASG_[categorie]_last_y_position_light_blue
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_light_blue = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_blue = [categorie]_offset_light_blue
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_light_blue = GLOBAL.ASG_[categorie]_y_position_light_blue
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_light_blue = GLOBAL.ASG_[categorie]_last_y_position_light_blue
+					}
+					divide_temp_variable = {
+						[categorie]_diff_light_blue = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_light_blue = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_light_blue = [categorie]_diff_light_blue
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag7].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_light_yellow = GLOBAL.ASG_[categorie]_y_position_light_yellow
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_light_yellow = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_light_yellow = GLOBAL.ASG_[categorie]_last_y_position_light_yellow
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_light_yellow = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_yellow = [categorie]_offset_light_yellow
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_light_yellow = GLOBAL.ASG_[categorie]_y_position_light_yellow
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_light_yellow = GLOBAL.ASG_[categorie]_last_y_position_light_yellow
+					}
+					divide_temp_variable = {
+						[categorie]_diff_light_yellow = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_light_yellow = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_light_yellow = [categorie]_diff_light_yellow
+					}
+				}
+			}
+			for_each_loop = {
+				array = [tag8].ASG_[categorie]_score_array
+				if = {
+					limit = {
+						check_variable = {
+							i > 0
+						}
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_last_y_position_light_white = GLOBAL.ASG_[categorie]_y_position_light_white
+					}
+					set_temp_variable = {
+						score_value = v
+					}
+					divide_temp_variable = {
+						score_value = GLOBAL.ASG_[categorie]_rendering_scale_factor
+					}
+					add_to_temp_variable = {
+						score_value = GLOBAL.ASG_graph_pixel_y_offset_value
+					}
+					round_temp_variable = score_value
+					clamp_variable = {
+						var = score_value
+						min = GLOBAL.ASG_graph_pixel_y_minimum_value_corrected_by_offset
+						max = GLOBAL.ASG_graph_pixel_y_maximum_value_corrected_by_offset
+					}
+					set_variable = {
+						GLOBAL.ASG_[categorie]_y_position_light_white = score_value
+					}
+					# The y position offset is the inverse of the y position
+					set_temp_variable = {
+						[categorie]_offset_light_white = GLOBAL.ASG_[categorie]_last_y_position_light_white
+					}
+					multiply_temp_variable = {
+						[categorie]_offset_light_white = -1
+					}
+					add_to_array = {
+						GLOBAL.ASG_SAMPLE_[categorie]_graph_offsets_light_white = [categorie]_offset_light_white
+					}
+					# The 'slope' here is simply the difference between the current y value and the last one, divided by 2 plus 50
+					# These last two changes are needed for the shader
+					set_temp_variable = {
+						[categorie]_diff_light_white = GLOBAL.ASG_[categorie]_y_position_light_white
+					}
+					subtract_from_temp_variable = {
+						[categorie]_diff_light_white = GLOBAL.ASG_[categorie]_last_y_position_light_white
+					}
+					divide_temp_variable = {
+						[categorie]_diff_light_white = 2
+					}
+					add_to_temp_variable = {
+						[categorie]_diff_light_white = 50
+					}
+					add_to_array = {
+						GLOBAL.ASG_[categorie]_graph_slopes_light_white = [categorie]_diff_light_white
+					}
+				}
+			}
+		}
+		categorie = "casualties"
 		tag1 = "[?GLOBAL.ASG_green_curve_tag.GetTag]"
 		tag2 = "[?GLOBAL.ASG_blue_curve_tag.GetTag]"
 		tag3 = "[?GLOBAL.ASG_grey_curve_tag.GetTag]"
