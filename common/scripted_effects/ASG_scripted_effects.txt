@@ -4827,28 +4827,28 @@ ASG_calculate_initial_graph_point_civilian = {
 	meta_effect = {
 		text = {
 			set_temp_variable = {
-				ASG_[categorie]_green_pixel_value = [tag1].ASG_[categorie]_score
+				ASG_[categorie]_green_pixel_value = [tag1].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = [tag2].ASG_[categorie]_score
+				ASG_[categorie]_blue_pixel_value = [tag2].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = [tag3].ASG_[categorie]_score
+				ASG_[categorie]_grey_pixel_value = [tag3].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_red_pixel_value = [tag4].ASG_[categorie]_score
+				ASG_[categorie]_red_pixel_value = [tag4].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = [tag5].ASG_[categorie]_score
+				ASG_[categorie]_light_red_pixel_value = [tag5].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = [tag6].ASG_[categorie]_score
+				ASG_[categorie]_light_blue_pixel_value = [tag6].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = [tag7].ASG_[categorie]_score
+				ASG_[categorie]_light_yellow_pixel_value = [tag7].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
+				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score_array^0
 			}
 
 			multiply_temp_variable = {
@@ -5019,28 +5019,28 @@ ASG_calculate_initial_graph_point_military = {
 	meta_effect = {
 		text = {
 			set_temp_variable = {
-				ASG_[categorie]_green_pixel_value = [tag1].ASG_[categorie]_score
+				ASG_[categorie]_green_pixel_value = [tag1].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = [tag2].ASG_[categorie]_score
+				ASG_[categorie]_blue_pixel_value = [tag2].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = [tag3].ASG_[categorie]_score
+				ASG_[categorie]_grey_pixel_value = [tag3].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_red_pixel_value = [tag4].ASG_[categorie]_score
+				ASG_[categorie]_red_pixel_value = [tag4].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = [tag5].ASG_[categorie]_score
+				ASG_[categorie]_light_red_pixel_value = [tag5].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = [tag6].ASG_[categorie]_score
+				ASG_[categorie]_light_blue_pixel_value = [tag6].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = [tag7].ASG_[categorie]_score
+				ASG_[categorie]_light_yellow_pixel_value = [tag7].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
+				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score_array^0
 			}
 
 			multiply_temp_variable = {
@@ -5211,28 +5211,28 @@ ASG_calculate_initial_graph_point_manpower = {
 	meta_effect = {
 		text = {
 			set_temp_variable = {
-				ASG_[categorie]_green_pixel_value = [tag1].ASG_[categorie]_score
+				ASG_[categorie]_green_pixel_value = [tag1].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = [tag2].ASG_[categorie]_score
+				ASG_[categorie]_blue_pixel_value = [tag2].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = [tag3].ASG_[categorie]_score
+				ASG_[categorie]_grey_pixel_value = [tag3].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_red_pixel_value = [tag4].ASG_[categorie]_score
+				ASG_[categorie]_red_pixel_value = [tag4].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = [tag5].ASG_[categorie]_score
+				ASG_[categorie]_light_red_pixel_value = [tag5].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = [tag6].ASG_[categorie]_score
+				ASG_[categorie]_light_blue_pixel_value = [tag6].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = [tag7].ASG_[categorie]_score
+				ASG_[categorie]_light_yellow_pixel_value = [tag7].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
+				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score_array^0
 			}
 
 			multiply_temp_variable = {
@@ -5403,28 +5403,28 @@ ASG_calculate_initial_graph_point_casualties = {
 	meta_effect = {
 		text = {
 			set_temp_variable = {
-				ASG_[categorie]_green_pixel_value = [tag1].ASG_[categorie]_score
+				ASG_[categorie]_green_pixel_value = [tag1].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_blue_pixel_value = [tag2].ASG_[categorie]_score
+				ASG_[categorie]_blue_pixel_value = [tag2].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_grey_pixel_value = [tag3].ASG_[categorie]_score
+				ASG_[categorie]_grey_pixel_value = [tag3].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_red_pixel_value = [tag4].ASG_[categorie]_score
+				ASG_[categorie]_red_pixel_value = [tag4].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_light_red_pixel_value = [tag5].ASG_[categorie]_score
+				ASG_[categorie]_light_red_pixel_value = [tag5].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_light_blue_pixel_value = [tag6].ASG_[categorie]_score
+				ASG_[categorie]_light_blue_pixel_value = [tag6].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_light_yellow_pixel_value = [tag7].ASG_[categorie]_score
+				ASG_[categorie]_light_yellow_pixel_value = [tag7].ASG_[categorie]_score_array^0
 			}
 			set_temp_variable = {
-				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score
+				ASG_[categorie]_light_white_pixel_value = [tag8].ASG_[categorie]_score_array^0
 			}
 
 			multiply_temp_variable = {
@@ -7555,4 +7555,18 @@ ASG_replot_casualties_graph = {
 		tag8 = "[?GLOBAL.ASG_light_white_curve_tag.GetTag]"
 		# debug = yes
 	}
+}
+
+test_pays = {
+	set_variable = {
+		GLOBAL.ASG_light_white_curve_tag = POL.id
+	}
+	ASG_graph_update = yes
+}
+
+test_pays2 = {
+	set_variable = {
+		GLOBAL.ASG_light_white_curve_tag = JAP.id
+	}
+	ASG_graph_update = yes
 }
