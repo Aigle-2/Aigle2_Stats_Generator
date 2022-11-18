@@ -241,6 +241,71 @@ guiTypes = {
 			maxWidth = 60
 			format = center
 		}
+
+		ButtonType = {
+			name = "button_grey_update"
+			position = { x = 185 y = 510}
+			quadTextureSprite ="GFX_deploy_priority"
+			frame = 4
+			clicksound = click_default
+		}
+
+		ButtonType = {
+			name = "button_blue_update"
+			position = { x = 265 y = 510}
+			quadTextureSprite ="GFX_deploy_priority"
+			frame = 4
+			clicksound = click_default
+		}
+
+		ButtonType = {
+			name = "button_red_update"
+			position = { x = 345 y = 510}
+			quadTextureSprite ="GFX_deploy_priority"
+			frame = 4
+			clicksound = click_default
+		}
+
+		ButtonType = {
+			name = "button_light_blue_update"
+			position = { x = 425 y = 510}
+			quadTextureSprite ="GFX_deploy_priority"
+			frame = 4
+			clicksound = click_default
+		}
+
+		ButtonType = {
+			name = "button_green_update"
+			position = { x = 505 y = 510}
+			quadTextureSprite ="GFX_deploy_priority"
+			frame = 4
+			clicksound = click_default
+		}
+
+		ButtonType = {
+			name = "button_light_white_update"
+			position = { x = 585 y = 510}
+			quadTextureSprite ="GFX_deploy_priority"
+			frame = 4
+			clicksound = click_default
+		}
+
+		ButtonType = {
+			name = "button_light_red_update"
+			position = { x = 665 y = 510}
+			quadTextureSprite ="GFX_deploy_priority"
+			frame = 4
+			clicksound = click_default
+		}
+
+		ButtonType = {
+			name = "button_light_yellow_update"
+			position = { x = 745 y = 510}
+			quadTextureSprite ="GFX_deploy_priority"
+			frame = 4
+			clicksound = click_default
+		}
+
 		instantTextboxType = {
 			name = "'36"
 			position = { x = 110 y = 485}
@@ -366,7 +431,27 @@ guiTypes = {
 			maxWidth = 650
 			format = center
 		}
-	}
+
+		# containerWindowType = {
+		# 	name = "bloc1"
+		# 	position = { x = 382 y = -280}	
+			
+		# 	size = { width = 110 height = 561 }
+			
+		# 	fade_time = 300
+		# 	fade_type = linear
+		# 	moveable = yes
+		# 	show_sound = menu_open_window
+		# 	click_to_front = yes
+			
+		# 	orientation = center
+			
+		# 	background = {
+		# 		name = "Background"
+		# 		quadTextureSprite = "GFX_tiled_plain_bg"
+		# 	}
+		# }
+	}	
 
 	# Line segment container, very important
 	containerWindowType = {
@@ -481,4 +566,40 @@ guiTypes = {
 			frame = 57
 		}
 	}
+
+	containerWindowType = {
+		name = "ASG_selection_gui"
+		position = { x = 0 y = 0}	
+		
+		size = { width = 500 height = 200	 }
+		
+		fade_time = 300
+		fade_type = linear
+		moveable = yes
+		show_sound = menu_open_window
+		click_to_front = yes
+        
+		orientation = center
+        
+		background = {
+			name = "Background"
+			quadTextureSprite = "GFX_tiled_plain_bg"
+		}
+
+		instantTextboxType = {
+			name = "TITLE"
+			position = { x = 100 y = 70}
+			font = "hoi_24header"
+			text = "PLEASE SELECT THE COUNTRY YOU WANT TO PLOT, AND CLOSE THIS WINDOW TO UPDATE THE GRAPHS."
+			maxWidth = 300		
+			format = center
+		}
+
+		buttonType = {
+            name = "button_close"
+            position = {x = 463 y = 12}
+            spriteType = "GFX_NV_btn_close"
+            clicksound = click_close
+        }
+    }
 }

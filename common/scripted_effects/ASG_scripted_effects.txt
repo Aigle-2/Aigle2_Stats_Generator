@@ -1,4 +1,4 @@
-ASG_graph_update = {
+ASG_graphs_replot = {
 	ASG_replot_civilian_graph = yes
 	ASG_replot_military_graph = yes
 	ASG_replot_manpower_graph = yes
@@ -7561,12 +7561,102 @@ test_pays = {
 	set_variable = {
 		GLOBAL.ASG_light_white_curve_tag = POL.id
 	}
-	ASG_graph_update = yes
+	ASG_graphs_replot = yes
 }
 
 test_pays2 = {
 	set_variable = {
 		GLOBAL.ASG_light_white_curve_tag = JAP.id
 	}
-	ASG_graph_update = yes
+	ASG_graphs_replot = yes
+}
+
+ASG_change_selected_channel_scope = {
+	if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_selected_channel = 1
+			}
+		}
+		set_variable = {
+			GLOBAL.ASG_grey_curve_tag = THIS.id
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_selected_channel = 5
+			}
+		}
+		set_variable = {
+			GLOBAL.ASG_green_curve_tag = THIS.id
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_selected_channel = 2
+			}
+		}
+		set_variable = {
+			GLOBAL.ASG_blue_curve_tag = THIS.id
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_selected_channel = 3
+			}
+		}
+		set_variable = {
+			GLOBAL.ASG_red_curve_tag = THIS.id
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_selected_channel = 4
+			}
+		}
+		set_variable = {
+			GLOBAL.ASG_light_blue_curve_tag = THIS.id
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_selected_channel = 6
+			}
+		}
+		set_variable = {
+			GLOBAL.ASG_light_red_curve_tag = THIS.id
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_selected_channel = 7
+			}
+		}
+		set_variable = {
+			GLOBAL.ASG_light_white_curve_tag = THIS.id
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				GLOBAL.ASG_selected_channel = 8
+			}
+		}
+		set_variable = {
+			GLOBAL.ASG_light_yellow_curve_tag = THIS.id
+		}
+	} else = {
+		log = "GLOBAL.ASG_selected_channel outside borders, please investigate."
+
+	}
+	ASG_graphs_replot = yes
+	set_variable = {
+		GLOBAL.ASG_selected_channel = 0
+	}
 }

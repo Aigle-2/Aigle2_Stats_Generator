@@ -241,6 +241,70 @@ guiTypes = {
 			format = center
 		}
 
+		ButtonType = {
+			name = "button_grey_update"
+			position = { x = 185 y = 510}
+			quadTextureSprite ="GFX_deploy_priority"
+			frame = 4
+			clicksound = click_default
+		}
+
+		ButtonType = {
+			name = "button_blue_update"
+			position = { x = 265 y = 510}
+			quadTextureSprite ="GFX_deploy_priority"
+			frame = 4
+			clicksound = click_default
+		}
+
+		ButtonType = {
+			name = "button_red_update"
+			position = { x = 345 y = 510}
+			quadTextureSprite ="GFX_deploy_priority"
+			frame = 4
+			clicksound = click_default
+		}
+
+		ButtonType = {
+			name = "button_light_blue_update"
+			position = { x = 425 y = 510}
+			quadTextureSprite ="GFX_deploy_priority"
+			frame = 4
+			clicksound = click_default
+		}
+
+		ButtonType = {
+			name = "button_green_update"
+			position = { x = 505 y = 510}
+			quadTextureSprite ="GFX_deploy_priority"
+			frame = 4
+			clicksound = click_default
+		}
+
+		ButtonType = {
+			name = "button_light_white_update"
+			position = { x = 585 y = 510}
+			quadTextureSprite ="GFX_deploy_priority"
+			frame = 4
+			clicksound = click_default
+		}
+
+		ButtonType = {
+			name = "button_light_red_update"
+			position = { x = 665 y = 510}
+			quadTextureSprite ="GFX_deploy_priority"
+			frame = 4
+			clicksound = click_default
+		}
+
+		ButtonType = {
+			name = "button_light_yellow_update"
+			position = { x = 745 y = 510}
+			quadTextureSprite ="GFX_deploy_priority"
+			frame = 4
+			clicksound = click_default
+		}
+
 		instantTextboxType = {
 			name = "'36"
 			position = { x = 110 y = 485}
