@@ -4598,12 +4598,21 @@ ASG_casualties_update_stats = {
 		if = {
 			limit = {
 				check_variable = {
-					ASG_casualties_score < THIS.casualties_k
+					ASG_casualties_score > THIS.casualties_k
 				}
 			}
 			set_variable = {
-				ASG_casualties_score = THIS.casualties_k
+				ASG_casualties_score_previous_wars = ASG_casualties_score
 			}
+			subtract_from_variable = {
+				ASG_casualties_score_previous_wars = THIS.casualties_k
+			}
+		}
+		set_variable = {
+			ASG_casualties_score = THIS.casualties_k
+		}
+		add_to_variable = {
+			ASG_casualties_score = ASG_casualties_score_previous_wars
 		}
 		add_to_array = {
 			THIS.ASG_casualties_score_array = ASG_casualties_score
