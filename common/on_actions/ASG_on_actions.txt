@@ -94,7 +94,7 @@ on_actions = {
 	on_monthly_GER = {
 		effect = {
 			# log = "Graph update THIS = [?THIS.GetName] ROOT = [?ROOT.GetName]"
-			ASG_graph_update = yes
+			ASG_graphs_replot = yes
 			ASG_stats_update = yes
 			add_to_variable = {
 				GLOBAL.ASG_number_of_executed_ticks = 1
